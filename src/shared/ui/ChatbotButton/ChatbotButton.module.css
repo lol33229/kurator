@@ -1,0 +1,32 @@
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 126px;
+  height: 108px;
+  color: var(--color-text);
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: filter 0.15s ease;
+}
+
+.button:hover {
+  filter: brightness(0.95);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+}
+
+.label {
+  position: relative;
+}
