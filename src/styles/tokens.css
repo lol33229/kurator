@@ -1,0 +1,17 @@
+/* Дизайн-токены из макета Figma «Куратор». */
+:root {
+  --color-bg: #f7f7f2;
+  --color-surface: #ffffff;
+  --color-text: #1d283e;
+  --color-accent: #b8f34a;
+  --color-tag: #e6e6e6;
+
+  --font-family: 'Manrope Variable', system-ui, sans-serif;
+
+  --radius-card: 51px;
+  --radius-pill: 28px;
+  --radius-tag: 15px;
+
+  --container-width: 1211px;
+  --page-gutter: 16px;
+}

@@ -1,0 +1,10 @@
+export const ROLES = ['student', 'mentor', 'curator', 'admin'] as const
+
+export type Role = (typeof ROLES)[number]
+
+export const ROLE_LABELS: Record<Role, string> = {
+  student: 'Ученик',
+  mentor: 'Наставник',
+  curator: 'Куратор',
+  admin: 'Администратор',
+}

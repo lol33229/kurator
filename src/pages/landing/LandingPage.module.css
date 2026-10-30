@@ -1,0 +1,503 @@
+/* Лендинг для незарегистрированного пользователя */
+
+.page {
+  padding-bottom: 69px;
+}
+
+.container {
+  width: min(var(--container-width), 100% - 2 * var(--page-gutter));
+  margin-inline: auto;
+}
+
+/* ---------- Шапка ---------- */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  column-gap: 40px;
+  padding-top: 11px;
+}
+
+.headerLogo {
+  margin-left: -24px;
+}
+
+.headerNav,
+.authNav {
+  display: flex;
+  gap: 45px;
+  padding-top: 18px;
+  font-size: 20px;
+}
+
+.headerNav {
+  margin-left: 113px;
+}
+
+.headerNav a {
+  text-decoration: underline;
+}
+
+.authNav {
+  gap: 43px;
+  margin-left: auto;
+}
+
+.authNav a {
+  text-decoration: none;
+}
+
+.headerNav a:hover,
+.authNav a:hover {
+  opacity: 0.7;
+}
+
+/* ---------- Общие элементы секций ---------- */
+
+.eyebrow {
+  font-size: 20px;
+}
+
+.sectionTitle {
+  margin-top: 9px;
+  font-size: 64px;
+  font-weight: 800;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.sectionAside {
+  font-size: 20px;
+  text-align: right;
+}
+
+.card {
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.cardTitle,
+.cardText {
+  font-size: 24px;
+}
+
+.cardTitle {
+  font-weight: 700;
+}
+
+.cardText {
+  font-weight: 500;
+}
+
+/* ---------- Первый экран ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 599px 529px;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 42px;
+}
+
+.heroTitle {
+  margin-top: 13px;
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.heroText {
+  margin-top: 13px;
+  font-size: 24px;
+}
+
+.heroCta {
+  margin-top: 39px;
+  min-width: 257px;
+}
+
+.heroNote {
+  margin-top: 9px;
+  font-size: 20px;
+}
+
+/* Карточка-пример наставника */
+
+.mentorCard {
+  padding: 23px 17px 41px;
+}
+
+.mentorTop {
+  display: flex;
+  align-items: flex-start;
+}
+
+.compat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  margin-left: 3px;
+  font-weight: 300;
+}
+
+.compatCircle {
+  position: absolute;
+  inset: 0;
+}
+
+.compatValue,
+.compatLabel {
+  position: relative;
+}
+
+.compatValue {
+  font-size: 30px;
+}
+
+.compatLabel {
+  font-size: 16px;
+}
+
+.mentorAvatar {
+  margin-top: 10px;
+  margin-left: 62px;
+  border-radius: 50%;
+}
+
+.mentorInfo {
+  margin-top: 10px;
+  margin-left: 9px;
+  font-size: 16px;
+}
+
+.mentorName {
+  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin: 29px 2px 0 9px;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-tag);
+  background: var(--color-tag);
+  font-size: 16px;
+}
+
+.reasonsTitle {
+  margin: 25px 0 0 9px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 11px 0 0 9px;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.reasons li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mentorCta {
+  width: 100%;
+  min-height: 51px;
+  margin-top: 25px;
+  font-weight: 600;
+}
+
+/* ---------- Как работает ---------- */
+
+.howItWorks {
+  margin-top: 92px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 336px 100px 336px 100px 336px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 63px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  min-height: 343px;
+  padding: 36px 27px;
+}
+
+.stepNumber {
+  margin-top: 27px;
+}
+
+.stepArrow {
+  justify-self: center;
+}
+
+/* ---------- Почему Куратор ---------- */
+
+.why {
+  margin-top: 55px;
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 17px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.whyCard {
+  min-height: 370px;
+  padding: 36px 24px;
+}
+
+.whyCard .cardTitle {
+  margin-top: 37px;
+}
+
+.cardText {
+  margin-top: 9px;
+}
+
+/* ---------- Для наставников ---------- */
+
+.forMentors {
+  margin-top: 42px;
+}
+
+.forMentorsBody {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.forMentorsLead {
+  padding-top: 34px;
+}
+
+.forMentorsText {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.forMentorsCta {
+  margin-top: 47px;
+  min-width: 257px;
+  font-weight: 400;
+}
+
+.benefitsCard {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 385px;
+  min-height: 370px;
+  padding: 44px 24px 44px 44px;
+  font-size: 20px;
+}
+
+/* ---------- Футер ---------- */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 83px;
+  min-height: 279px;
+  padding: 15px 38px 40px 34px;
+}
+
+.footerLogo {
+  margin-left: -29px;
+}
+
+.footerTagline {
+  margin-top: -2px;
+  font-size: 20px;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 31px;
+  font-size: 20px;
+  text-align: right;
+}
+
+.footerLinks a {
+  text-decoration: none;
+}
+
+.footerLinks a + a {
+  margin-top: 15px;
+}
+
+.support {
+  margin-top: 24px;
+}
+
+.support a {
+  display: block;
+  margin-top: 21px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1240px) {
+  .hero {
+    grid-template-columns: 1fr minmax(0, 529px);
+  }
+
+  .steps {
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 16px;
+  }
+
+  .whyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .headerNav {
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .stepArrow {
+    transform: rotate(90deg);
+  }
+
+  .forMentorsBody {
+    flex-direction: column;
+  }
+
+  .benefitsCard {
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .sectionTitle {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    gap: 4px 16px;
+  }
+
+  .headerLogo {
+    width: 100%;
+  }
+
+  .headerNav,
+  .authNav {
+    gap: 16px;
+    padding-top: 0;
+    font-size: 16px;
+  }
+
+  .headerNav {
+    margin-left: 0;
+  }
+
+  .heroTitle {
+    font-size: 34px;
+  }
+
+  .heroText {
+    font-size: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 36px;
+  }
+
+  .sectionHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sectionAside {
+    text-align: left;
+  }
+
+  .card {
+    border-radius: 32px;
+  }
+
+  .tags {
+    justify-content: flex-start;
+  }
+
+  .mentorAvatar {
+    margin-left: 16px;
+    width: 72px;
+    height: 72px;
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .whyCard,
+  .step {
+    min-height: 0;
+  }
+
+  .forMentorsText {
+    font-size: 28px;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .footerLinks {
+    align-items: flex-start;
+    text-align: left;
+    padding-top: 0;
+  }
+}
