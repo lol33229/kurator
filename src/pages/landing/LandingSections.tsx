@@ -42,9 +42,13 @@ export function HeroSection() {
   )
 }
 
-export function HowItWorksSection() {
+type SectionProps = {
+  className?: string
+}
+
+export function HowItWorksSection({ className }: SectionProps) {
   return (
-    <section className={`${styles.container} ${styles.howItWorks}`}>
+    <section className={[styles.container, styles.howItWorks, className].filter(Boolean).join(' ')}>
       <div className={styles.sectionHead}>
         <div>
           <p className={styles.eyebrow}>как работает?</p>
