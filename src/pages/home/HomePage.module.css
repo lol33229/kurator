@@ -1,0 +1,245 @@
+/* Главная для зарегистрированного пользователя (Figma: «зарег главный экран», 380:39611). */
+
+/* ---------- Первый экран ---------- */
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 521px;
+  gap: 40px;
+  margin-top: 42px;
+}
+
+.heroLead {
+  display: flex;
+  flex-direction: column;
+}
+
+.heroTitle {
+  margin-top: 9px;
+  font-size: 64px;
+  font-weight: 800;
+}
+
+.heroText {
+  margin-top: 46px;
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.heroCta {
+  align-self: flex-start;
+  min-width: 257px;
+  margin-top: auto;
+  font-weight: 400;
+}
+
+.heroNote {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.chatbot {
+  position: absolute;
+  top: 496px;
+  left: calc(100% - 40px);
+}
+
+/* ---------- Карточка рекомендации ---------- */
+
+.recommendation {
+  margin-top: 5px;
+  padding: 18px 8px 48px 18px;
+}
+
+.recommendationTop {
+  display: flex;
+  align-items: flex-start;
+}
+
+.compat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 130px;
+  height: 130px;
+  font-weight: 300;
+}
+
+.compatCircle {
+  position: absolute;
+  inset: 0;
+}
+
+.compatValue,
+.compatLabel {
+  position: relative;
+}
+
+.compatValue {
+  font-size: 30px;
+}
+
+.compatLabel {
+  font-size: 16px;
+}
+
+.avatar {
+  flex-shrink: 0;
+  margin: 15px 0 0 73px;
+}
+
+.mentorInfo {
+  margin: 15px 0 0 9px;
+}
+
+.mentorName {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mentorDirection {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 12px;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-tag);
+  background: var(--color-tag);
+  font-size: 16px;
+}
+
+.reasonsTitle {
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 17px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.reasons li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profileCta {
+  width: 495px;
+  max-width: 100%;
+  min-height: 51px;
+  margin-top: 44px;
+  background: rgb(184 243 74 / 52%);
+  font-weight: 400;
+}
+
+/* ---------- Отступ до «как работает» ---------- */
+
+.howItWorks {
+  margin-top: 58px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1400px) {
+  .chatbot {
+    left: auto;
+    right: 0;
+  }
+}
+
+@media (max-width: 1240px) {
+  .hero {
+    grid-template-columns: 1fr minmax(0, 521px);
+  }
+
+  .heroTitle {
+    font-size: 48px;
+  }
+
+  .heroText {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heroCta {
+    margin-top: 32px;
+  }
+
+  .recommendation {
+    margin: 0;
+  }
+
+  /* relative, а не static: внутри кнопки абсолютно позиционирован фон-эллипс */
+  .chatbot {
+    position: relative;
+    top: auto;
+    justify-self: end;
+  }
+
+  .howItWorks {
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroTitle {
+    font-size: 36px;
+  }
+
+  .heroText {
+    font-size: 24px;
+    margin-top: 16px;
+  }
+
+  .recommendation {
+    padding: 18px 16px 32px;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    margin-left: 16px;
+  }
+
+  .mentorName {
+    font-size: 20px;
+  }
+
+  .tags {
+    justify-content: flex-start;
+  }
+}
