@@ -7,7 +7,7 @@ import styles from './HomePage.module.css'
 
 export type Recommendation = {
   compatibility: number
-  // До начала менторства ученику видны только имя и первая буква фамилии, фото скрыто.
+  // Фамилия и фото скрыты до начала менторства
   displayName: string
   direction: string
   tags: string[]

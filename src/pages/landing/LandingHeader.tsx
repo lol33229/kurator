@@ -3,7 +3,7 @@ import { Logo } from '@/shared/ui/Logo/Logo'
 import styles from './LandingPage.module.css'
 
 type LandingHeaderProps = {
-  // Есть у вошедшего пользователя: вместо «Войти / Регистрация» показываем кабинет и выход.
+  // Для вошедшего пользователя
   cabinetPath?: string
 }
 

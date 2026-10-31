@@ -4,7 +4,7 @@ import styles from './Button.module.css'
 
 type ButtonLinkProps = ComponentProps<typeof Link>
 
-// Акцентная кнопка-ссылка (лаймовая «пилюля» из макета).
+// Акцентная кнопка-ссылка
 export function ButtonLink({ className, ...props }: ButtonLinkProps) {
   return <Link className={[styles.button, className].filter(Boolean).join(' ')} {...props} />
 }

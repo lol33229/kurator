@@ -8,7 +8,7 @@ import { ButtonLink } from '@/shared/ui/Button/ButtonLink'
 import { MentorPreviewCard } from './MentorPreviewCard'
 import styles from './LandingPage.module.css'
 
-// Тексты «ЗАГОЛОВОК» и «описание» — заглушки из макета, заменим, когда появится копирайт.
+// Тексты-заглушки из макета
 const STEPS = [
   { number: '01', icon: circlePurple, title: 'ЗАГОЛОВОК', text: 'описание' },
   { number: '02', icon: circleOrange, title: 'ЗАГОЛОВОК', text: 'описание' },

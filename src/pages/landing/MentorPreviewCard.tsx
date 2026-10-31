@@ -4,7 +4,7 @@ import mentorAvatar from '@/assets/landing/mentor-avatar.png'
 import { ButtonLink } from '@/shared/ui/Button/ButtonLink'
 import styles from './LandingPage.module.css'
 
-// Демонстрационная карточка с первого экрана: показывает, как выглядит рекомендация.
+// Пример карточки наставника
 const PREVIEW = {
   compatibility: 94,
   name: 'Алексей Сапрыкин',

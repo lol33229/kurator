@@ -1,0 +1,53 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--page-gutter);
+  overflow-y: auto;
+  background: var(--color-overlay);
+}
+
+.dialog {
+  position: relative;
+  width: 693px;
+  max-width: 100%;
+  margin: auto;
+  padding: 50px 24px 56px;
+  border: 3px solid var(--color-accent-light);
+  border-radius: 40px;
+  background: var(--color-surface);
+}
+
+.close {
+  position: absolute;
+  top: 23px;
+  right: 48px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.close:hover {
+  opacity: 0.7;
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .dialog {
+    padding: 64px 16px 40px;
+    border-radius: 32px;
+  }
+
+  .close {
+    top: 16px;
+    right: 16px;
+  }
+}

@@ -6,7 +6,7 @@ type ChatbotButtonProps = {
   className?: string
 }
 
-// Кнопка перехода к ИИ чат-боту (ответы по базе знаний куратора).
+// Кнопка ИИ чат-бота
 export function ChatbotButton({ className }: ChatbotButtonProps) {
   return (
     <Link to="/chatbot" className={[styles.button, className].filter(Boolean).join(' ')}>

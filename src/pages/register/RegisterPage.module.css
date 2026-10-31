@@ -1,0 +1,61 @@
+/* Окно регистрации */
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 248px;
+  max-width: 100%;
+  margin: 22px auto 0;
+}
+
+.field {
+  width: 100%;
+}
+
+.field + .field {
+  margin-top: 13px;
+}
+
+.submit {
+  width: 245px;
+  max-width: 100%;
+  height: 42px;
+  margin-top: 26px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-accent-light);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit:hover {
+  filter: brightness(0.95);
+}
+
+.submit:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.loginLink {
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 28px;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 28px;
+  }
+}

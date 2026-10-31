@@ -2,7 +2,7 @@ type PagePlaceholderProps = {
   title: string
 }
 
-// Временная заглушка, пока экран не свёрстан по макету.
+// Временная заглушка экрана
 export function PagePlaceholder({ title }: PagePlaceholderProps) {
   return (
     <main style={{ padding: 24 }}>

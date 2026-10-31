@@ -1,10 +1,16 @@
-/* Дизайн-токены из макета Figma «Куратор». */
+/* Дизайн-токены */
 :root {
   --color-bg: #f7f7f2;
   --color-surface: #ffffff;
   --color-text: #1d283e;
   --color-accent: #b8f34a;
   --color-tag: #e6e6e6;
+  --color-accent-light: #ccff6d;
+  --color-input-bg: #f9f9f9;
+  --color-input-border: #e6e6e6;
+  --color-muted: #667085;
+  --color-error: #e0232e;
+  --color-overlay: rgb(29 40 62 / 40%);
 
   --font-family: 'Manrope Variable', system-ui, sans-serif;
 

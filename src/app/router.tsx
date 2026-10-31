@@ -1,16 +1,18 @@
 import { createBrowserRouter } from 'react-router'
 import { HomePage } from '@/pages/home/HomePage'
 import { LandingPage } from '@/pages/landing/LandingPage'
+import { RegisterPage } from '@/pages/register/RegisterPage'
 import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
 
 export const router = createBrowserRouter([
   { path: '/', element: <LandingPage /> },
-  // Главная для вошедшего пользователя; когда появится авторизация, будет открываться по «/».
+  // Главная для вошедшего пользователя (временный адрес)
   { path: '/home', element: <HomePage /> },
   { path: '/chatbot', element: <PagePlaceholder title="ИИ чат-бот" /> },
   { path: '/login', element: <PagePlaceholder title="Вход" /> },
-  { path: '/register', element: <PagePlaceholder title="Регистрация" /> },
+  { path: '/register', element: <RegisterPage /> },
+  { path: '/register/confirm', element: <PagePlaceholder title="Подтверждение почты" /> },
   { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
   { path: '/news', element: <PagePlaceholder title="Новости" /> },
   ...ROLES.map((role) => ({
