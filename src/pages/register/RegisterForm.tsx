@@ -9,6 +9,26 @@ export type RegisterValues = {
   passwordRepeat: string
 }
 
+type RegisterErrors = Partial<Record<keyof RegisterValues, string>>
+
+const MIN_PASSWORD_LENGTH = 8
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function validate({ email, password, passwordRepeat }: RegisterValues): RegisterErrors {
+  const errors: RegisterErrors = {}
+
+  if (!email.trim()) errors.email = 'Введите email'
+  else if (!EMAIL_PATTERN.test(email.trim())) errors.email = 'Некорректный email'
+
+  if (!password) errors.password = 'Придумайте пароль'
+  else if (password.length < MIN_PASSWORD_LENGTH) errors.password = `Минимум ${MIN_PASSWORD_LENGTH} символов`
+
+  if (!passwordRepeat) errors.passwordRepeat = 'Повторите пароль'
+  else if (passwordRepeat !== password) errors.passwordRepeat = 'Пароли не совпадают'
+
+  return errors
+}
+
 type RegisterFormProps = {
   titleId: string
   onSubmit: (values: RegisterValues) => void
@@ -16,13 +36,18 @@ type RegisterFormProps = {
 
 export function RegisterForm({ titleId, onSubmit }: RegisterFormProps) {
   const [values, setValues] = useState<RegisterValues>({ email: '', password: '', passwordRepeat: '' })
+  const [submitted, setSubmitted] = useState(false)
+
+  // Ошибки показываем после первой попытки отправки
+  const errors = submitted ? validate(values) : {}
 
   const change = (field: keyof RegisterValues) => (event: { target: { value: string } }) =>
     setValues((prev) => ({ ...prev, [field]: event.target.value }))
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    onSubmit({ ...values, email: values.email.trim() })
+    setSubmitted(true)
+    if (Object.keys(validate(values)).length === 0) onSubmit({ ...values, email: values.email.trim() })
   }
 
   return (
@@ -41,6 +66,7 @@ export function RegisterForm({ titleId, onSubmit }: RegisterFormProps) {
           autoFocus
           value={values.email}
           onChange={change('email')}
+          error={errors.email}
         />
         <TextField
           className={styles.field}
@@ -51,6 +77,7 @@ export function RegisterForm({ titleId, onSubmit }: RegisterFormProps) {
           required
           value={values.password}
           onChange={change('password')}
+          error={errors.password}
         />
         <TextField
           className={styles.field}
@@ -61,6 +88,7 @@ export function RegisterForm({ titleId, onSubmit }: RegisterFormProps) {
           required
           value={values.passwordRepeat}
           onChange={change('passwordRepeat')}
+          error={errors.passwordRepeat}
         />
         <button type="submit" className={styles.submit}>
           Выслать код на почту
