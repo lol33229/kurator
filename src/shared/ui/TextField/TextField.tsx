@@ -1,17 +1,18 @@
 import { useId, type InputHTMLAttributes } from 'react'
 import styles from './TextField.module.css'
 
-type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> & {
   label: string
   error?: string
+  compact?: boolean
 }
 
-export function TextField({ label, error, required, className, ...inputProps }: TextFieldProps) {
+export function TextField({ label, error, required, compact, className, ...inputProps }: TextFieldProps) {
   const id = useId()
   const errorId = `${id}-error`
 
   return (
-    <div className={[styles.field, className].filter(Boolean).join(' ')}>
+    <div className={[styles.field, compact && styles.compact, className].filter(Boolean).join(' ')}>
       <label className={styles.label} htmlFor={id}>
         {label}
         {required && <span className={styles.required}> *</span>}

@@ -46,3 +46,16 @@
   color: var(--color-error);
   font-size: 12px;
 }
+
+/* Компактный размер для анкеты */
+.compact .label {
+  margin-bottom: var(--field-label-gap, 3px);
+  font-size: var(--field-label-size, 14px);
+  font-weight: var(--field-label-weight, 400);
+}
+
+.compact .input {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+}

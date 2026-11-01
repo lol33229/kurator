@@ -12,6 +12,9 @@
   --color-muted: #667085;
   --color-error: #e0232e;
   --color-overlay: rgb(29 40 62 / 40%);
+  --color-list-bg: #f3f3f3;
+  --color-progress-done: #b6b6b6;
+  --color-progress-todo: #ececec;
 
   --font-family: 'Manrope Variable', system-ui, sans-serif;
 
