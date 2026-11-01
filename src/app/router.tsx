@@ -5,6 +5,7 @@ import { LoginPage } from '@/pages/login/LoginPage'
 import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
 import { ResetSentPage } from '@/pages/password-reset/ResetSentPage'
+import { ConfirmEmailPage } from '@/pages/register/ConfirmEmailPage'
 import { RegisterPage } from '@/pages/register/RegisterPage'
 import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
   { path: '/password-reset/sent', element: <ResetSentPage /> },
   { path: '/password-reset/new', element: <NewPasswordPage /> },
   { path: '/register', element: <RegisterPage /> },
-  { path: '/register/confirm', element: <PagePlaceholder title="Подтверждение почты" /> },
+  { path: '/register/confirm', element: <ConfirmEmailPage /> },
   { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
   { path: '/news', element: <PagePlaceholder title="Новости" /> },
   ...ROLES.map((role) => ({
