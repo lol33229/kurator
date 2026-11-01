@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { HomePage } from '@/pages/home/HomePage'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
+import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
 import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
 import { ResetSentPage } from '@/pages/password-reset/ResetSentPage'
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
   { path: '/password-reset/new', element: <NewPasswordPage /> },
   { path: '/register', element: <RegisterPage /> },
   { path: '/register/confirm', element: <ConfirmEmailPage /> },
+  { path: '/onboarding', element: <OnboardingPage /> },
   { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
   { path: '/news', element: <PagePlaceholder title="Новости" /> },
   ...ROLES.map((role) => ({

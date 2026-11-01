@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import { LandingWithModal } from '@/pages/landing/LandingWithModal'
 import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import styles from './ConfirmEmail.module.css'
@@ -20,6 +20,7 @@ function secondsLabel(seconds: number) {
 
 export function ConfirmEmailPage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const inputId = useId()
   const errorId = `${inputId}-error`
   const [code, setCode] = useState('')
@@ -44,7 +45,7 @@ export function ConfirmEmailPage() {
     event.preventDefault()
     if (code.length < CODE_LENGTH) setError('Введите код из письма')
     else if (code !== DEMO_CODE) setError('Неверный код')
-    else navigate('/home')
+    else navigate('/onboarding', { state: { role: location.state?.role } })
   }
 
   return (
