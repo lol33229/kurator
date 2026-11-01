@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { HomePage } from '@/pages/home/HomePage'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
+import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
 import { ResetSentPage } from '@/pages/password-reset/ResetSentPage'
 import { RegisterPage } from '@/pages/register/RegisterPage'
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
   { path: '/password-reset', element: <ResetRequestPage /> },
   { path: '/password-reset/sent', element: <ResetSentPage /> },
+  { path: '/password-reset/new', element: <NewPasswordPage /> },
   { path: '/register', element: <RegisterPage /> },
   { path: '/register/confirm', element: <PagePlaceholder title="Подтверждение почты" /> },
   { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
