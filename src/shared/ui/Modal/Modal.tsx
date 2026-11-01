@@ -5,10 +5,11 @@ import styles from './Modal.module.css'
 type ModalProps = {
   labelledBy: string
   onClose: () => void
+  className?: string
   children: ReactNode
 }
 
-export function Modal({ labelledBy, onClose, children }: ModalProps) {
+export function Modal({ labelledBy, onClose, className, children }: ModalProps) {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
@@ -24,7 +25,7 @@ export function Modal({ labelledBy, onClose, children }: ModalProps) {
 
   return (
     <div className={styles.overlay} onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
-      <div className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
+      <div className={[styles.dialog, className].filter(Boolean).join(' ')} role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
         <button type="button" className={styles.close} onClick={onClose} aria-label="Закрыть">
           <img src={closeIcon} alt="" width={40} height={40} />
         </button>

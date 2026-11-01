@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
+import { validateEmail } from '@/shared/lib/validation'
 import { TextField } from '@/shared/ui/TextField/TextField'
 import styles from './RegisterPage.module.css'
 
@@ -12,13 +13,12 @@ export type RegisterValues = {
 type RegisterErrors = Partial<Record<keyof RegisterValues, string>>
 
 const MIN_PASSWORD_LENGTH = 8
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function validate({ email, password, passwordRepeat }: RegisterValues): RegisterErrors {
   const errors: RegisterErrors = {}
 
-  if (!email.trim()) errors.email = 'Введите email'
-  else if (!EMAIL_PATTERN.test(email.trim())) errors.email = 'Некорректный email'
+  const emailError = validateEmail(email)
+  if (emailError) errors.email = emailError
 
   if (!password) errors.password = 'Придумайте пароль'
   else if (password.length < MIN_PASSWORD_LENGTH) errors.password = `Минимум ${MIN_PASSWORD_LENGTH} символов`

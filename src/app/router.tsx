@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 import { HomePage } from '@/pages/home/HomePage'
 import { LandingPage } from '@/pages/landing/LandingPage'
+import { LoginPage } from '@/pages/login/LoginPage'
 import { RegisterPage } from '@/pages/register/RegisterPage'
 import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
@@ -10,7 +11,8 @@ export const router = createBrowserRouter([
   // Главная для вошедшего пользователя (временный адрес)
   { path: '/home', element: <HomePage /> },
   { path: '/chatbot', element: <PagePlaceholder title="ИИ чат-бот" /> },
-  { path: '/login', element: <PagePlaceholder title="Вход" /> },
+  { path: '/login', element: <LoginPage /> },
+  { path: '/password-reset', element: <PagePlaceholder title="Восстановление пароля" /> },
   { path: '/register', element: <RegisterPage /> },
   { path: '/register/confirm', element: <PagePlaceholder title="Подтверждение почты" /> },
   { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },

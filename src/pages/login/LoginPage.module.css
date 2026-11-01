@@ -1,0 +1,29 @@
+/* Окно входа */
+
+.dialog {
+  --modal-padding-top: 63px;
+  --modal-padding-bottom: 70px;
+  --modal-close-top: 28px;
+}
+
+.forgot {
+  align-self: flex-start;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 22px;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.submit {
+  margin-top: 7px;
+}
+
+.registerLink {
+  margin-top: 1px;
+}
