@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
-import formStyles from '@/pages/register/RegisterPage.module.css'
 import { validateEmail } from '@/shared/lib/validation'
+import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { TextField } from '@/shared/ui/TextField/TextField'
 import styles from './LoginPage.module.css'
 
@@ -76,10 +76,10 @@ export function LoginForm({ titleId, onSubmit }: LoginFormProps) {
         <Link to="/password-reset" className={styles.forgot}>
           Забыли пароль?
         </Link>
-        <button type="submit" className={`${formStyles.submit} ${styles.submit}`}>
+        <button type="submit" className={formStyles.submit}>
           Войти
         </button>
-        <Link to="/register" className={`${formStyles.loginLink} ${styles.registerLink}`}>
+        <Link to="/register" className={`${formStyles.link} ${styles.registerLink}`}>
           Еще нет аккаунта? Зарегистрируйся!
         </Link>
       </form>

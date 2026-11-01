@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router'
-import { validateEmail } from '@/shared/lib/validation'
+import { validateEmail, validatePasswordPair } from '@/shared/lib/validation'
+import styles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { TextField } from '@/shared/ui/TextField/TextField'
-import styles from './RegisterPage.module.css'
 
 export type RegisterValues = {
   email: string
@@ -12,19 +12,14 @@ export type RegisterValues = {
 
 type RegisterErrors = Partial<Record<keyof RegisterValues, string>>
 
-const MIN_PASSWORD_LENGTH = 8
-
 function validate({ email, password, passwordRepeat }: RegisterValues): RegisterErrors {
-  const errors: RegisterErrors = {}
+  const errors: RegisterErrors = validatePasswordPair(password, passwordRepeat, {
+    emptyPassword: 'Придумайте пароль',
+    emptyRepeat: 'Повторите пароль',
+  })
 
   const emailError = validateEmail(email)
   if (emailError) errors.email = emailError
-
-  if (!password) errors.password = 'Придумайте пароль'
-  else if (password.length < MIN_PASSWORD_LENGTH) errors.password = `Минимум ${MIN_PASSWORD_LENGTH} символов`
-
-  if (!passwordRepeat) errors.passwordRepeat = 'Повторите пароль'
-  else if (passwordRepeat !== password) errors.passwordRepeat = 'Пароли не совпадают'
 
   return errors
 }
@@ -93,7 +88,7 @@ export function RegisterForm({ titleId, onSubmit }: RegisterFormProps) {
         <button type="submit" className={styles.submit}>
           Выслать код на почту
         </button>
-        <Link to="/login" className={styles.loginLink}>
+        <Link to="/login" className={styles.link}>
           Уже есть аккаунт?
         </Link>
       </form>
