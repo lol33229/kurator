@@ -13,7 +13,7 @@
 
 .header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   column-gap: 40px;
   padding-top: 11px;
@@ -27,7 +27,6 @@
 .authNav {
   display: flex;
   gap: 45px;
-  padding-top: 18px;
   font-size: 20px;
 }
 

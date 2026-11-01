@@ -12,6 +12,11 @@ body {
   margin: 0;
 }
 
+/* Место под полосу прокрутки есть всегда, страница не сдвигается */
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
