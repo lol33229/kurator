@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import chevronIcon from '@/assets/icons/chevron-down.svg'
+import removeIcon from '@/assets/icons/xmark-small.svg'
+import chipStyles from '@/shared/ui/MultiSelect/MultiSelect.module.css'
 import fieldStyles from '@/shared/ui/TextField/TextField.module.css'
 import styles from './Dropdown.module.css'
 
@@ -18,6 +20,8 @@ type DropdownProps = {
   error?: string
   // Поле ввода с подсказками: значение — введённый текст
   searchable?: boolean
+  // Выбранное значение показывается меткой с крестиком
+  chip?: boolean
   className?: string
 }
 
@@ -30,6 +34,7 @@ export function Dropdown({
   required,
   error,
   searchable,
+  chip,
   className,
 }: DropdownProps) {
   const id = useId()
@@ -75,6 +80,8 @@ export function Dropdown({
       // Закрываем только список, а не всё окно
       event.stopPropagation()
       setOpen(false)
+    } else if (chip && value && (event.key === 'Backspace' || event.key === 'Delete')) {
+      onChange('')
     } else if (!searchable && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault()
       openList()
@@ -90,7 +97,7 @@ export function Dropdown({
     'aria-invalid': Boolean(error),
     'aria-describedby': error ? errorId : undefined,
     'aria-required': required,
-    className: [styles.trigger, error && styles.invalid].filter(Boolean).join(' '),
+    className: [styles.trigger, chip && styles.chipTrigger, error && styles.invalid].filter(Boolean).join(' '),
     onKeyDown,
   }
 
@@ -117,9 +124,26 @@ export function Dropdown({
           />
         ) : (
           <button {...comboboxProps} type="button" aria-haspopup="listbox" onClick={() => (open ? setOpen(false) : openList())}>
-            <span className={[styles.value, !selected && styles.placeholder].filter(Boolean).join(' ')}>
-              {selected ? selected.label : placeholder}
-            </span>
+            {chip && selected ? (
+              <span className={chipStyles.chip}>
+                {selected.label}
+                {/* Внутри кнопки нельзя вложить кнопку, с клавиатуры очищается Backspace */}
+                <span
+                  className={chipStyles.remove}
+                  aria-hidden="true"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    onChange('')
+                  }}
+                >
+                  <img src={removeIcon} alt="" width={11} height={11} />
+                </span>
+              </span>
+            ) : (
+              <span className={[styles.value, !selected && styles.placeholder].filter(Boolean).join(' ')}>
+                {selected ? selected.label : placeholder}
+              </span>
+            )}
           </button>
         )}
         <img className={styles.chevron} src={chevronIcon} alt="" width={16} height={16} />

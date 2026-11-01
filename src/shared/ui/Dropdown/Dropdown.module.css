@@ -87,3 +87,7 @@ input.trigger {
 .selected {
   font-weight: 600;
 }
+
+.chipTrigger {
+  --trigger-padding-left: 8px;
+}

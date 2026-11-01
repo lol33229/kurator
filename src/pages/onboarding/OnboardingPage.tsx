@@ -5,6 +5,7 @@ import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { BasicInfoStep, type BasicInfo } from './BasicInfoStep'
 import { GoalStep, type Goal } from './GoalStep'
+import { MentorProfileStep, type MentorProfile } from './MentorProfileStep'
 import { PreferencesStep, type Preferences } from './PreferencesStep'
 import { ProgressSteps } from './ProgressSteps'
 import { RoleStep } from './RoleStep'
@@ -43,6 +44,15 @@ export function OnboardingPage() {
     budgetTo: '',
   })
   const [goal, setGoal] = useState<Goal>({ goal: '', deadline: '' })
+  const [mentorProfile, setMentorProfile] = useState<MentorProfile>({
+    position: '',
+    experience: '',
+    skills: [],
+    levels: {},
+    directions: [],
+  })
+  const isMentor = role === 'mentor'
+  const dialogClass = isMentor && step === 3 ? styles.dialogMentorStep3 : STEP_DIALOG_CLASS[step]
 
   const close = useCallback(() => navigate('/home'), [navigate])
 
@@ -52,23 +62,21 @@ export function OnboardingPage() {
       <Modal
         labelledBy={titleId}
         onClose={close}
-        className={[styles.dialog, STEP_DIALOG_CLASS[step]].filter(Boolean).join(' ')}
+        className={[styles.dialog, dialogClass].filter(Boolean).join(' ')}
       >
         <h2 id={titleId} className={`${formStyles.title} ${styles.title}`}>
           Заполнение анкеты
         </h2>
         <ProgressSteps current={step} total={TOTAL_STEPS} />
         {step === 1 && <RoleStep role={role} onChange={setRole} onNext={() => setStep(2)} />}
-        {/* Анкета ментора появится позже, пока она завершается на шаге 2 */}
         {step === 2 && (
-          <BasicInfoStep
-            values={basicInfo}
-            onChange={setBasicInfo}
-            onBack={() => setStep(1)}
-            onNext={role === 'student' ? () => setStep(3) : close}
-          />
+          <BasicInfoStep values={basicInfo} onChange={setBasicInfo} onBack={() => setStep(1)} onNext={() => setStep(3)} />
         )}
-        {step === 3 && (
+        {/* Шаг 4 ментора появится позже, пока анкета завершается на шаге 3 */}
+        {step === 3 && isMentor && (
+          <MentorProfileStep values={mentorProfile} onChange={setMentorProfile} onBack={() => setStep(2)} onNext={close} />
+        )}
+        {step === 3 && !isMentor && (
           <PreferencesStep
             values={preferences}
             onChange={setPreferences}

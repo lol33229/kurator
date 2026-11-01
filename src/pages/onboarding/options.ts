@@ -85,3 +85,40 @@ export const AVAILABILITY_OPTIONS: DropdownOption[] = [
   { value: '6-10', label: '6–10 часов в неделю' },
   { value: '10+', label: 'Более 10 часов в неделю' },
 ]
+
+export const POSITION_OPTIONS = toOptions([
+  'Frontend-разработчик',
+  'Backend-разработчик',
+  'UX/UI-дизайнер',
+  'Графический дизайнер',
+  'Аналитик данных',
+  'ML-инженер',
+  'Тестировщик',
+  'Проектный менеджер',
+  'Маркетолог',
+  'Тимлид',
+])
+
+export const EXPERIENCE_OPTIONS: DropdownOption[] = [
+  { value: '<1', label: 'Менее 1 года' },
+  { value: '1-3', label: '1–3 года' },
+  { value: '3-5', label: '3–5 лет' },
+  { value: '5-10', label: '5–10 лет' },
+  { value: '10+', label: 'Более 10 лет' },
+]
+
+export const SKILL_LEVEL_OPTIONS: DropdownOption[] = [
+  { value: 'basic', label: 'Базовый' },
+  { value: 'confident', label: 'Уверенный' },
+  { value: 'advanced', label: 'Продвинутый' },
+  { value: 'expert', label: 'Эксперт' },
+]
+
+export const DIRECTION_OPTIONS = toOptions([
+  'Освоение профессии',
+  'Подготовка к собеседованию',
+  'Карьерный рост',
+  'Ревью кода и работ',
+  'Помощь с проектом',
+  'Soft skills',
+])
