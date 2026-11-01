@@ -14,6 +14,10 @@
   --modal-padding-bottom: 47px;
 }
 
+.dialogStep3 {
+  --modal-padding-bottom: 28px;
+}
+
 /* Центрируем по всему окну, а не по области с несимметричными отступами */
 .title {
   margin-left: -22px;
@@ -70,7 +74,9 @@
   margin-top: 10px;
 }
 
+/* Подписи в макете шире поля и не переносятся */
 .field {
+  --field-label-white-space: nowrap;
   width: 299px;
   max-width: 100%;
 }
@@ -153,6 +159,61 @@
   margin-top: 40px;
 }
 
+.step3Footer {
+  margin-top: 24px;
+}
+
+/* Бюджет */
+
+.budget {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
+
+.budgetLegend {
+  padding: 0;
+}
+
+.budgetRow {
+  display: grid;
+  grid-template-columns: 37px 76px 55px 76px;
+  align-items: center;
+  margin-top: 7px;
+}
+
+.budgetTo {
+  padding-left: 19px;
+}
+
+.budgetInput {
+  width: 76px;
+  height: 43px;
+  padding: 0 4px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 5px;
+  background: var(--color-input-bg);
+  color: var(--color-text);
+  font: inherit;
+  text-align: center;
+}
+
+.budgetInput::placeholder {
+  color: #737373;
+}
+
+.budgetInput:focus {
+  border-color: var(--color-text);
+  outline: none;
+}
+
+.budgetInvalid {
+  border-color: var(--color-error);
+}
+
 .back,
 .next {
   width: 138px;
@@ -193,6 +254,10 @@
   .segment {
     flex: 1;
     width: auto;
+  }
+
+  .field {
+    --field-label-white-space: normal;
   }
 
   .step1Footer,

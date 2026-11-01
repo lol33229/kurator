@@ -52,6 +52,7 @@
   margin-bottom: var(--field-label-gap, 3px);
   font-size: var(--field-label-size, 14px);
   font-weight: var(--field-label-weight, 400);
+  white-space: var(--field-label-white-space, normal);
 }
 
 .compact .input {

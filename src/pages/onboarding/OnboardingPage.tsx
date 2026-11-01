@@ -4,11 +4,17 @@ import { HomePage } from '@/pages/home/HomePage'
 import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { BasicInfoStep, type BasicInfo } from './BasicInfoStep'
+import { PreferencesStep, type Preferences } from './PreferencesStep'
 import { ProgressSteps } from './ProgressSteps'
 import { RoleStep } from './RoleStep'
 import styles from './Onboarding.module.css'
 
 const TOTAL_STEPS = 4
+
+const STEP_DIALOG_CLASS: Record<number, string | undefined> = {
+  2: styles.dialogStep2,
+  3: styles.dialogStep3,
+}
 
 export function OnboardingPage() {
   const navigate = useNavigate()
@@ -25,6 +31,15 @@ export function OnboardingPage() {
     language: '',
     photo: null,
   })
+  const [preferences, setPreferences] = useState<Preferences>({
+    skills: [],
+    level: '',
+    tasks: [],
+    format: '',
+    availability: '',
+    budgetFrom: '',
+    budgetTo: '',
+  })
 
   const close = useCallback(() => navigate('/home'), [navigate])
 
@@ -34,16 +49,25 @@ export function OnboardingPage() {
       <Modal
         labelledBy={titleId}
         onClose={close}
-        className={[styles.dialog, step === 2 && styles.dialogStep2].filter(Boolean).join(' ')}
+        className={[styles.dialog, STEP_DIALOG_CLASS[step]].filter(Boolean).join(' ')}
       >
         <h2 id={titleId} className={`${formStyles.title} ${styles.title}`}>
           Заполнение анкеты
         </h2>
         <ProgressSteps current={step} total={TOTAL_STEPS} />
         {step === 1 && <RoleStep role={role} onChange={setRole} onNext={() => setStep(2)} />}
-        {/* Шаги 3 и 4 появятся по макетам, пока анкета завершается на шаге 2 */}
+        {/* Анкета ментора появится позже, пока она завершается на шаге 2 */}
         {step === 2 && (
-          <BasicInfoStep values={basicInfo} onChange={setBasicInfo} onBack={() => setStep(1)} onNext={close} />
+          <BasicInfoStep
+            values={basicInfo}
+            onChange={setBasicInfo}
+            onBack={() => setStep(1)}
+            onNext={role === 'student' ? () => setStep(3) : close}
+          />
+        )}
+        {/* Шаг 4 появится по макету, пока анкета завершается на шаге 3 */}
+        {step === 3 && (
+          <PreferencesStep values={preferences} onChange={setPreferences} onBack={() => setStep(2)} onNext={close} />
         )}
       </Modal>
     </>

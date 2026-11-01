@@ -1,0 +1,42 @@
+.trigger {
+  --trigger-height: auto;
+  --trigger-padding-y: 5px;
+  --trigger-padding-left: 8px;
+  flex-wrap: wrap;
+  gap: 5px 13px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 21px;
+  padding: 0 4px 0 7px;
+  border: 1px solid var(--color-accent-light);
+  border-radius: 15px;
+  color: rgb(29 40 62 / 85%);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+
+.remove {
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.remove:hover {
+  opacity: 0.6;
+}
+
+.remove:focus-visible {
+  outline: 2px solid var(--color-text);
+  border-radius: 50%;
+}
+
+.picked {
+  background: rgb(0 0 0 / 5%);
+}
