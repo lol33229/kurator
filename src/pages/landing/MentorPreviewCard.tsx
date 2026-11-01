@@ -53,7 +53,7 @@ export function MentorPreviewCard() {
         ))}
       </ul>
 
-      <ButtonLink to="/register" className={styles.mentorCta}>
+      <ButtonLink to="/register" className={`${styles.cta} ${styles.mentorCta}`}>
         Посмотреть профиль
       </ButtonLink>
     </article>
