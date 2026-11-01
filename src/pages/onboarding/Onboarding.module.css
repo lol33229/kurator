@@ -18,6 +18,10 @@
   --modal-padding-bottom: 28px;
 }
 
+.dialogStep4 {
+  --modal-padding-bottom: 54px;
+}
+
 /* Центрируем по всему окну, а не по области с несимметричными отступами */
 .title {
   margin-left: -22px;
@@ -74,7 +78,7 @@
   margin-top: 10px;
 }
 
-/* Подписи в макете шире поля и не переносятся */
+/* Подписи и ошибки в макете шире поля и не переносятся */
 .field {
   --field-label-white-space: nowrap;
   width: 299px;
@@ -161,6 +165,14 @@
 
 .step3Footer {
   margin-top: 24px;
+}
+
+.goalFields {
+  gap: 10px;
+}
+
+.step4Footer {
+  margin-top: 66px;
 }
 
 /* Бюджет */

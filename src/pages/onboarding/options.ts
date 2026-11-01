@@ -72,6 +72,13 @@ export const FORMAT_OPTIONS: DropdownOption[] = [
   { value: 'mixed', label: 'Смешанный' },
 ]
 
+export const DEADLINE_OPTIONS: DropdownOption[] = [
+  { value: '1m', label: '1 месяц' },
+  { value: '3m', label: '3 месяца' },
+  { value: '6m', label: '6 месяцев' },
+  { value: '6m+', label: 'Больше 6 месяцев' },
+]
+
 export const AVAILABILITY_OPTIONS: DropdownOption[] = [
   { value: '1-2', label: '1–2 часа в неделю' },
   { value: '3-5', label: '3–5 часов в неделю' },

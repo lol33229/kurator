@@ -4,6 +4,7 @@ import { HomePage } from '@/pages/home/HomePage'
 import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { BasicInfoStep, type BasicInfo } from './BasicInfoStep'
+import { GoalStep, type Goal } from './GoalStep'
 import { PreferencesStep, type Preferences } from './PreferencesStep'
 import { ProgressSteps } from './ProgressSteps'
 import { RoleStep } from './RoleStep'
@@ -14,6 +15,7 @@ const TOTAL_STEPS = 4
 const STEP_DIALOG_CLASS: Record<number, string | undefined> = {
   2: styles.dialogStep2,
   3: styles.dialogStep3,
+  4: styles.dialogStep4,
 }
 
 export function OnboardingPage() {
@@ -40,6 +42,7 @@ export function OnboardingPage() {
     budgetFrom: '',
     budgetTo: '',
   })
+  const [goal, setGoal] = useState<Goal>({ goal: '', deadline: '' })
 
   const close = useCallback(() => navigate('/home'), [navigate])
 
@@ -65,10 +68,16 @@ export function OnboardingPage() {
             onNext={role === 'student' ? () => setStep(3) : close}
           />
         )}
-        {/* Шаг 4 появится по макету, пока анкета завершается на шаге 3 */}
         {step === 3 && (
-          <PreferencesStep values={preferences} onChange={setPreferences} onBack={() => setStep(2)} onNext={close} />
+          <PreferencesStep
+            values={preferences}
+            onChange={setPreferences}
+            onBack={() => setStep(2)}
+            onNext={() => setStep(4)}
+          />
         )}
+        {/* Пока нет API: после последнего шага открываем главную */}
+        {step === 4 && <GoalStep values={goal} onChange={setGoal} onBack={() => setStep(3)} onNext={close} />}
       </Modal>
     </>
   )
