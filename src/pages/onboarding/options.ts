@@ -122,3 +122,10 @@ export const DIRECTION_OPTIONS = toOptions([
   'Помощь с проектом',
   'Soft skills',
 ])
+
+export const PRICE_MODEL_OPTIONS: DropdownOption[] = [
+  { value: 'hour', label: 'Оплата за час' },
+  { value: 'session', label: 'Оплата за сессию' },
+  { value: 'package', label: 'Пакет занятий' },
+  { value: 'month', label: 'Подписка на месяц' },
+]

@@ -183,6 +183,59 @@
   margin-top: 46px;
 }
 
+/* Условия ментора */
+
+.termsFields {
+  gap: 10px;
+}
+
+.price,
+.checkbox {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.price .priceInput {
+  width: 104px;
+}
+
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.checkboxInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.checkboxIcon {
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.checkboxInput:focus-visible + .checkboxIcon {
+  outline: 2px solid var(--color-text);
+}
+
+.termsFooter {
+  margin-top: 37px;
+}
+
 /* Уровень владения: строка на каждый выбранный навык */
 
 .levels {

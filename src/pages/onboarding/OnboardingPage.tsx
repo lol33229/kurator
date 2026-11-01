@@ -6,6 +6,7 @@ import { Modal } from '@/shared/ui/Modal/Modal'
 import { BasicInfoStep, type BasicInfo } from './BasicInfoStep'
 import { GoalStep, type Goal } from './GoalStep'
 import { MentorProfileStep, type MentorProfile } from './MentorProfileStep'
+import { MentorTermsStep, type MentorTerms } from './MentorTermsStep'
 import { PreferencesStep, type Preferences } from './PreferencesStep'
 import { ProgressSteps } from './ProgressSteps'
 import { RoleStep } from './RoleStep'
@@ -17,6 +18,11 @@ const STEP_DIALOG_CLASS: Record<number, string | undefined> = {
   2: styles.dialogStep2,
   3: styles.dialogStep3,
   4: styles.dialogStep4,
+}
+
+const MENTOR_STEP_DIALOG_CLASS: Record<number, string | undefined> = {
+  2: styles.dialogStep2,
+  3: styles.dialogMentorStep3,
 }
 
 export function OnboardingPage() {
@@ -51,8 +57,15 @@ export function OnboardingPage() {
     levels: {},
     directions: [],
   })
+  const [mentorTerms, setMentorTerms] = useState<MentorTerms>({
+    format: '',
+    availability: '',
+    priceModel: '',
+    price: '',
+    freeTrial: false,
+  })
   const isMentor = role === 'mentor'
-  const dialogClass = isMentor && step === 3 ? styles.dialogMentorStep3 : STEP_DIALOG_CLASS[step]
+  const dialogClass = isMentor ? MENTOR_STEP_DIALOG_CLASS[step] : STEP_DIALOG_CLASS[step]
 
   const close = useCallback(() => navigate('/home'), [navigate])
 
@@ -72,9 +85,13 @@ export function OnboardingPage() {
         {step === 2 && (
           <BasicInfoStep values={basicInfo} onChange={setBasicInfo} onBack={() => setStep(1)} onNext={() => setStep(3)} />
         )}
-        {/* Шаг 4 ментора появится позже, пока анкета завершается на шаге 3 */}
         {step === 3 && isMentor && (
-          <MentorProfileStep values={mentorProfile} onChange={setMentorProfile} onBack={() => setStep(2)} onNext={close} />
+          <MentorProfileStep
+            values={mentorProfile}
+            onChange={setMentorProfile}
+            onBack={() => setStep(2)}
+            onNext={() => setStep(4)}
+          />
         )}
         {step === 3 && !isMentor && (
           <PreferencesStep
@@ -85,7 +102,10 @@ export function OnboardingPage() {
           />
         )}
         {/* Пока нет API: после последнего шага открываем главную */}
-        {step === 4 && <GoalStep values={goal} onChange={setGoal} onBack={() => setStep(3)} onNext={close} />}
+        {step === 4 && isMentor && (
+          <MentorTermsStep values={mentorTerms} onChange={setMentorTerms} onBack={() => setStep(3)} onNext={close} />
+        )}
+        {step === 4 && !isMentor && <GoalStep values={goal} onChange={setGoal} onBack={() => setStep(3)} onNext={close} />}
       </Modal>
     </>
   )
