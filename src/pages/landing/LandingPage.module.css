@@ -469,7 +469,7 @@
   display: flex;
   justify-content: space-between;
   gap: 24px;
-  margin-top: 63px;
+  margin-top: var(--footer-offset, 63px);
   min-height: 279px;
   padding: 15px 38px 40px 34px;
 }

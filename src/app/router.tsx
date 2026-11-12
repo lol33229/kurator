@@ -8,6 +8,7 @@ import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
 import { ResetSentPage } from '@/pages/password-reset/ResetSentPage'
 import { ConfirmEmailPage } from '@/pages/register/ConfirmEmailPage'
 import { RegisterPage } from '@/pages/register/RegisterPage'
+import { StudentHomePage } from '@/pages/student/StudentHomePage'
 import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
 
@@ -25,7 +26,15 @@ export const router = createBrowserRouter([
   { path: '/onboarding', element: <OnboardingPage /> },
   { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
   { path: '/news', element: <PagePlaceholder title="Новости" /> },
-  ...ROLES.map((role) => ({
+  { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
+  { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
+  { path: '/profile', element: <PagePlaceholder title="Профиль" /> },
+  { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
+  { path: '/student', element: <StudentHomePage /> },
+  { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },
+  { path: '/student/events', element: <PagePlaceholder title="События" /> },
+  { path: '/student/goals', element: <PagePlaceholder title="Мои цели" /> },
+  ...ROLES.filter((role) => role !== 'student').map((role) => ({
     path: `/${role}`,
     element: <PagePlaceholder title={`Кабинет: ${ROLE_LABELS[role]}`} />,
   })),

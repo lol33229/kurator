@@ -1,0 +1,491 @@
+/* Главный экран менти */
+
+.page {
+  --footer-offset: 28px;
+}
+
+.main {
+  width: min(1142px, 100% - 2 * var(--page-gutter));
+  margin: 19px auto 0;
+}
+
+/* В макете заголовок чуть левее карточек */
+.title,
+.subtitle {
+  margin-left: -5px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.subtitle {
+  max-width: 503px;
+  margin-top: 22px;
+  font-size: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 538px));
+  justify-content: space-between;
+  margin-top: 29px;
+}
+
+/* Колонки одной высоты, отступы между карточками делятся поровну */
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+/* ---------- Карточка ---------- */
+
+.card {
+  position: relative;
+  border-radius: 40px;
+  background: var(--color-surface);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.more {
+  display: flex;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+
+.more img {
+  transform: rotate(-90deg);
+}
+
+.more:hover {
+  opacity: 0.6;
+}
+
+.more:focus-visible,
+.writeButton:focus-visible,
+.suggestion:focus-visible,
+.event:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Человек: фото, имя, должность */
+
+.person {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.personPhoto {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.personName {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.personPosition {
+  font-size: 16px;
+}
+
+/* Метки статуса и совместимости */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  border-radius: 17px;
+  font-size: 13px;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.pending {
+  background: rgb(255 190 92 / 70%);
+}
+
+.accepted,
+.compat {
+  background: rgb(50 186 118 / 15%);
+}
+
+/* ---------- Ваш наставник ---------- */
+
+.mentorCard {
+  padding: 15px 21px 22px 33px;
+}
+
+.badge {
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: rgb(184 243 74 / 52%);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.mentorProfile {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.mentorPhoto {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.mentorName {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.mentorPosition {
+  max-width: 255px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tagsFull {
+  justify-content: space-between;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 16px;
+  border-radius: 15px;
+  background: var(--color-tag);
+  font-size: 16px;
+}
+
+.writeButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin: 18px 0 0 auto;
+  padding: 4px 12px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+}
+
+.writeButton:hover {
+  background: var(--color-list-bg);
+}
+
+/* ---------- Мои заявки ---------- */
+
+.requestsCard {
+  padding: 14px 21px 52px 33px;
+}
+
+.requests {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.request {
+  display: grid;
+  grid-template-columns: minmax(0, 310px) 116px;
+  align-items: center;
+}
+
+/* ---------- Найти ментора ---------- */
+
+.findCard {
+  padding: 17px 16px 35px 27px;
+}
+
+.findCard .more {
+  margin-right: 11px;
+}
+
+.findText {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.suggestions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 49px;
+  margin: 15px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestion {
+  display: block;
+  height: 100%;
+  padding: 10px 13px 15px;
+  border: 1px solid rgb(29 40 62 / 38%);
+  border-radius: 7px;
+  text-decoration: none;
+}
+
+.suggestion:hover {
+  border-color: var(--color-text);
+}
+
+.suggestionFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 7px;
+}
+
+.compat {
+  width: 163px;
+}
+
+.suggestionChevron {
+  opacity: 0.38;
+  transform: rotate(-90deg);
+}
+
+/* ---------- Ближайшие события ---------- */
+
+.eventsCard {
+  padding: 16px 21px 37px 33px;
+}
+
+.eventsTitle {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event {
+  display: grid;
+  grid-template-columns: 65px minmax(0, 1fr) 12px;
+  align-items: center;
+  column-gap: 9px;
+  padding-right: 22px;
+  border-radius: 13px;
+  text-decoration: none;
+}
+
+.event:hover .eventTitle {
+  text-decoration: underline;
+}
+
+.eventDate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 62px;
+  border-radius: 13px;
+  background: rgb(184 243 74 / 34%);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 0.74;
+  text-align: center;
+}
+
+.eventInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.eventTitle {
+  max-width: 266px;
+  font-weight: 700;
+}
+
+.eventTime {
+  font-weight: 300;
+}
+
+.eventChevron {
+  align-self: start;
+  margin-top: 16px;
+  transform: rotate(-90deg);
+}
+
+
+/* ---------- Ваша цель ---------- */
+
+.goalCard {
+  padding: 14px 21px 28px 33px;
+}
+
+.goal {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.goalIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgb(184 243 74 / 52%);
+}
+
+.goalTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.goalText {
+  max-width: 287px;
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  margin-top: 14px;
+}
+
+.progressTrack {
+  flex: 0 1 424px;
+  height: 19px;
+  overflow: hidden;
+  border-radius: 151px;
+  background: #f2f2f2;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 151px;
+  background: rgb(184 243 74 / 85%);
+}
+
+.progressValue {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1240px) {
+  .grid {
+    column-gap: 24px;
+  }
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title,
+  .subtitle {
+    margin-left: 0;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .card {
+    border-radius: 32px;
+  }
+
+  .mentorCard,
+  .requestsCard,
+  .findCard,
+  .eventsCard,
+  .goalCard {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .mentorPhoto {
+    width: 72px;
+    height: 72px;
+  }
+
+  .tagsFull {
+    justify-content: flex-start;
+  }
+
+  .request {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .request .status {
+    padding: 0 10px;
+  }
+
+  .suggestions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .findCard .more {
+    margin-right: 0;
+  }
+
+  .event {
+    padding-right: 0;
+  }
+}
