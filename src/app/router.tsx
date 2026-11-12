@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router'
 import { RootLayout } from '@/app/RootLayout'
-import { HomePage } from '@/pages/home/HomePage'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
@@ -18,8 +17,6 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: '/', element: <LandingPage /> },
-      // Главная для вошедшего пользователя (временный адрес)
-      { path: '/home', element: <HomePage /> },
       { path: '/chatbot', element: <PagePlaceholder title="ИИ чат-бот" /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/password-reset', element: <ResetRequestPage /> },

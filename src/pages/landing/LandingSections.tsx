@@ -55,7 +55,7 @@ export function HeroSection() {
   return (
     <section className={`${styles.container} ${styles.hero}`}>
       <div>
-        <p className={styles.eyebrow}>платформа наставничества с AI</p>
+        <p className={styles.eyebrow}>платформа наставничества с ИИ</p>
         <h1 className={styles.heroTitle}>Найдите наставника, который подходит именно Вам</h1>
         <p className={styles.heroText}>
           Куратор анализирует ваши цели, интересы и опыт, чтобы подобрать подходящего наставника и помочь пройти путь
@@ -71,13 +71,9 @@ export function HeroSection() {
   )
 }
 
-type SectionProps = {
-  className?: string
-}
-
-export function HowItWorksSection({ className }: SectionProps) {
+export function HowItWorksSection() {
   return (
-    <section className={[styles.container, styles.howItWorks, className].filter(Boolean).join(' ')}>
+    <section className={`${styles.container} ${styles.howItWorks}`}>
       <div className={styles.sectionHead}>
         <div>
           <p className={styles.eyebrow}>как работает?</p>

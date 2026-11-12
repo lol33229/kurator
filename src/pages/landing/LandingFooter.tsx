@@ -9,7 +9,7 @@ export function LandingFooter() {
     <footer className={`${styles.container} ${styles.card} ${styles.footer}`}>
       <div>
         <Logo size="lg" className={styles.footerLogo} />
-        <p className={styles.footerTagline}>платформа наставничества с AI</p>
+        <p className={styles.footerTagline}>платформа наставничества с ИИ</p>
       </div>
       <nav className={styles.footerLinks} aria-label="Ссылки в подвале">
         <Link to="/news">новости</Link>

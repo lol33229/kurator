@@ -2,12 +2,7 @@ import { Link } from 'react-router'
 import { Logo } from '@/shared/ui/Logo/Logo'
 import styles from './LandingPage.module.css'
 
-type LandingHeaderProps = {
-  // Для вошедшего пользователя
-  cabinetPath?: string
-}
-
-export function LandingHeader({ cabinetPath }: LandingHeaderProps) {
+export function LandingHeader() {
   return (
     <header className={`${styles.container} ${styles.header}`}>
       <Logo className={styles.headerLogo} />
@@ -16,17 +11,8 @@ export function LandingHeader({ cabinetPath }: LandingHeaderProps) {
         <Link to="/news">Новости</Link>
       </nav>
       <nav className={styles.authNav} aria-label="Аккаунт">
-        {cabinetPath ? (
-          <>
-            <Link to={cabinetPath}>Кабинет</Link>
-            <Link to="/">Выйти</Link>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Войти</Link>
-            <Link to="/register">Регистрация</Link>
-          </>
-        )}
+        <Link to="/login">Войти</Link>
+        <Link to="/register">Регистрация</Link>
       </nav>
     </header>
   )

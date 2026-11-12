@@ -1,6 +1,6 @@
 import { useCallback, useId, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import { HomePage } from '@/pages/home/HomePage'
+import { LandingPage } from '@/pages/landing/LandingPage'
 import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { BasicInfoStep, type BasicInfo } from './BasicInfoStep'
@@ -67,11 +67,12 @@ export function OnboardingPage() {
   const isMentor = role === 'mentor'
   const dialogClass = isMentor ? MENTOR_STEP_DIALOG_CLASS[step] : STEP_DIALOG_CLASS[step]
 
-  const close = useCallback(() => navigate('/home'), [navigate])
+  // Менти попадает на свой главный экран; экрана ментора пока нет, там заглушка
+  const close = useCallback(() => navigate(role === 'mentor' ? '/mentor' : '/student'), [navigate, role])
 
   return (
     <>
-      <HomePage />
+      <LandingPage />
       <Modal
         labelledBy={titleId}
         onClose={close}

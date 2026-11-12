@@ -7,7 +7,8 @@ export function LoginPage() {
   const navigate = useNavigate()
 
   // Пока нет API: сразу открываем главную для вошедшего пользователя
-  const submit = () => navigate('/home')
+  // Пока нет API ролей: после входа открываем экран менти
+  const submit = () => navigate('/student')
 
   return (
     <LandingWithModal className={styles.dialog}>
