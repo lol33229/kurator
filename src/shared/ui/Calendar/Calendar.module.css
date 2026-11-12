@@ -1,0 +1,101 @@
+.calendar {
+  width: 280px;
+  max-width: 100%;
+  padding: 8px;
+  border-radius: 15px;
+  background: var(--color-surface);
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  padding: 9px 16px;
+}
+
+.nav {
+  display: flex;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+
+.nav:hover {
+  background: var(--color-list-bg);
+}
+
+.nav:focus-visible {
+  outline: 2px solid var(--color-text);
+}
+
+.compact .title {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.compact .nav {
+  padding: 5px 10px;
+}
+
+.grid {
+  border-collapse: separate;
+  border-spacing: 2px;
+  margin: -2px;
+}
+
+.grid th,
+.day {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  text-align: center;
+}
+
+.grid th {
+  font-weight: 400;
+}
+
+.day {
+  position: relative;
+  font-weight: 500;
+}
+
+.outside {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.weekend {
+  color: #e9033a;
+}
+
+/* Точка под числом: в этот день есть встреча */
+.marked::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text);
+  transform: translateX(-50%);
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}

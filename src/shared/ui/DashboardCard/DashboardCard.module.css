@@ -1,0 +1,66 @@
+/* Карточки главных экранов менти и ментора */
+
+.card {
+  position: relative;
+  border-radius: 40px;
+  background: var(--color-surface);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.more {
+  display: flex;
+  flex-shrink: 0;
+  margin-right: var(--more-offset, 0);
+  border-radius: 6px;
+}
+
+.more img {
+  transform: rotate(-90deg);
+}
+
+.more:hover {
+  opacity: 0.6;
+}
+
+.more:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Метки статуса и совместимости */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  border-radius: 17px;
+  font-size: 13px;
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.pillGreen {
+  background: rgb(50 186 118 / 15%);
+}
+
+.pillOrange {
+  background: rgb(255 190 92 / 70%);
+}
+
+@media (max-width: 640px) {
+  .card {
+    border-radius: 32px;
+  }
+}

@@ -41,41 +41,8 @@
   gap: 28px;
 }
 
-/* ---------- Карточка ---------- */
+/* ---------- Общее для карточек ---------- */
 
-.card {
-  position: relative;
-  border-radius: 40px;
-  background: var(--color-surface);
-}
-
-.cardHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.cardTitle {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.more {
-  display: flex;
-  flex-shrink: 0;
-  border-radius: 6px;
-}
-
-.more img {
-  transform: rotate(-90deg);
-}
-
-.more:hover {
-  opacity: 0.6;
-}
-
-.more:focus-visible,
 .writeButton:focus-visible,
 .suggestion:focus-visible,
 .event:focus-visible {
@@ -103,28 +70,6 @@
 
 .personPosition {
   font-size: 16px;
-}
-
-/* Метки статуса и совместимости */
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 25px;
-  border-radius: 17px;
-  font-size: 13px;
-  font-weight: 300;
-  white-space: nowrap;
-}
-
-.pending {
-  background: rgb(255 190 92 / 70%);
-}
-
-.accepted,
-.compat {
-  background: rgb(50 186 118 / 15%);
 }
 
 /* ---------- Ваш наставник ---------- */
@@ -234,8 +179,8 @@
   padding: 17px 16px 35px 27px;
 }
 
-.findCard .more {
-  margin-right: 11px;
+.findCard {
+  --more-offset: 11px;
 }
 
 .findText {
@@ -446,10 +391,6 @@
     font-size: 20px;
   }
 
-  .card {
-    border-radius: 32px;
-  }
-
   .mentorCard,
   .requestsCard,
   .findCard,
@@ -473,7 +414,7 @@
     gap: 8px;
   }
 
-  .request .status {
+  .request > span {
     padding: 0 10px;
   }
 
@@ -481,8 +422,8 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .findCard .more {
-    margin-right: 0;
+  .findCard {
+    --more-offset: 0;
   }
 
   .event {

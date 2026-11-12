@@ -8,6 +8,8 @@ type UserHeaderProps = {
   name: string
   roleLabel: string
   avatar: string
+  // Разделы с непрочитанным: у ссылки появляется зелёная точка
+  unread?: string[]
 }
 
 const NAV_LINKS = [
@@ -18,7 +20,7 @@ const NAV_LINKS = [
 ]
 
 // Шапка для вошедшего пользователя
-export function UserHeader({ name, roleLabel, avatar }: UserHeaderProps) {
+export function UserHeader({ name, roleLabel, avatar, unread = [] }: UserHeaderProps) {
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
@@ -41,11 +43,15 @@ export function UserHeader({ name, roleLabel, avatar }: UserHeaderProps) {
     <header className={styles.header}>
       <Logo className={styles.logo} />
       <nav className={styles.nav} aria-label="Разделы">
-        {NAV_LINKS.map((link) => (
-          <Link key={link.to} to={link.to}>
-            {link.label}
-          </Link>
-        ))}
+        {NAV_LINKS.map((link) => {
+          const hasUnread = unread.includes(link.to)
+          return (
+            <Link key={link.to} to={link.to} className={hasUnread ? styles.unread : undefined}>
+              {link.label}
+              {hasUnread && <span className={styles.hidden}> (есть непрочитанные)</span>}
+            </Link>
+          )
+        })}
       </nav>
       <div ref={rootRef} className={styles.profile}>
         <button

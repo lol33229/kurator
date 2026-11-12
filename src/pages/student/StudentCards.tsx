@@ -1,27 +1,13 @@
-import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 import calendarIcon from '@/assets/icons/calendar.svg'
 import chartIcon from '@/assets/icons/chart-mixed.svg'
 import smallChevron from '@/assets/icons/chevron-small.svg'
 import chevronIcon from '@/assets/icons/chevron-wide.svg'
 import pencilIcon from '@/assets/icons/pencil.svg'
+import { CardHead } from '@/shared/ui/DashboardCard/DashboardCard'
+import cardStyles from '@/shared/ui/DashboardCard/DashboardCard.module.css'
 import { EVENTS, GOAL, REQUESTS, SUGGESTIONS, type Mentor, type RequestStatus } from './data'
 import styles from './StudentHomePage.module.css'
-
-type MoreLinkProps = {
-  to: string
-  label: string
-  className?: string
-}
-
-// Стрелка «подробнее» в углу карточки
-function MoreLink({ to, label, className }: MoreLinkProps) {
-  return (
-    <Link to={to} className={[styles.more, className].filter(Boolean).join(' ')} aria-label={label}>
-      <img src={chevronIcon} alt="" width={23} height={24} />
-    </Link>
-  )
-}
 
 type PersonProps = {
   name: string
@@ -41,20 +27,11 @@ function Person({ name, position, photo }: PersonProps) {
   )
 }
 
-function CardHead({ children, more }: { children: ReactNode; more: MoreLinkProps }) {
-  return (
-    <div className={styles.cardHead}>
-      {children}
-      <MoreLink {...more} />
-    </div>
-  )
-}
-
 export function MentorCard({ mentor }: { mentor: Mentor }) {
   // Полный ряд навыков растягиваем на всю ширину, короткий — нет
   const isFullRow = Boolean(mentor.moreTags)
   return (
-    <article className={`${styles.card} ${styles.mentorCard}`}>
+    <article className={`${cardStyles.card} ${styles.mentorCard}`}>
       <CardHead more={{ to: '/mentors', label: `Профиль наставника ${mentor.name}` }}>
         <span className={styles.badge}>Ваш наставник</span>
       </CardHead>
@@ -90,17 +67,22 @@ const STATUS_LABELS: Record<RequestStatus, string> = {
   accepted: 'Согласовано',
 }
 
+const STATUS_PILLS: Record<RequestStatus, string> = {
+  pending: cardStyles.pillOrange,
+  accepted: cardStyles.pillGreen,
+}
+
 export function RequestsCard() {
   return (
-    <section className={`${styles.card} ${styles.requestsCard}`}>
+    <section className={`${cardStyles.card} ${styles.requestsCard}`}>
       <CardHead more={{ to: '/student/requests', label: 'Все заявки' }}>
-        <h2 className={styles.cardTitle}>Мои заявки</h2>
+        <h2 className={cardStyles.cardTitle}>Мои заявки</h2>
       </CardHead>
       <ul className={styles.requests}>
         {REQUESTS.map((request) => (
           <li key={request.id} className={styles.request}>
             <Person {...request} />
-            <span className={`${styles.status} ${styles[request.status]}`}>{STATUS_LABELS[request.status]}</span>
+            <span className={`${cardStyles.pill} ${STATUS_PILLS[request.status]}`}>{STATUS_LABELS[request.status]}</span>
           </li>
         ))}
       </ul>
@@ -110,9 +92,9 @@ export function RequestsCard() {
 
 export function FindMentorCard() {
   return (
-    <section className={`${styles.card} ${styles.findCard}`}>
+    <section className={`${cardStyles.card} ${styles.findCard}`}>
       <CardHead more={{ to: '/mentors', label: 'Все рекомендации' }}>
-        <h2 className={styles.cardTitle}>Найти ментора</h2>
+        <h2 className={cardStyles.cardTitle}>Найти ментора</h2>
       </CardHead>
       <p className={styles.findText}>
         Еще не нашли идеального наставника?
@@ -125,7 +107,7 @@ export function FindMentorCard() {
             <Link to="/mentors" className={styles.suggestion}>
               <Person {...mentor} />
               <span className={styles.suggestionFooter}>
-                <span className={`${styles.status} ${styles.compat}`}>{mentor.compatibility}% совместимости</span>
+                <span className={`${cardStyles.pill} ${cardStyles.pillGreen} ${styles.compat}`}>{mentor.compatibility}% совместимости</span>
                 <img className={styles.suggestionChevron} src={chevronIcon} alt="" width={23} height={24} />
               </span>
             </Link>
@@ -138,9 +120,9 @@ export function FindMentorCard() {
 
 export function EventsCard() {
   return (
-    <section className={`${styles.card} ${styles.eventsCard}`}>
+    <section className={`${cardStyles.card} ${styles.eventsCard}`}>
       <CardHead more={{ to: '/student/events', label: 'Все события' }}>
-        <h2 className={`${styles.cardTitle} ${styles.eventsTitle}`}>
+        <h2 className={`${cardStyles.cardTitle} ${styles.eventsTitle}`}>
           <img src={calendarIcon} alt="" width={25} height={25} />
           Ближайшие события
         </h2>
@@ -171,9 +153,9 @@ export function EventsCard() {
 
 export function GoalCard() {
   return (
-    <section className={`${styles.card} ${styles.goalCard}`}>
+    <section className={`${cardStyles.card} ${styles.goalCard}`}>
       <CardHead more={{ to: '/student/goals', label: 'Все цели' }}>
-        <h2 className={styles.cardTitle}>Ваша цель</h2>
+        <h2 className={cardStyles.cardTitle}>Ваша цель</h2>
       </CardHead>
       <div className={styles.goal}>
         <span className={styles.goalIcon}>

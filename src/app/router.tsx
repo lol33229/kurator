@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { RootLayout } from '@/app/RootLayout'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
+import { MentorHomePage } from '@/pages/mentor/MentorHomePage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
 import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
@@ -35,7 +36,12 @@ export const router = createBrowserRouter([
       { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },
       { path: '/student/events', element: <PagePlaceholder title="События" /> },
       { path: '/student/goals', element: <PagePlaceholder title="Мои цели" /> },
-      ...ROLES.filter((role) => role !== 'student').map((role) => ({
+      { path: '/mentor', element: <MentorHomePage /> },
+      { path: '/mentor/requests', element: <PagePlaceholder title="Запросы менти" /> },
+      { path: '/mentor/events', element: <PagePlaceholder title="События" /> },
+      { path: '/mentor/mentees', element: <PagePlaceholder title="Мои менти" /> },
+      // Кабинеты куратора и администратора пока заглушки
+      ...ROLES.filter((role) => role === 'curator' || role === 'admin').map((role) => ({
         path: `/${role}`,
         element: <PagePlaceholder title={`Кабинет: ${ROLE_LABELS[role]}`} />,
       })),
