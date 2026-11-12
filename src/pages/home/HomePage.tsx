@@ -3,7 +3,6 @@ import { LandingHeader } from '@/pages/landing/LandingHeader'
 import landingStyles from '@/pages/landing/LandingPage.module.css'
 import { ForMentorsSection, HowItWorksSection, WhyKuratorSection } from '@/pages/landing/LandingSections'
 import { ButtonLink } from '@/shared/ui/Button/ButtonLink'
-import { ChatbotButton } from '@/shared/ui/ChatbotButton/ChatbotButton'
 import { RecommendationCard, type Recommendation } from './RecommendationCard'
 import styles from './HomePage.module.css'
 
@@ -37,7 +36,6 @@ export function HomePage() {
             <p className={styles.heroNote}>бесплатно, займет 5 минут</p>
           </div>
           <RecommendationCard recommendation={TOP_RECOMMENDATION} />
-          <ChatbotButton className={styles.chatbot} />
         </section>
         <HowItWorksSection className={styles.howItWorks} />
         <WhyKuratorSection />

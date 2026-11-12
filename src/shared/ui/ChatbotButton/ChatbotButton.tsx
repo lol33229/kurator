@@ -1,17 +1,12 @@
 import { Link } from 'react-router'
-import chatbotBackground from '@/assets/chatbot/chatbot-bg.svg'
+import botIcon from '@/assets/chatbot/bot.svg'
 import styles from './ChatbotButton.module.css'
 
-type ChatbotButtonProps = {
-  className?: string
-}
-
-// Кнопка ИИ чат-бота
-export function ChatbotButton({ className }: ChatbotButtonProps) {
+// Плавающая кнопка ИИ чат-бота
+export function ChatbotButton() {
   return (
-    <Link to="/chatbot" className={[styles.button, className].filter(Boolean).join(' ')}>
-      <img className={styles.background} src={chatbotBackground} alt="" width={126} height={107.84} />
-      <span className={styles.label}>ИИ ЧАТ-БОТ</span>
+    <Link to="/chatbot" className={styles.button} aria-label="ИИ чат-бот">
+      <img src={botIcon} alt="" width={80} height={83.5} />
     </Link>
   )
 }

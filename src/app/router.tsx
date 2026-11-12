@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router'
+import { RootLayout } from '@/app/RootLayout'
 import { HomePage } from '@/pages/home/HomePage'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
@@ -13,30 +14,35 @@ import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
 
 export const router = createBrowserRouter([
-  { path: '/', element: <LandingPage /> },
-  // Главная для вошедшего пользователя (временный адрес)
-  { path: '/home', element: <HomePage /> },
-  { path: '/chatbot', element: <PagePlaceholder title="ИИ чат-бот" /> },
-  { path: '/login', element: <LoginPage /> },
-  { path: '/password-reset', element: <ResetRequestPage /> },
-  { path: '/password-reset/sent', element: <ResetSentPage /> },
-  { path: '/password-reset/new', element: <NewPasswordPage /> },
-  { path: '/register', element: <RegisterPage /> },
-  { path: '/register/confirm', element: <ConfirmEmailPage /> },
-  { path: '/onboarding', element: <OnboardingPage /> },
-  { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
-  { path: '/news', element: <PagePlaceholder title="Новости" /> },
-  { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
-  { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
-  { path: '/profile', element: <PagePlaceholder title="Профиль" /> },
-  { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
-  { path: '/student', element: <StudentHomePage /> },
-  { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },
-  { path: '/student/events', element: <PagePlaceholder title="События" /> },
-  { path: '/student/goals', element: <PagePlaceholder title="Мои цели" /> },
-  ...ROLES.filter((role) => role !== 'student').map((role) => ({
-    path: `/${role}`,
-    element: <PagePlaceholder title={`Кабинет: ${ROLE_LABELS[role]}`} />,
-  })),
-  { path: '*', element: <PagePlaceholder title="Страница не найдена" /> },
+  {
+    element: <RootLayout />,
+    children: [
+      { path: '/', element: <LandingPage /> },
+      // Главная для вошедшего пользователя (временный адрес)
+      { path: '/home', element: <HomePage /> },
+      { path: '/chatbot', element: <PagePlaceholder title="ИИ чат-бот" /> },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/password-reset', element: <ResetRequestPage /> },
+      { path: '/password-reset/sent', element: <ResetSentPage /> },
+      { path: '/password-reset/new', element: <NewPasswordPage /> },
+      { path: '/register', element: <RegisterPage /> },
+      { path: '/register/confirm', element: <ConfirmEmailPage /> },
+      { path: '/onboarding', element: <OnboardingPage /> },
+      { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
+      { path: '/news', element: <PagePlaceholder title="Новости" /> },
+      { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
+      { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
+      { path: '/profile', element: <PagePlaceholder title="Профиль" /> },
+      { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
+      { path: '/student', element: <StudentHomePage /> },
+      { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },
+      { path: '/student/events', element: <PagePlaceholder title="События" /> },
+      { path: '/student/goals', element: <PagePlaceholder title="Мои цели" /> },
+      ...ROLES.filter((role) => role !== 'student').map((role) => ({
+        path: `/${role}`,
+        element: <PagePlaceholder title={`Кабинет: ${ROLE_LABELS[role]}`} />,
+      })),
+      { path: '*', element: <PagePlaceholder title="Страница не найдена" /> },
+    ],
+  },
 ])

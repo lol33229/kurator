@@ -39,12 +39,6 @@
   font-size: 20px;
 }
 
-.chatbot {
-  position: absolute;
-  top: 496px;
-  left: calc(100% - 40px);
-}
-
 /* ---------- Карточка рекомендации ---------- */
 
 .recommendation {
@@ -169,13 +163,6 @@
 
 /* ---------- Адаптив ---------- */
 
-@media (max-width: 1400px) {
-  .chatbot {
-    left: auto;
-    right: 0;
-  }
-}
-
 @media (max-width: 1240px) {
   .hero {
     grid-template-columns: 1fr minmax(0, 521px);
@@ -201,13 +188,6 @@
 
   .recommendation {
     margin: 0;
-  }
-
-  /* для фона кнопки */
-  .chatbot {
-    position: relative;
-    top: auto;
-    justify-self: end;
   }
 
   .howItWorks {
