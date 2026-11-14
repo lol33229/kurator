@@ -9,6 +9,7 @@ import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
 import { ResetSentPage } from '@/pages/password-reset/ResetSentPage'
 import { ConfirmEmailPage } from '@/pages/register/ConfirmEmailPage'
 import { RegisterPage } from '@/pages/register/RegisterPage'
+import { StudentProfilePage } from '@/pages/student/profile/StudentProfilePage'
 import { StudentHomePage } from '@/pages/student/StudentHomePage'
 import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
@@ -30,16 +31,20 @@ export const router = createBrowserRouter([
       { path: '/news', element: <PagePlaceholder title="Новости" /> },
       { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
       { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
-      { path: '/profile', element: <PagePlaceholder title="Профиль" /> },
       { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
       { path: '/student', element: <StudentHomePage /> },
       { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },
       { path: '/student/events', element: <PagePlaceholder title="События" /> },
       { path: '/student/goals', element: <PagePlaceholder title="Мои цели" /> },
+      { path: '/student/profile', element: <StudentProfilePage /> },
+      { path: '/student/profile/edit', element: <PagePlaceholder title="Редактирование профиля" /> },
+      { path: '/student/history', element: <PagePlaceholder title="История наставничества" /> },
+      { path: '/student/reviews', element: <PagePlaceholder title="Отзывы" /> },
       { path: '/mentor', element: <MentorHomePage /> },
       { path: '/mentor/requests', element: <PagePlaceholder title="Запросы менти" /> },
       { path: '/mentor/events', element: <PagePlaceholder title="События" /> },
       { path: '/mentor/mentees', element: <PagePlaceholder title="Мои менти" /> },
+      { path: '/mentor/profile', element: <PagePlaceholder title="Профиль ментора" /> },
       // Кабинеты куратора и администратора пока заглушки
       ...ROLES.filter((role) => role === 'curator' || role === 'admin').map((role) => ({
         path: `/${role}`,

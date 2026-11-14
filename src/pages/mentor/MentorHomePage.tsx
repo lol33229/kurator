@@ -15,7 +15,13 @@ export function MentorHomePage() {
 
   return (
     <div className={`${landingStyles.page} ${styles.page}`}>
-      <UserHeader name={MENTOR.shortName} roleLabel="ментор" avatar={MENTOR.avatar} unread={['/messages', '/notifications']} />
+      <UserHeader
+        name={MENTOR.shortName}
+        roleLabel="ментор"
+        avatar={MENTOR.avatar}
+        unread={['/messages', '/notifications']}
+        profilePath="/mentor/profile"
+      />
       <main className={styles.main}>
         <h1 className={styles.title}>Привет, {MENTOR.firstName}!</h1>
         <p className={styles.subtitle}>Здесь вы управляете наставничеством, заявками и развитием своих менти.</p>

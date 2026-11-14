@@ -10,6 +10,9 @@ type UserHeaderProps = {
   avatar: string
   // Разделы с непрочитанным: у ссылки появляется зелёная точка
   unread?: string[]
+  // Разделы, которые на этой странице не показываем
+  hiddenLinks?: string[]
+  profilePath?: string
 }
 
 const NAV_LINKS = [
@@ -20,7 +23,14 @@ const NAV_LINKS = [
 ]
 
 // Шапка для вошедшего пользователя
-export function UserHeader({ name, roleLabel, avatar, unread = [] }: UserHeaderProps) {
+export function UserHeader({
+  name,
+  roleLabel,
+  avatar,
+  unread = [],
+  hiddenLinks = [],
+  profilePath = '/profile',
+}: UserHeaderProps) {
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
@@ -43,7 +53,7 @@ export function UserHeader({ name, roleLabel, avatar, unread = [] }: UserHeaderP
     <header className={styles.header}>
       <Logo className={styles.logo} />
       <nav className={styles.nav} aria-label="Разделы">
-        {NAV_LINKS.map((link) => {
+        {NAV_LINKS.filter((link) => !hiddenLinks.includes(link.to)).map((link) => {
           const hasUnread = unread.includes(link.to)
           return (
             <Link key={link.to} to={link.to} className={hasUnread ? styles.unread : undefined}>
@@ -72,7 +82,7 @@ export function UserHeader({ name, roleLabel, avatar, unread = [] }: UserHeaderP
         {open && (
           <ul id={menuId} className={styles.menu} role="menu">
             <li role="none">
-              <Link role="menuitem" to="/profile" onClick={() => setOpen(false)}>
+              <Link role="menuitem" to={profilePath} onClick={() => setOpen(false)}>
                 Профиль
               </Link>
             </li>

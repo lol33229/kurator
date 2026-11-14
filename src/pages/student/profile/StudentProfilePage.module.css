@@ -1,0 +1,540 @@
+/* Профиль менти */
+
+.page {
+  --footer-offset: 27px;
+}
+
+.main {
+  width: min(1208px, 100% - 2 * var(--page-gutter));
+  margin: 21px auto 0;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.subtitle {
+  max-width: 503px;
+  margin-top: 22px;
+  font-size: 24px;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* ---------- Секция ---------- */
+
+.section {
+  padding: 21px 29px 0 41px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.sectionHead > div:first-child {
+  margin-right: auto;
+}
+
+.sectionSubtitle {
+  font-size: 16px;
+}
+
+.action {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 189px;
+  height: 30px;
+  margin-top: 14px;
+  border-radius: 8px;
+  background: var(--color-accent-light);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.action {
+  border: none;
+  color: var(--color-text);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.action:hover {
+  filter: brightness(0.95);
+}
+
+.action:focus-visible,
+.photoEdit:focus-within {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Личные данные ---------- */
+
+.personal {
+  padding-bottom: 39px;
+}
+
+.personalBody {
+  display: flex;
+  align-items: flex-start;
+  gap: 43px;
+  margin-top: 22px;
+}
+
+.photo {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.photoImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.photoEdit {
+  position: absolute;
+  top: 70px;
+  left: 72px;
+  display: flex;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.photoEdit:hover {
+  filter: brightness(0.95);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 312px 230px minmax(0, 370px);
+  row-gap: 30px;
+  margin: 0;
+  font-size: 16px;
+}
+
+.fields dd {
+  margin: 11px 0 0;
+  font-weight: 500;
+}
+
+/* ---------- Интересы и навыки ---------- */
+
+.skills {
+  padding-bottom: 46px;
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 33px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skillPair {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+
+.skill,
+.level {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+.skill {
+  height: 30px;
+  padding: 0 18px;
+  background: var(--color-tag);
+}
+
+.level {
+  height: 25px;
+  padding: 0 8px;
+  border: 1px solid var(--color-accent-light);
+  color: rgb(29 40 62 / 85%);
+}
+
+/* ---------- Прогресс ---------- */
+
+.progress {
+  display: flex;
+  align-items: center;
+}
+
+.progressTrack {
+  display: block;
+  height: 19px;
+  overflow: hidden;
+  border-radius: 151px;
+  background: #f2f2f2;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  border-radius: 151px;
+}
+
+.progressValue {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.progressFill.good {
+  background: rgb(184 243 74 / 85%);
+}
+
+.progressFill.low {
+  background: rgb(255 0 61 / 23%);
+}
+
+.progressFill.done {
+  background: var(--color-accent);
+}
+
+/* ---------- Цели ---------- */
+
+.goals {
+  padding-bottom: 60px;
+}
+
+.goalList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 560px));
+  row-gap: 24px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.goal {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.goalIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.goalIcon.good {
+  background: rgb(184 243 74 / 52%);
+}
+
+.goalIcon.low {
+  background: rgb(255 0 61 / 23%);
+}
+
+.goalTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.goalText {
+  max-width: 287px;
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.goalProgress {
+  gap: 19px;
+  margin-top: 12px;
+}
+
+.goalProgress .progressTrack {
+  flex: 0 1 424px;
+}
+
+/* Окно редактирования целей в стиле анкеты */
+.goalsDialog {
+  --modal-padding-bottom: 48px;
+}
+
+.goalsFooter {
+  margin-top: 40px;
+}
+
+/* ---------- Доступность ---------- */
+
+.availability {
+  padding-bottom: 34px;
+}
+
+.availabilityList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 18px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.availabilityList > div {
+  display: grid;
+  grid-template-columns: 142px minmax(0, 1fr);
+}
+
+.availabilityList dt {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.availabilityList dd {
+  margin: 0;
+}
+
+/* ---------- Строки истории и отзывов ---------- */
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+  margin: 21px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.person {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.personPhoto {
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.personName {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.personPosition {
+  font-size: 16px;
+}
+
+/* ---------- История наставничества ---------- */
+
+.history {
+  padding-bottom: 29px;
+}
+
+.history .rows {
+  margin-top: 23px;
+}
+
+.historyRow {
+  display: grid;
+  grid-template-columns: 263px 311px minmax(0, 1fr);
+  align-items: start;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.current {
+  padding: 0 12px;
+  background: rgb(184 243 74 / 52%);
+}
+
+.finished {
+  padding: 0 9px;
+  background: var(--color-tag);
+}
+
+.period {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+.historyGoal {
+  margin-top: 4px;
+}
+
+.historyGoalTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.historyProgress {
+  gap: 17px;
+  margin-top: 8px;
+}
+
+.historyProgress .progressTrack {
+  flex: 0 0 200px;
+}
+
+/* ---------- Отзывы ---------- */
+
+/* В макете отзывы стоят ближе к истории, чем остальные секции */
+.reviews {
+  margin-top: -5px;
+  padding-bottom: 19px;
+}
+
+.average {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 18px 11px 0 0;
+  color: #000;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.reviewRow {
+  display: grid;
+  grid-template-columns: 275px minmax(0, 550px) auto;
+  align-items: start;
+  margin-top: 0;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.starIcons {
+  display: flex;
+  gap: 8px;
+}
+
+.reviewText {
+  max-width: 396px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.reviewDate {
+  font-size: 16px;
+}
+
+.reviews .rows {
+  gap: 22px;
+  margin-top: 31px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1240px) {
+  .fields {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+
+  .historyRow {
+    grid-template-columns: 240px 240px minmax(0, 1fr);
+  }
+
+  .reviewRow {
+    grid-template-columns: 240px minmax(0, 1fr) auto;
+    column-gap: 16px;
+  }
+}
+
+@media (max-width: 960px) {
+  .sectionHead {
+    flex-wrap: wrap;
+  }
+
+  .personalBody {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .goalList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .historyRow,
+  .reviewRow {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .section {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .sectionHead > div:first-child {
+    flex-basis: 100%;
+  }
+
+  .action {
+    margin-top: 0;
+  }
+
+  .fields,
+  .availabilityList > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .availabilityList dd {
+    margin-top: 6px;
+  }
+}

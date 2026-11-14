@@ -10,7 +10,7 @@ export function StudentHomePage() {
   const [firstMentor, secondMentor] = MY_MENTORS
   return (
     <div className={`${landingStyles.page} ${styles.page}`}>
-      <UserHeader name={STUDENT.shortName} roleLabel="менти" avatar={STUDENT.avatar} />
+      <UserHeader name={STUDENT.shortName} roleLabel="менти" avatar={STUDENT.avatar} profilePath="/student/profile" />
       <main className={styles.main}>
         <h1 className={styles.title}>Привет, {STUDENT.firstName}!</h1>
         <p className={styles.subtitle}>Ваш путь к новым знаниям и возможностям начинается здесь.</p>
