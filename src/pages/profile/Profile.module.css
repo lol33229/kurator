@@ -1,7 +1,7 @@
-/* Профиль менти */
+/* Профиль: общие блоки менти и ментора */
 
 .page {
-  --footer-offset: 27px;
+  --footer-offset: var(--profile-footer-offset, 22px);
 }
 
 .main {
@@ -91,6 +91,7 @@
 /* ---------- Личные данные ---------- */
 
 .personal {
+  min-height: var(--personal-min-height, 0);
   padding-bottom: 39px;
 }
 
@@ -219,80 +220,10 @@
   background: var(--color-accent);
 }
 
-/* ---------- Цели ---------- */
-
-.goals {
-  padding-bottom: 60px;
-}
-
-.goalList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 560px));
-  row-gap: 24px;
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.goal {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.goalIcon {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
-
-.goalIcon.good {
-  background: rgb(184 243 74 / 52%);
-}
-
-.goalIcon.low {
-  background: rgb(255 0 61 / 23%);
-}
-
-.goalTitle {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.goalText {
-  max-width: 287px;
-  margin-top: 6px;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 20px;
-}
-
-.goalProgress {
-  gap: 19px;
-  margin-top: 12px;
-}
-
-.goalProgress .progressTrack {
-  flex: 0 1 424px;
-}
-
-/* Окно редактирования целей в стиле анкеты */
-.goalsDialog {
-  --modal-padding-bottom: 48px;
-}
-
-.goalsFooter {
-  margin-top: 40px;
-}
-
 /* ---------- Доступность ---------- */
 
 .availability {
-  padding-bottom: 34px;
+  padding-bottom: var(--availability-bottom, 34px);
 }
 
 .availabilityList {
@@ -306,7 +237,7 @@
 
 .availabilityList > div {
   display: grid;
-  grid-template-columns: 142px minmax(0, 1fr);
+  grid-template-columns: var(--availability-label, 142px) minmax(0, 1fr);
 }
 
 .availabilityList dt {
@@ -413,9 +344,9 @@
 
 /* ---------- Отзывы ---------- */
 
-/* В макете отзывы стоят ближе к истории, чем остальные секции */
 .reviews {
-  margin-top: -5px;
+  min-height: var(--reviews-min-height, 0);
+  margin-top: var(--reviews-offset, 0);
   padding-bottom: 19px;
 }
 
@@ -494,10 +425,6 @@
 
   .fields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .goalList {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .historyRow,

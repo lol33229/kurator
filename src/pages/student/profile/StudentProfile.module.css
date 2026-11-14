@@ -1,0 +1,83 @@
+/* Профиль менти: цели и отличия от общего профиля */
+
+/* В макете менти отзывы стоят ближе к истории, чем остальные блоки */
+.page {
+  --profile-footer-offset: 27px;
+  --reviews-offset: -5px;
+}
+
+/* ---------- Цели ---------- */
+
+.goals {
+  padding-bottom: 60px;
+}
+
+.goalList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 560px));
+  row-gap: 24px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.goal {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.goalIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.goalIconGood {
+  background: rgb(184 243 74 / 52%);
+}
+
+.goalIconLow {
+  background: rgb(255 0 61 / 23%);
+}
+
+.goalTitle {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.goalText {
+  max-width: 287px;
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.goalProgress {
+  gap: 19px;
+  margin-top: 12px;
+}
+
+.goalProgress > span:first-child {
+  flex: 0 1 424px;
+}
+
+/* Окно редактирования целей в стиле анкеты */
+.goalsDialog {
+  --modal-padding-bottom: 48px;
+}
+
+.goalsFooter {
+  margin-top: 40px;
+}
+
+@media (max-width: 960px) {
+  .goalList {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

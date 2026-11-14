@@ -4,7 +4,7 @@ import onboardingStyles from '@/pages/onboarding/Onboarding.module.css'
 import formStyles from '@/shared/ui/AuthForm/AuthForm.module.css'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { MultiSelect } from '@/shared/ui/MultiSelect/MultiSelect'
-import styles from './StudentProfilePage.module.css'
+import styles from './StudentProfile.module.css'
 
 type GoalsModalProps = {
   tasks: string[]

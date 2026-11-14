@@ -2,19 +2,51 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import avatarEditIcon from '@/assets/icons/avatar-edit.svg'
 import calendarIcon from '@/assets/icons/calendar-small.svg'
-import chartIcon from '@/assets/icons/chart-mixed.svg'
 import chevronRight from '@/assets/icons/chevron-right.svg'
-import clockIcon from '@/assets/icons/clock.svg'
 import pencilIcon from '@/assets/icons/pencil-edit.svg'
 import starLarge from '@/assets/icons/star-large.svg'
 import starIcon from '@/assets/icons/star.svg'
-import videoIcon from '@/assets/icons/video.svg'
+import { LandingFooter } from '@/pages/landing/LandingFooter'
+import landingStyles from '@/pages/landing/LandingPage.module.css'
 import cardStyles from '@/shared/ui/DashboardCard/DashboardCard.module.css'
-import { GoalsModal } from './GoalsModal'
-import { AVAILABILITY, GOALS, HISTORY, PROFILE, REVIEWS, SKILLS } from './profileData'
-import styles from './StudentProfilePage.module.css'
+import { UserHeader } from '@/shared/ui/UserHeader/UserHeader'
+import styles from './Profile.module.css'
+import { isGoodProgress } from './progress'
 
-type ActionProps = {
+// ---------- Страница ----------
+
+type ProfileLayoutProps = {
+  user: { name: string; roleLabel: string; avatar: string }
+  profilePath: string
+  subtitle: string
+  className?: string
+  children: ReactNode
+}
+
+// Общий каркас страницы профиля; вкладку «Менторы» в профиле не показываем
+export function ProfileLayout({ user, profilePath, subtitle, className, children }: ProfileLayoutProps) {
+  return (
+    <div className={[landingStyles.page, styles.page, className].filter(Boolean).join(' ')}>
+      <UserHeader
+        name={user.name}
+        roleLabel={user.roleLabel}
+        avatar={user.avatar}
+        profilePath={profilePath}
+        hiddenLinks={['/mentors']}
+      />
+      <main className={styles.main}>
+        <h1 className={styles.title}>Мой профиль</h1>
+        <p className={styles.subtitle}>{subtitle}</p>
+        <div className={styles.sections}>{children}</div>
+      </main>
+      <LandingFooter />
+    </div>
+  )
+}
+
+// ---------- Секция ----------
+
+export type ActionProps = {
   label: string
   icon: 'edit' | 'next'
   // Ссылка на другую страницу или действие на этой
@@ -55,7 +87,7 @@ type SectionProps = {
   children: ReactNode
 }
 
-function Section({ title, subtitle, action, aside, className, children }: SectionProps) {
+export function Section({ title, subtitle, action, aside, className, children }: SectionProps) {
   return (
     <section className={[cardStyles.card, styles.section, className].filter(Boolean).join(' ')}>
       <div className={styles.sectionHead}>
@@ -71,11 +103,11 @@ function Section({ title, subtitle, action, aside, className, children }: Sectio
   )
 }
 
-const EDIT_PATH = '/student/profile/edit'
+// ---------- Личные данные ----------
 
 // Фото профиля с выбором нового файла; пока нет API, фото меняется только на экране
-function ProfilePhoto() {
-  const [photo, setPhoto] = useState(PROFILE.photo)
+function ProfilePhoto({ initial }: { initial: string }) {
+  const [photo, setPhoto] = useState(initial)
   useEffect(() => () => URL.revokeObjectURL(photo), [photo])
 
   return (
@@ -98,18 +130,25 @@ function ProfilePhoto() {
   )
 }
 
-export function PersonalSection() {
+type PersonalSectionProps = {
+  subtitle: string
+  photo: string
+  fields: { label: string; value: string }[]
+  editPath: string
+}
+
+export function PersonalSection({ subtitle, photo, fields, editPath }: PersonalSectionProps) {
   return (
     <Section
       title="Личные данные"
-      subtitle="Основная информация о вас, которая видна наставникам"
-      action={{ to: EDIT_PATH, label: 'Редактировать', icon: 'edit' }}
+      subtitle={subtitle}
+      action={{ to: editPath, label: 'Редактировать', icon: 'edit' }}
       className={styles.personal}
     >
       <div className={styles.personalBody}>
-        <ProfilePhoto />
+        <ProfilePhoto initial={photo} />
         <dl className={styles.fields}>
-          {PROFILE.fields.map((field) => (
+          {fields.map((field) => (
             <div key={field.label}>
               <dt>{field.label}</dt>
               <dd>{field.value}</dd>
@@ -121,30 +160,47 @@ export function PersonalSection() {
   )
 }
 
-export function SkillsSection() {
+// ---------- Навыки ----------
+
+export type SkillLevel = { skill: string; level: string }
+
+// Навык и рядом уровень владения в зелёной рамке
+export function SkillPairs({ skills, className }: { skills: SkillLevel[]; className?: string }) {
+  return (
+    <ul className={[styles.skillList, className].filter(Boolean).join(' ')}>
+      {skills.map((item) => (
+        <li key={item.skill} className={styles.skillPair}>
+          <span className={styles.skill}>{item.skill}</span>
+          <span className={styles.level}>{item.level}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export function SkillsSection({ skills, editPath }: { skills: SkillLevel[]; editPath: string }) {
   return (
     <Section
       title="Интересы и навыки"
       subtitle="Области, которые вам интересны и ваши текущие навыки и уровень владения"
-      action={{ to: EDIT_PATH, label: 'Редактировать', icon: 'edit' }}
+      action={{ to: editPath, label: 'Редактировать', icon: 'edit' }}
       className={styles.skills}
     >
-      <ul className={styles.skillList}>
-        {SKILLS.map((item) => (
-          <li key={item.skill} className={styles.skillPair}>
-            <span className={styles.skill}>{item.skill}</span>
-            <span className={styles.level}>{item.level}</span>
-          </li>
-        ))}
-      </ul>
+      <SkillPairs skills={skills} />
     </Section>
   )
 }
 
-// Хороший прогресс — зелёный, остальной — розовый
-const progressColor = (progress: number) => (progress >= 50 ? styles.good : styles.low)
+// ---------- Прогресс ----------
 
-function Progress({ value, label, className }: { value: number; label: string; className?: string }) {
+type ProgressProps = {
+  value: number
+  label: string
+  className?: string
+}
+
+export function Progress({ value, label, className }: ProgressProps) {
+  const color = value === 100 ? styles.done : isGoodProgress(value) ? styles.good : styles.low
   return (
     <div className={[styles.progress, className].filter(Boolean).join(' ')}>
       <span
@@ -155,77 +211,27 @@ function Progress({ value, label, className }: { value: number; label: string; c
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <span
-          className={`${styles.progressFill} ${value === 100 ? styles.done : progressColor(value)}`}
-          style={{ width: `${value}%` }}
-        />
+        <span className={`${styles.progressFill} ${color}`} style={{ width: `${value}%` }} />
       </span>
       <span className={styles.progressValue}>{value}%</span>
     </div>
   )
 }
 
-// Цель для задачи: из данных профиля или новая с нулевым прогрессом
-const goalForTask = (task: string) =>
-  GOALS.find((goal) => goal.task === task) ?? {
-    task,
-    title: task,
-    description: 'Новая цель: прогресс появится после первых задач с наставником',
-    progress: 0,
-  }
+// ---------- Доступность ----------
 
-export function GoalsSection() {
-  const [tasks, setTasks] = useState(GOALS.map((goal) => goal.task))
-  const [editing, setEditing] = useState(false)
-
-  return (
-    <Section
-      title="Цели"
-      subtitle="К чему вы стремитесь в рамках наставничества"
-      action={{ onClick: () => setEditing(true), label: 'Редактировать', icon: 'edit' }}
-      className={styles.goals}
-    >
-      <ul className={styles.goalList}>
-        {tasks.map(goalForTask).map((goal) => (
-          <li key={goal.task}>
-            <div className={styles.goal}>
-              <span className={`${styles.goalIcon} ${progressColor(goal.progress)}`}>
-                <img src={chartIcon} alt="" width={45} height={45} />
-              </span>
-              <div>
-                <p className={styles.goalTitle}>{goal.title}</p>
-                <p className={styles.goalText}>{goal.description}</p>
-              </div>
-            </div>
-            <Progress value={goal.progress} label={`Прогресс цели «${goal.title}»`} className={styles.goalProgress} />
-          </li>
-        ))}
-      </ul>
-      {editing && (
-        <GoalsModal
-          tasks={tasks}
-          onClose={() => setEditing(false)}
-          onSave={(next) => {
-            setTasks(next)
-            setEditing(false)
-          }}
-        />
-      )}
-    </Section>
-  )
+type AvailabilitySectionProps = {
+  subtitle: string
+  rows: { icon: string; label: string; value: string }[]
+  editPath: string
 }
 
-export function AvailabilitySection() {
-  const rows = [
-    { icon: calendarIcon, label: 'Дни', value: AVAILABILITY.days },
-    { icon: clockIcon, label: 'Время', value: AVAILABILITY.time },
-    { icon: videoIcon, label: 'Формат', value: AVAILABILITY.format },
-  ]
+export function AvailabilitySection({ subtitle, rows, editPath }: AvailabilitySectionProps) {
   return (
     <Section
       title="Доступность"
-      subtitle="Когда вам удобно взаимодействовать с наставником"
-      action={{ to: EDIT_PATH, label: 'Редактировать', icon: 'edit' }}
+      subtitle={subtitle}
+      action={{ to: editPath, label: 'Редактировать', icon: 'edit' }}
       className={styles.availability}
     >
       <dl className={styles.availabilityList}>
@@ -243,7 +249,11 @@ export function AvailabilitySection() {
   )
 }
 
-function Person({ name, position, photo }: { name: string; position: string; photo: string }) {
+// ---------- История и отзывы ----------
+
+type PersonProps = { name: string; position: string; photo: string }
+
+function Person({ name, position, photo }: PersonProps) {
   return (
     <div className={styles.person}>
       <img className={styles.personPhoto} src={photo} alt="" width={60} height={60} />
@@ -255,21 +265,36 @@ function Person({ name, position, photo }: { name: string; position: string; pho
   )
 }
 
-export function HistorySection() {
+export type HistoryItem = PersonProps & {
+  id: string
+  current: boolean
+  period: string
+  goal: string
+  progress: number
+}
+
+type HistorySectionProps = {
+  items: HistoryItem[]
+  // «Текущий наставник» у менти, «Текущий менти» у ментора
+  currentLabel: string
+  historyPath: string
+}
+
+export function HistorySection({ items, currentLabel, historyPath }: HistorySectionProps) {
   return (
     <Section
       title="История наставничества"
       subtitle="Ваши прошлые и текущие пары, цели и результаты"
-      action={{ to: '/student/history', label: 'Вся история', icon: 'next' }}
+      action={{ to: historyPath, label: 'Вся история', icon: 'next' }}
       className={styles.history}
     >
       <ul className={styles.rows}>
-        {HISTORY.map((item) => (
+        {items.map((item) => (
           <li key={item.id} className={styles.historyRow}>
             <Person {...item} />
             <div>
               <span className={`${styles.statusBadge} ${item.current ? styles.current : styles.finished}`}>
-                {item.current ? 'Текущий наставник' : 'Завершено'}
+                {item.current ? currentLabel : 'Завершено'}
               </span>
               <p className={styles.period}>
                 <img src={calendarIcon} alt="" width={20} height={20} />
@@ -301,13 +326,26 @@ function Stars({ rating }: { rating: number }) {
   )
 }
 
-export function ReviewsSection() {
-  const average = REVIEWS.reduce((sum, review) => sum + review.rating, 0) / REVIEWS.length
+export type Review = PersonProps & {
+  id: string
+  rating: number
+  date: string
+  text: string
+}
+
+type ReviewsSectionProps = {
+  subtitle: string
+  reviews: Review[]
+  reviewsPath: string
+}
+
+export function ReviewsSection({ subtitle, reviews, reviewsPath }: ReviewsSectionProps) {
+  const average = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
   return (
     <Section
       title="Отзывы"
-      subtitle="Отзывы от ваших наставников"
-      action={{ to: '/student/reviews', label: 'Все отзывы', icon: 'next' }}
+      subtitle={subtitle}
+      action={{ to: reviewsPath, label: 'Все отзывы', icon: 'next' }}
       aside={
         <p className={styles.average}>
           <img src={starLarge} alt="" width={30} height={30} />
@@ -318,7 +356,7 @@ export function ReviewsSection() {
       className={styles.reviews}
     >
       <ul className={styles.rows}>
-        {REVIEWS.map((review) => (
+        {reviews.map((review) => (
           <li key={review.id} className={styles.reviewRow}>
             <Person {...review} />
             <div>

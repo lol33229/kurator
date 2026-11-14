@@ -3,6 +3,7 @@ import { RootLayout } from '@/app/RootLayout'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
 import { MentorHomePage } from '@/pages/mentor/MentorHomePage'
+import { MentorProfilePage } from '@/pages/mentor/profile/MentorProfilePage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
 import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
@@ -44,7 +45,10 @@ export const router = createBrowserRouter([
       { path: '/mentor/requests', element: <PagePlaceholder title="Запросы менти" /> },
       { path: '/mentor/events', element: <PagePlaceholder title="События" /> },
       { path: '/mentor/mentees', element: <PagePlaceholder title="Мои менти" /> },
-      { path: '/mentor/profile', element: <PagePlaceholder title="Профиль ментора" /> },
+      { path: '/mentor/profile', element: <MentorProfilePage /> },
+      { path: '/mentor/profile/edit', element: <PagePlaceholder title="Редактирование профиля" /> },
+      { path: '/mentor/history', element: <PagePlaceholder title="История наставничества" /> },
+      { path: '/mentor/reviews', element: <PagePlaceholder title="Отзывы" /> },
       // Кабинеты куратора и администратора пока заглушки
       ...ROLES.filter((role) => role === 'curator' || role === 'admin').map((role) => ({
         path: `/${role}`,

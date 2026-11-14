@@ -1,41 +1,48 @@
-import { LandingFooter } from '@/pages/landing/LandingFooter'
-import landingStyles from '@/pages/landing/LandingPage.module.css'
-import { UserHeader } from '@/shared/ui/UserHeader/UserHeader'
-import { PROFILE } from './profileData'
+import calendarIcon from '@/assets/icons/calendar-small.svg'
+import clockIcon from '@/assets/icons/clock.svg'
+import videoIcon from '@/assets/icons/video.svg'
 import {
   AvailabilitySection,
-  GoalsSection,
   HistorySection,
   PersonalSection,
+  ProfileLayout,
   ReviewsSection,
   SkillsSection,
-} from './ProfileSections'
-import styles from './StudentProfilePage.module.css'
+} from '@/pages/profile/ProfileParts'
+import { GoalsSection } from './GoalsSection'
+import { AVAILABILITY, HISTORY, PROFILE, REVIEWS, SKILLS } from './profileData'
+import styles from './StudentProfile.module.css'
+
+const EDIT_PATH = '/student/profile/edit'
 
 // Профиль менти
 export function StudentProfilePage() {
   return (
-    <div className={`${landingStyles.page} ${styles.page}`}>
-      <UserHeader
-        name={PROFILE.shortName}
-        roleLabel="менти"
-        avatar={PROFILE.headerAvatar}
-        profilePath="/student/profile"
-        hiddenLinks={['/mentors']}
+    <ProfileLayout
+      user={{ name: PROFILE.shortName, roleLabel: 'менти', avatar: PROFILE.headerAvatar }}
+      profilePath="/student/profile"
+      subtitle="Здесь вы можете управлять своими данными и целями"
+      className={styles.page}
+    >
+      <PersonalSection
+        subtitle="Основная информация о вас, которая видна наставникам"
+        photo={PROFILE.photo}
+        fields={PROFILE.fields}
+        editPath={EDIT_PATH}
       />
-      <main className={styles.main}>
-        <h1 className={styles.title}>Мой профиль</h1>
-        <p className={styles.subtitle}>Здесь вы можете управлять своими данными и целями</p>
-        <div className={styles.sections}>
-          <PersonalSection />
-          <SkillsSection />
-          <GoalsSection />
-          <AvailabilitySection />
-          <HistorySection />
-          <ReviewsSection />
-        </div>
-      </main>
-      <LandingFooter />
-    </div>
+      <SkillsSection skills={SKILLS} editPath={EDIT_PATH} />
+      <GoalsSection />
+      <AvailabilitySection
+        subtitle="Когда вам удобно взаимодействовать с наставником"
+        rows={[
+          { icon: calendarIcon, label: 'Дни', value: AVAILABILITY.days },
+          { icon: clockIcon, label: 'Время', value: AVAILABILITY.time },
+          { icon: videoIcon, label: 'Формат', value: AVAILABILITY.format },
+        ]}
+        editPath={EDIT_PATH}
+      />
+      <HistorySection items={HISTORY} currentLabel="Текущий наставник" historyPath="/student/history" />
+      <ReviewsSection subtitle="Отзывы от ваших наставников" reviews={REVIEWS} reviewsPath="/student/reviews" />
+    </ProfileLayout>
   )
 }
