@@ -3,8 +3,6 @@
 Каждый ученик строится от «целевого» наставника: навыки, задачи, формат и график
 берутся у него с небольшим шумом. Поэтому для каждого ученика известен правильный
 ответ, и можно считать, попал ли он в топ рекомендаций.
-
-Запуск: python -m kurator_ml.synthetic --mentors 100 --students 300 --out data/synthetic
 """
 
 import argparse
@@ -14,6 +12,7 @@ from pathlib import Path
 
 from pydantic import BaseModel
 
+from kurator_ml.domain import POSITION_SKILLS
 from kurator_ml.options import (
     TASK_TO_DIRECTION,
     Availability,
@@ -31,20 +30,6 @@ from kurator_ml.options import (
     Task,
 )
 from kurator_ml.schemas import MentorProfile, StudentProfile
-
-# Типичные навыки для каждой должности
-POSITION_SKILLS: dict[Position, list[Skill]] = {
-    Position.FRONTEND: [Skill.JAVASCRIPT, Skill.REACT, Skill.INTERFACES],
-    Position.BACKEND: [Skill.PYTHON, Skill.CSHARP, Skill.SQL],
-    Position.UX_UI: [Skill.INTERFACES, Skill.GRAPHIC_DESIGN],
-    Position.GRAPHIC_DESIGNER: [Skill.GRAPHIC_DESIGN, Skill.INTERFACES, Skill.MARKETING],
-    Position.DATA_ANALYST: [Skill.SQL, Skill.PYTHON, Skill.DATA_ANALYTICS],
-    Position.ML_ENGINEER: [Skill.PYTHON, Skill.MACHINE_LEARNING, Skill.DATA_ANALYTICS],
-    Position.QA: [Skill.PYTHON, Skill.SQL, Skill.JAVASCRIPT],
-    Position.PROJECT_MANAGER: [Skill.PROJECT_MANAGEMENT, Skill.MARKETING],
-    Position.MARKETER: [Skill.MARKETING, Skill.DATA_ANALYTICS, Skill.GRAPHIC_DESIGN],
-    Position.TEAM_LEAD: [Skill.PROJECT_MANAGEMENT, Skill.PYTHON, Skill.JAVASCRIPT],
-}
 
 # Какой уровень ученика подходит к опыту наставника
 LEVEL_BY_EXPERIENCE: dict[Experience, list[StudentLevel]] = {

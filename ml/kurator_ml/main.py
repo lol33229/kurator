@@ -3,6 +3,7 @@
 from fastapi import FastAPI, HTTPException
 
 from kurator_ml import __version__
+from kurator_ml.recommender import Recommender
 from kurator_ml.schemas import (
     ChatbotRequest,
     ChatbotResponse,
@@ -20,16 +21,18 @@ app = FastAPI(
 
 NOT_READY = "Будет реализовано на следующих этапах"
 
+recommender = Recommender()
+
 
 @app.get("/health", tags=["Служебное"])
 def health() -> dict[str, str]:
     return {"status": "ok", "version": __version__}
 
 
-@app.post("/recommendations", tags=["Подбор"], responses={501: {"description": NOT_READY}})
+@app.post("/recommendations", tags=["Подбор"])
 def recommend(request: RecommendationRequest) -> RecommendationResponse:
     """Ранжированный список наставников с процентом совместимости и объяснением."""
-    raise HTTPException(status_code=501, detail=NOT_READY)
+    return recommender.recommend(request)
 
 
 @app.post("/moderation/review", tags=["Модерация"], responses={501: {"description": NOT_READY}})

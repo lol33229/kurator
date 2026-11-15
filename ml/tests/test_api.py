@@ -17,14 +17,21 @@ def test_contract_is_published():
     assert {"/recommendations", "/moderation/review", "/chatbot/ask"} <= set(paths)
 
 
-def test_recommendations_accepts_valid_request():
-    mentors, students, _ = generate(mentors=5, students=1)
+def test_recommendations_returns_ranked_mentors():
+    mentors, students, _ = generate(mentors=20, students=1)
     body = {
         "student": students[0].model_dump(mode="json"),
         "mentors": [mentor.model_dump(mode="json") for mentor in mentors],
+        "min_score": 0,
     }
-    # Запрос проходит проверку контракта, сам подбор ещё не реализован
-    assert client.post("/recommendations", json=body).status_code == 501
+    response = client.post("/recommendations", json=body)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["model_version"] == "v1-rules"
+    assert data["recommendations"]
+    first = data["recommendations"][0]
+    assert {"mentor_id", "score", "factors", "matched_skills", "matched_goals", "reasons"} <= set(first)
+    assert len(first["factors"]) == 8
 
 
 def test_recommendations_rejects_unknown_skill():
