@@ -5,21 +5,302 @@
   bottom: 24px;
   z-index: 30;
   display: block;
+  padding: 0;
+  border: none;
   border-radius: 50%;
+  background: none;
+  cursor: pointer;
 }
 
 .button:hover {
   filter: brightness(0.95);
 }
 
-.button:focus-visible {
+.button:focus-visible,
+.close:focus-visible,
+.chip:focus-visible,
+.rate:focus-visible,
+.send:focus-visible,
+.input:focus-visible {
   outline: 2px solid var(--color-text);
   outline-offset: 2px;
+}
+
+/* ---------- Окно помощника ---------- */
+
+.panel {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  height: min(656px, 100dvh - 48px);
+  overflow: hidden;
+  border-radius: 28px;
+  background: #f2f3ec;
+  color: #1d2236;
+  box-shadow: 0 24px 60px rgb(29 34 54 / 30%);
+}
+
+.head {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 12px;
+  height: 80px;
+  padding: 0 18px 0 20px;
+  background: #1d2236;
+}
+
+.logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #fbe3b6;
+}
+
+.headText {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23.2px;
+}
+
+.status {
+  color: #b9f06a;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 17.4px;
+}
+
+.close {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 10%);
+  color: #fff;
+  font-family: 'Segoe UI Symbol', system-ui, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: rgb(255 255 255 / 18%);
+}
+
+/* Лента */
+.messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  padding: 18px 16px 12px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.day {
+  align-self: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #e8e9e1;
+  color: #8a8fa0;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 21.95px;
+}
+
+.bubble {
+  max-width: 313px;
+  font-size: 14px;
+  line-height: 20.3px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bot {
+  align-self: flex-start;
+  padding: 11px 14px 12px;
+  border-radius: 18px 18px 18px 6px;
+  background: #fff;
+}
+
+.user {
+  align-self: flex-end;
+  padding: 11px 14px;
+  border-radius: 18px 18px 6px 18px;
+  background: #c8f56a;
+}
+
+.botName {
+  display: block;
+  margin-bottom: 3.4px;
+  color: #5b3fc4;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 15.95px;
+}
+
+.typing {
+  color: #8a8fa0;
+}
+
+.feedback {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8.6px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.rate {
+  width: 32px;
+  height: 23px;
+  padding: 0;
+  border: 1px solid #e6e7e0;
+  border-radius: 8px;
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.rate:first-of-type {
+  margin-left: 2px;
+}
+
+.rate:hover {
+  background: #f6f6f3;
+}
+
+.rateActive,
+.rateActive:hover {
+  border-color: #a8db45;
+  background: #e3f9b8;
+}
+
+/* Частые вопросы */
+.quick {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 10px;
+}
+
+.chip {
+  height: 33.25px;
+  padding: 0 12px;
+  border: 1px solid #e6e7e0;
+  border-radius: 999px;
+  background: #fff;
+  color: #1d2236;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: #a8db45;
+  background: #f6fde8;
+}
+
+.chip:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* Поле вопроса */
+.composer {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  padding: 12px;
+  border-top: 0.8px solid #e6e7e0;
+  background: #fff;
+}
+
+.input {
+  flex: 1;
+  height: 44px;
+  max-height: 110px;
+  padding: 11px 14px;
+  border: 1px solid #e6e7e0;
+  border-radius: 14px;
+  background: #fafaf7;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20.3px;
+  resize: none;
+}
+
+.input::placeholder {
+  color: #757575;
+}
+
+.send {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  background: #c8f56a;
+  cursor: pointer;
+}
+
+.send:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.note {
+  flex-shrink: 0;
+  padding: 0 28px 8px;
+  background: #fff;
+  color: #8a8fa0;
+  font-size: 11px;
+  line-height: 15.95px;
+  text-align: center;
 }
 
 @media (max-width: 960px) {
   .button {
     right: 16px;
     bottom: 16px;
+  }
+}
+
+/* На телефоне окно почти во весь экран */
+@media (max-width: 480px) {
+  .panel {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    width: auto;
+    height: calc(100dvh - 16px);
+    border-radius: 24px;
   }
 }

@@ -27,7 +27,6 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: '/', element: <LandingPage /> },
-      { path: '/chatbot', element: <PagePlaceholder title="ИИ чат-бот" /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/password-reset', element: <ResetRequestPage /> },
       { path: '/password-reset/sent', element: <ResetSentPage /> },

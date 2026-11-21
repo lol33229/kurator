@@ -16,7 +16,7 @@
   --color-progress-done: #b6b6b6;
   --color-progress-todo: #ececec;
 
-  --font-family: 'Manrope Variable', system-ui, sans-serif;
+  --font-family: 'Manrope Variable', 'Noto Color Emoji', system-ui, sans-serif;
 
   --radius-card: 51px;
   --radius-pill: 28px;
