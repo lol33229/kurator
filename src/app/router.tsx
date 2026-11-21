@@ -7,6 +7,8 @@ import { MenteePage } from '@/pages/mentor/mentee/MenteePage'
 import { MenteeRequestPage } from '@/pages/mentor/mentee/MenteeRequestPage'
 import { MentorHomePage } from '@/pages/mentor/MentorHomePage'
 import { MentorProfilePage } from '@/pages/mentor/profile/MentorProfilePage'
+import { NewsArticlePage } from '@/pages/news/NewsArticlePage'
+import { NewsPage } from '@/pages/news/NewsPage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
 import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
@@ -32,7 +34,8 @@ export const router = createBrowserRouter([
       { path: '/register/confirm', element: <ConfirmEmailPage /> },
       { path: '/onboarding', element: <OnboardingPage /> },
       { path: '/mentors', element: <MentorSearchPage /> },
-      { path: '/news', element: <PagePlaceholder title="Новости" /> },
+      { path: '/news', element: <NewsPage /> },
+      { path: '/news/:id', element: <NewsArticlePage /> },
       { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
       { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
       { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
