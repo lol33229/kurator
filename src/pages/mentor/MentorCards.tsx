@@ -18,7 +18,8 @@ type RequestsCardProps = {
 export function RequestsCard({ requests, onAnswer }: RequestsCardProps) {
   return (
     <section className={`${cardStyles.card} ${styles.requestsCard}`}>
-      <CardHead more={{ to: '/mentor/requests', label: 'Все запросы' }}>
+      {/* Списков заявок и менти пока нет в макетах: стрелка ведёт на страницу из макета */}
+      <CardHead more={{ to: '/mentor/requests/aleksey', label: 'Открыть заявку' }}>
         <h2 className={cardStyles.cardTitle}>Новые запросы</h2>
       </CardHead>
       {requests.length === 0 ? (
@@ -29,7 +30,11 @@ export function RequestsCard({ requests, onAnswer }: RequestsCardProps) {
             <li key={request.id} className={styles.request}>
               <img className={styles.photo} src={request.photo} alt="" width={60} height={60} />
               <div>
-                <p className={styles.requestName}>{request.name}</p>
+                <p className={styles.requestName}>
+                  <Link to={`/mentor/requests/${request.id}`} className={styles.personLink}>
+                    {request.name}
+                  </Link>
+                </p>
                 <p className={styles.requestPosition}>{request.position}</p>
                 <p className={styles.requestGoal}>Цель: {request.goal}</p>
               </div>
@@ -107,7 +112,7 @@ function progressLevel(progress: number) {
 export function MenteesCard() {
   return (
     <section className={`${cardStyles.card} ${styles.menteesCard}`}>
-      <CardHead more={{ to: '/mentor/mentees', label: 'Все менти' }}>
+      <CardHead more={{ to: '/mentor/mentees/aleksey', label: 'Открыть страницу менти' }}>
         <h2 className={cardStyles.cardTitle}>Мои менти</h2>
       </CardHead>
       <ul className={styles.mentees}>
@@ -116,7 +121,12 @@ export function MenteesCard() {
             <div className={styles.menteePerson}>
               <img className={styles.photo} src={mentee.photo} alt="" width={60} height={60} />
               <div>
-                <p className={styles.menteeName}>{mentee.name}</p>
+                <p className={styles.menteeName}>
+                  {/* Ссылка растянута на всю строку менти */}
+                  <Link to={`/mentor/mentees/${mentee.id}`} className={`${styles.personLink} ${styles.rowLink}`}>
+                    {mentee.name}
+                  </Link>
+                </p>
                 <p className={styles.menteeGoal}>{mentee.goal}</p>
               </div>
             </div>

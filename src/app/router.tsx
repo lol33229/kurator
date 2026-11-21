@@ -3,6 +3,8 @@ import { RootLayout } from '@/app/RootLayout'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
 import { MentorSearchPage } from '@/pages/mentors/MentorSearchPage'
+import { MenteePage } from '@/pages/mentor/mentee/MenteePage'
+import { MenteeRequestPage } from '@/pages/mentor/mentee/MenteeRequestPage'
 import { MentorHomePage } from '@/pages/mentor/MentorHomePage'
 import { MentorProfilePage } from '@/pages/mentor/profile/MentorProfilePage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
@@ -44,8 +46,10 @@ export const router = createBrowserRouter([
       { path: '/student/reviews', element: <PagePlaceholder title="Отзывы" /> },
       { path: '/mentor', element: <MentorHomePage /> },
       { path: '/mentor/requests', element: <PagePlaceholder title="Запросы менти" /> },
+      { path: '/mentor/requests/:id', element: <MenteeRequestPage /> },
       { path: '/mentor/events', element: <PagePlaceholder title="События" /> },
       { path: '/mentor/mentees', element: <PagePlaceholder title="Мои менти" /> },
+      { path: '/mentor/mentees/:id', element: <MenteePage /> },
       { path: '/mentor/profile', element: <MentorProfilePage /> },
       { path: '/mentor/profile/edit', element: <PagePlaceholder title="Редактирование профиля" /> },
       { path: '/mentor/history', element: <PagePlaceholder title="История наставничества" /> },

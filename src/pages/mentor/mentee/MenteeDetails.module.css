@@ -1,0 +1,929 @@
+/* Заявка менти и страница своего менти */
+
+.page {
+  --footer-offset: 21px;
+}
+
+.main {
+  width: min(1257px, 100% - 2 * var(--page-gutter));
+  /* В макете контент сдвинут на 20px правее центра */
+  margin: 29px 0 0 max(var(--page-gutter), 50% - 609px);
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* У страницы своего менти контент в макете на 9px ниже */
+.lower {
+  padding-top: 3px;
+}
+
+.lower .layout {
+  margin-top: 18px;
+}
+
+/* ---------- Хлебные крошки ---------- */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #8a8fa0;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.crumbs a {
+  color: #4a5065;
+}
+
+.crumbs a:hover {
+  color: var(--color-text);
+}
+
+/* ---------- Сетка ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 882px) 370px;
+  align-items: start;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 5px;
+}
+
+.card {
+  border-radius: 24px;
+  background: var(--color-surface);
+}
+
+/* Верхние три карточки в макете чуть уже */
+.hero,
+.about,
+.skills {
+  margin: 0 5px;
+  border-radius: 40px;
+}
+
+.interaction {
+  margin-top: -5px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.sectionTitle {
+  color: #1d2236;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+/* ---------- Шапка менти ---------- */
+
+.hero {
+  padding: 24px 30px 32.6px;
+}
+
+.badge {
+  width: fit-content;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 25.4px;
+}
+
+.badgeNew {
+  background: #fce6bf;
+  color: #9a5b00;
+}
+
+.badgePair {
+  margin: -12px 0 0 -7px;
+  background: #ddf2e8;
+  color: #2e7d5b;
+  line-height: 26px;
+}
+
+.heroMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.badgePair + .heroMain {
+  margin-top: 29.4px;
+}
+
+.avatar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.name {
+  color: #1d2236;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 34.5px;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #4a5065;
+  font-size: 15px;
+  line-height: 21.75px;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 19px;
+  margin: 11.6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 31px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #f6f6f3;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.facts b {
+  color: #1d2236;
+  font-weight: 600;
+}
+
+/* ---------- О менти ---------- */
+
+.about {
+  padding: 20px 28px 36px;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 312px 230px minmax(0, 283px);
+  gap: 30px 0;
+  margin: 26px 0 0;
+  font-size: 16px;
+}
+
+.aboutGrid dt {
+  font-weight: 400;
+}
+
+.aboutGrid dd {
+  margin: 11px 0 0;
+  font-weight: 500;
+}
+
+/* ---------- Навыки ---------- */
+
+.skills {
+  padding: 23px 28px 22px;
+}
+
+.skills .skillPairs {
+  gap: 19px 33px;
+  margin-top: 19px;
+}
+
+/* ---------- Взаимодействие ---------- */
+
+.interaction {
+  --chip-bg: #edeeea;
+  --plate-bg: #f7f8f3;
+
+  padding: 30px 52px 29.5px 28px;
+  color: #1d2236;
+}
+
+.gray {
+  --chip-bg: #e6e6e6;
+  --plate-bg: #e6e6e6;
+}
+
+.labelRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-top: 21.5px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.interaction > .label {
+  margin-top: 18px;
+}
+
+.legend {
+  color: #8a8fa0;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 16.9px;
+}
+
+.legendMark {
+  color: #2f4a00;
+}
+
+.wanted {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wanted li {
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 30.85px;
+}
+
+.wantedMatched {
+  background: #e3f9b8;
+  color: #2f4a00;
+  font-weight: 600;
+}
+
+.wantedOther {
+  background: var(--chip-bg);
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.levels li {
+  border-radius: 12px;
+  background: #f7f8f3;
+  color: #8a8fa0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 38.85px;
+  text-align: center;
+}
+
+.levels .levelActive {
+  background: #c8f56a;
+  color: #1d2236;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7.6px;
+  min-height: 40.3px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--plate-bg);
+  font-size: 14px;
+  line-height: 20.3px;
+  cursor: pointer;
+}
+
+.task input {
+  position: absolute;
+  width: 18.4px;
+  height: 18.4px;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.task:has(input:disabled) {
+  cursor: default;
+}
+
+.taskBox {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 18.4px;
+  height: 18.4px;
+  border: 1px solid #b9bcb2;
+  border-radius: 5px;
+}
+
+.task input:checked + .taskBox {
+  border-color: #a8db45;
+  background: #c8f56a;
+}
+
+.task input:checked + .taskBox::after {
+  content: '✓';
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.task input:focus-visible + .taskBox {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.terms {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 4px;
+  margin: 16px 0 0;
+}
+
+.terms div {
+  min-height: 71.15px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--plate-bg);
+}
+
+/* Бюджет — по центру под двумя плашками */
+.terms div:nth-child(3) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(389px, 100%);
+}
+
+.terms dt {
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 17.4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.terms dd {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 21.75px;
+}
+
+/* ---------- Цель ---------- */
+
+.goalCard {
+  padding: 6px 52px 23.1px 28px;
+}
+
+.goal {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 125.9px;
+  margin-top: 5px;
+  padding: 12px 19.6px 12px 12px;
+  border-radius: 18px;
+  background: #f7f7f2;
+}
+
+.goalIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgb(184 243 74 / 52%);
+}
+
+.goalMain {
+  flex: 1;
+  min-width: 0;
+}
+
+.goalLabel {
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.goalTitle {
+  margin-top: 2px;
+  color: #1d2236;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24.65px;
+}
+
+.goalTerm {
+  text-align: right;
+}
+
+.goalTermValue {
+  color: #1d2236;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.goalDeadline {
+  margin-top: 21px;
+  color: #8a8fa0;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+/* ---------- Правая колонка ---------- */
+
+.aside {
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky {
+  position: sticky;
+  top: 24px;
+}
+
+.sideCard {
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--color-surface);
+}
+
+.sideCard + .sideCard {
+  margin-top: 16px;
+}
+
+.sideTitle {
+  color: #1d2236;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23.2px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: #1d2236;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #c8f56a;
+}
+
+.primary:hover {
+  background: #bdec58;
+}
+
+.secondary {
+  border-color: #e6e7e0;
+  background: var(--color-surface);
+}
+
+.secondary:hover {
+  background: #f6f6f3;
+}
+
+.button:focus-visible,
+.meeting:focus-visible,
+.crumbs a:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Совместимость в заявке */
+.match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.matchTitle {
+  color: #1d2236;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+}
+
+.match .ring {
+  margin-top: 6px;
+}
+
+.matchCaption {
+  margin-top: 12px;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+  text-align: center;
+}
+
+.factors {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.factorHead {
+  display: flex;
+  justify-content: space-between;
+  color: #1d2236;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.factorTrack {
+  height: 8px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #eef0e8;
+}
+
+.factorTrack span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.factorFull {
+  background: #9cd43a;
+}
+
+.factorPart {
+  background: #c8f56a;
+}
+
+.factorNote {
+  margin-top: 4px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+/* Решение по заявке */
+.decision {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.deadline,
+.accepted,
+.declined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 61.7px;
+  margin-bottom: -4px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 16px;
+  line-height: 18.85px;
+  text-align: center;
+}
+
+.deadline {
+  background: #fff7e8;
+  color: #9a5b00;
+}
+
+.accepted {
+  background: #ddf2e8;
+  color: #2e7d5b;
+}
+
+.declined {
+  background: #f6f6f3;
+  color: #4a5065;
+}
+
+.sideNote {
+  margin-top: -4px;
+  padding: 0 4px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+  text-align: center;
+}
+
+/* Действия со своим менти */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.matchSmall {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.matchText {
+  margin-top: 1px;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.meeting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 63.5px;
+  margin-top: 12px;
+  padding: 0 14px;
+  border-radius: 16px;
+  background: #f7f8f3;
+  text-decoration: none;
+}
+
+.meeting:hover .meetingTitle {
+  text-decoration: underline;
+}
+
+.meetingDate {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 39.5px;
+  border-radius: 12px;
+  background: #e3f9b8;
+  color: #1d2236;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 12.1px;
+}
+
+.meetingDate b {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 15.4px;
+}
+
+.meetingTitle {
+  display: block;
+  color: #1d2236;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.meetingTime {
+  display: block;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+/* ---------- Кольцо совместимости ---------- */
+
+.ring {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: conic-gradient(#dae9bd 0%, #9cd43a var(--ring-value), #eef0e8 var(--ring-value));
+}
+
+.ring::before {
+  content: '';
+  position: absolute;
+  inset: var(--ring-width);
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.ringLarge {
+  --ring-width: 12px;
+
+  width: 150px;
+  height: 150px;
+}
+
+.ringSmall {
+  --ring-width: 8px;
+
+  width: 84px;
+  height: 84px;
+}
+
+.ringValue,
+.ringLabel {
+  position: relative;
+}
+
+.ringValue {
+  color: #1d2236;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 31.9px;
+}
+
+.ringLarge .ringValue {
+  margin-top: 8px;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.ringLabel {
+  margin-top: 10px;
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1240px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 16px;
+  }
+
+  .main {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero,
+  .about,
+  .skills {
+    margin: 0;
+  }
+
+  .aboutGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 20px;
+  }
+}
+
+/* На узком экране колонка действий идёт сразу после шапки менти */
+@media (max-width: 960px) {
+  .layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .content {
+    display: contents;
+  }
+
+  .content > :not(:first-child) {
+    order: 2;
+  }
+
+  .aside {
+    order: 1;
+    width: 100%;
+  }
+
+  .interaction {
+    margin-top: 0;
+  }
+
+  .sticky {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero,
+  .about,
+  .skills,
+  .interaction,
+  .goalCard,
+  .sideCard {
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .badgePair {
+    margin: 0;
+  }
+
+  .badgePair + .heroMain {
+    margin-top: 18px;
+  }
+
+  .heroMain {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    font-size: 24px;
+  }
+
+  .name {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .aboutGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .aboutGrid dd {
+    margin-top: 4px;
+  }
+
+  .levels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .terms {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .terms div:nth-child(3) {
+    width: 100%;
+  }
+
+  .goal {
+    flex-wrap: wrap;
+  }
+
+  .goalTerm {
+    width: 100%;
+    padding-left: 96px;
+    text-align: left;
+  }
+
+  .goalDeadline {
+    margin-top: 0;
+  }
+}

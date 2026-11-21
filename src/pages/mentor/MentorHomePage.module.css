@@ -79,6 +79,26 @@
   font-weight: 700;
 }
 
+/* Имя ведёт на страницу заявки или менти */
+.personLink {
+  text-decoration: none;
+}
+
+.personLink:hover {
+  text-decoration: underline;
+}
+
+.personLink:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.rowLink::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
 .requestPosition {
   font-size: 16px;
 }
@@ -255,6 +275,7 @@
 }
 
 .mentee {
+  position: relative;
   display: grid;
   grid-template-columns: 242px 130px 82px auto;
   align-items: center;
