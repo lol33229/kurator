@@ -10,6 +10,7 @@ import { MentorProfilePage } from '@/pages/mentor/profile/MentorProfilePage'
 import { MessagesPage } from '@/pages/messages/MessagesPage'
 import { NewsArticlePage } from '@/pages/news/NewsArticlePage'
 import { NewsPage } from '@/pages/news/NewsPage'
+import { NotificationsPage } from '@/pages/notifications/NotificationsPage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
 import { NewPasswordPage } from '@/pages/password-reset/NewPasswordPage'
 import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
       { path: '/news', element: <NewsPage /> },
       { path: '/news/:id', element: <NewsArticlePage /> },
       { path: '/messages', element: <MessagesPage /> },
-      { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
+      { path: '/notifications', element: <NotificationsPage /> },
       { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
       { path: '/student', element: <StudentHomePage /> },
       { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },

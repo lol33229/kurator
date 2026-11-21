@@ -1,0 +1,410 @@
+/* Уведомления */
+
+.page {
+  --footer-offset: 42.5px;
+}
+
+.main {
+  width: min(1215px, 100% - 2 * var(--page-gutter));
+  margin: 17px 0 0 max(var(--page-gutter), 50% - 608px);
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* ---------- Шапка страницы ---------- */
+
+.head {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.title {
+  color: #1d2236;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 49.3px;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: #4a5065;
+  font-size: 16px;
+  line-height: 23.2px;
+}
+
+.controls {
+  position: absolute;
+  top: 7px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.markAll {
+  height: 42px;
+  padding: 0 20px;
+  border: 1px solid #e6e7e0;
+  border-radius: 13px;
+  background: var(--color-surface);
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.markAll:hover {
+  background: #f6f6f3;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 10px;
+  color: #4a5065;
+  font-size: 16px;
+  line-height: 23.2px;
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 13px;
+  background: #d9dad3;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.switch[aria-checked='true'] {
+  background: #9cd43a;
+}
+
+.switchThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+  transition: left 0.15s ease;
+}
+
+.switch[aria-checked='true'] .switchThumb {
+  left: 21px;
+}
+
+/* ---------- Лента ---------- */
+
+.section {
+  width: min(878px, 100%);
+  margin-top: 22px;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  overflow-x: auto;
+  border-radius: 18px;
+  background: var(--color-surface);
+  scrollbar-width: none;
+}
+
+.tab {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  height: 38.3px;
+  padding: 0 12px 0 16px;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background: #f6f6f3;
+}
+
+.tabActive,
+.tabActive:hover {
+  background: #c8f56a;
+  color: #1d2236;
+}
+
+.tabCount {
+  min-width: 18.8px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgb(29 34 54 / 8%);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 17.95px;
+  text-align: center;
+}
+
+.list {
+  margin-top: 16px;
+  padding: 0 8px 8px;
+  border-radius: 24px;
+  background: var(--color-surface);
+}
+
+.group {
+  padding-top: 26px;
+}
+
+.group:first-child {
+  padding-top: 22px;
+}
+
+.groupTitle {
+  padding-left: 16px;
+  color: #8a8fa0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.85px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.items {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  column-gap: 14px;
+  padding: 16px 25.6px 16px 16px;
+  border-radius: 18px;
+}
+
+.unread {
+  background: #fafdf2;
+}
+
+/* Зелёная точка у непрочитанного */
+.unread::before {
+  content: '';
+  position: absolute;
+  top: 57.3px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8bc43a;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+}
+
+.green {
+  background: #ddf2e8;
+}
+
+.lime {
+  background: #e3f9b8;
+}
+
+.blue {
+  background: #dceeff;
+}
+
+.pink {
+  background: #ffe1ea;
+}
+
+.orange {
+  background: #fce6bf;
+}
+
+.violet {
+  background: #e6e1ff;
+}
+
+.body {
+  min-width: 0;
+}
+
+.itemTitle {
+  color: #1d2236;
+  font-size: 15px;
+  line-height: 21.75px;
+}
+
+.itemText {
+  margin-top: 2px;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 17px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  color: #1d2236;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.85px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #c8f56a;
+}
+
+.primary:hover {
+  background: #bdec58;
+}
+
+.secondary {
+  border-color: #e6e7e0;
+  background: var(--color-surface);
+}
+
+.secondary:hover {
+  background: #f6f6f3;
+}
+
+.time {
+  padding-top: 1px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 32px 16px 24px;
+  color: #8a8fa0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.markAll:focus-visible,
+.switch:focus-visible,
+.tab:focus-visible,
+.action:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1240px) {
+  .main {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .section {
+    width: 100%;
+  }
+
+  .controls {
+    position: static;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .toggleRow {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .controls {
+    position: static;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .toggleRow {
+    margin-right: 0;
+    font-size: 14px;
+  }
+
+  .list {
+    padding: 0 4px 4px;
+  }
+
+  .item {
+    grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 14px 12px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .body {
+    padding-right: 52px;
+  }
+
+  .time {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+  }
+
+  .unread::before {
+    top: 33px;
+    left: 3px;
+  }
+}
