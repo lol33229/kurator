@@ -1,0 +1,262 @@
+/* Окна чата: встреча и жалоба */
+
+.dialog {
+  --modal-width: 480px;
+  --modal-padding-top: 28px;
+  --modal-padding-right: 28px;
+  --modal-padding-bottom: 28px;
+  --modal-padding-left: 28px;
+  --modal-border: none;
+  --modal-radius: 28px;
+  --modal-close-top: 28px;
+  --modal-close-right: 28px;
+  --modal-close-size: 36px;
+  --modal-close-icon: 22px;
+  --modal-close-bg: #f3f4ef;
+  --modal-mobile-padding: 20px;
+  --modal-mobile-radius: 24px;
+  --modal-mobile-close: 20px;
+
+  color: #1d2236;
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding-right: 48px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 31.9px;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #4a5065;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.form {
+  padding-top: 4px;
+}
+
+.label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.85px;
+}
+
+.input {
+  width: 100%;
+  height: 43.9px;
+  padding: 0 13.8px;
+  border: 1px solid #e6e7e0;
+  border-radius: 12px;
+  background: #f6f6f3;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: #757575;
+}
+
+.tall {
+  height: 45.9px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Переключатели длительности и формата */
+.segments {
+  display: grid;
+  height: 40.85px;
+  padding: 3px;
+  border-radius: 12px;
+  background: #f6f6f3;
+}
+
+.segment {
+  padding: 0;
+  border: none;
+  border-radius: 9px;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 13px;
+  line-height: 18.85px;
+  cursor: pointer;
+}
+
+.segment:hover {
+  color: #1d2236;
+}
+
+.segmentActive {
+  background: var(--color-surface);
+  color: #1d2236;
+  font-weight: 700;
+  box-shadow: 0 1px 1.5px rgb(0 0 0 / 8%);
+}
+
+/* Причины жалобы */
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin: 14px 0 0;
+  padding: 0;
+  border: none;
+}
+
+.reason {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42.7px;
+  padding: 0 12px;
+  border: 1px solid #e6e7e0;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 20.3px;
+  cursor: pointer;
+}
+
+.reason:hover {
+  border-color: #c9cbc2;
+}
+
+.reasonActive,
+.reasonActive:hover {
+  border-color: #a8db45;
+  background: #f6fde8;
+}
+
+.reason input {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  opacity: 0;
+}
+
+.radio {
+  position: relative;
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #767676;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.reason input:checked + .radio {
+  border-color: #7db02a;
+}
+
+.reason input:checked + .radio::after {
+  content: '';
+  position: absolute;
+  inset: 1.6px;
+  border-radius: 50%;
+  background: #7db02a;
+}
+
+.reason input:focus-visible + .radio {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+.commentLabel {
+  margin-top: 8px;
+}
+
+.comment {
+  height: 84.5px;
+  padding: 10.8px 13.8px;
+  line-height: 20.3px;
+  resize: vertical;
+}
+
+/* Кнопки внизу */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 26px;
+  margin-top: 18px;
+}
+
+.cancel {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  color: #1d2236;
+}
+
+.submit {
+  height: 42px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #bdec58;
+}
+
+.submit:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.input:focus-visible,
+.segment:focus-visible,
+.cancel:focus-visible,
+.submit:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer {
+    gap: 16px;
+  }
+}

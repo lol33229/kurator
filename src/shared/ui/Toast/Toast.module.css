@@ -1,0 +1,17 @@
+/* Уведомление вверху экрана */
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  z-index: 40;
+  max-width: calc(100% - 2 * var(--page-gutter));
+  padding: 14px 20px;
+  border-radius: 16px;
+  background: #1d2236;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+  box-shadow: 0 12px 15px rgb(29 34 54 / 25%);
+  transform: translateX(-50%);
+}

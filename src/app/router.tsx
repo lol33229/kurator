@@ -7,6 +7,7 @@ import { MenteePage } from '@/pages/mentor/mentee/MenteePage'
 import { MenteeRequestPage } from '@/pages/mentor/mentee/MenteeRequestPage'
 import { MentorHomePage } from '@/pages/mentor/MentorHomePage'
 import { MentorProfilePage } from '@/pages/mentor/profile/MentorProfilePage'
+import { MessagesPage } from '@/pages/messages/MessagesPage'
 import { NewsArticlePage } from '@/pages/news/NewsArticlePage'
 import { NewsPage } from '@/pages/news/NewsPage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       { path: '/mentors', element: <MentorSearchPage /> },
       { path: '/news', element: <NewsPage /> },
       { path: '/news/:id', element: <NewsArticlePage /> },
-      { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
+      { path: '/messages', element: <MessagesPage /> },
       { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },
       { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
       { path: '/student', element: <StudentHomePage /> },
