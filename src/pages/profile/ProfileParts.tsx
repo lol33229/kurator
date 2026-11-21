@@ -23,7 +23,7 @@ type ProfileLayoutProps = {
   children: ReactNode
 }
 
-// Общий каркас страницы профиля; вкладку «Менторы» в профиле не показываем
+// Общий каркас страницы профиля
 export function ProfileLayout({ user, profilePath, subtitle, className, children }: ProfileLayoutProps) {
   return (
     <div className={[landingStyles.page, styles.page, className].filter(Boolean).join(' ')}>
@@ -32,7 +32,6 @@ export function ProfileLayout({ user, profilePath, subtitle, className, children
         roleLabel={user.roleLabel}
         avatar={user.avatar}
         profilePath={profilePath}
-        hiddenLinks={['/mentors']}
       />
       <main className={styles.main}>
         <h1 className={styles.title}>Мой профиль</h1>

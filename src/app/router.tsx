@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router'
 import { RootLayout } from '@/app/RootLayout'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
+import { MentorSearchPage } from '@/pages/mentors/MentorSearchPage'
 import { MentorHomePage } from '@/pages/mentor/MentorHomePage'
 import { MentorProfilePage } from '@/pages/mentor/profile/MentorProfilePage'
 import { OnboardingPage } from '@/pages/onboarding/OnboardingPage'
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
       { path: '/register', element: <RegisterPage /> },
       { path: '/register/confirm', element: <ConfirmEmailPage /> },
       { path: '/onboarding', element: <OnboardingPage /> },
-      { path: '/mentors', element: <PagePlaceholder title="Менторы" /> },
+      { path: '/mentors', element: <MentorSearchPage /> },
       { path: '/news', element: <PagePlaceholder title="Новости" /> },
       { path: '/messages', element: <PagePlaceholder title="Сообщения" /> },
       { path: '/notifications', element: <PagePlaceholder title="Уведомления" /> },

@@ -1,0 +1,221 @@
+/* Сравнение менторов */
+
+.dialog {
+  --modal-width: 1200px;
+  --modal-padding-top: 28px;
+  --modal-padding-right: 28px;
+  --modal-padding-bottom: 28px;
+  --modal-padding-left: 28px;
+  --modal-border: none;
+  --modal-radius: 28px;
+  --modal-bg: #f7f7f2;
+  --modal-close-top: 28px;
+  --modal-close-right: 28px;
+  --modal-close-size: 40px;
+  --modal-close-icon: 26px;
+  --modal-close-bg: var(--color-surface);
+  --modal-mobile-padding: 20px 16px;
+  --modal-mobile-radius: 24px;
+  --modal-mobile-close: 16px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding-right: 56px;
+}
+
+.title {
+  color: #1d2236;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32.2px;
+}
+
+.count {
+  margin-top: 4px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #e3f9b8;
+  color: #2f4a00;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 27.2px;
+}
+
+.tableWrap {
+  margin-top: 20px;
+  overflow-x: auto;
+  border-radius: 24px;
+  background: var(--color-surface);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #1d2236;
+  font-size: 14px;
+  line-height: 19.6px;
+}
+
+.table td,
+.table th {
+  padding: 0 18px;
+  border-bottom: 0.8px solid #e6e7e0;
+  font-weight: 400;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table .labelCell {
+  width: 200px;
+  min-width: 160px;
+  background: #fafaf7;
+  color: #8a8fa0;
+  font-weight: 600;
+}
+
+.table .cell {
+  height: 48.4px;
+}
+
+.table .bold {
+  font-weight: 700;
+}
+
+.table .best {
+  background: #f6fde8;
+}
+
+.muted {
+  color: #8a8fa0;
+}
+
+.empty {
+  color: #b8bbc4;
+}
+
+/* ---------- Шапка таблицы ---------- */
+
+.table .mentorCell,
+.table .slotCell {
+  height: 138.6px;
+  text-align: center;
+}
+
+.table .mentorCell {
+  padding-top: 14px;
+  padding-bottom: 15px;
+  vertical-align: top;
+}
+
+.avatar {
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+.name {
+  display: block;
+  margin-top: 7.8px;
+  font-weight: 700;
+}
+
+.position {
+  display: block;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.2px;
+}
+
+.table .slotCell {
+  min-width: 180px;
+}
+
+.slotTitle {
+  display: block;
+  color: #8a8fa0;
+}
+
+.slotLink {
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 13px;
+  line-height: 18.2px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.slotLink:hover {
+  color: var(--color-text);
+}
+
+/* ---------- Кнопки ---------- */
+
+.actionsRow td {
+  border-bottom: none;
+}
+
+.table .actionsCell {
+  --button-height: 40px;
+  --sent-bg: #ddf2e8;
+  --sent-color: #2e7d5b;
+
+  padding: 14px 18px;
+  vertical-align: top;
+}
+
+.action {
+  width: 100%;
+}
+
+.remove {
+  width: 100%;
+  height: 40px;
+  margin-top: 8px;
+  border: 1px solid #e6e7e0;
+  border-radius: 14px;
+  background: var(--color-surface);
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.remove:hover {
+  background: #f6f6f3;
+}
+
+.remove:focus-visible,
+.slotLink:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .table {
+    min-width: 720px;
+  }
+
+  /* Подписи строк остаются на месте при прокрутке таблицы */
+  .table .labelCell {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 132px;
+    min-width: 132px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+}

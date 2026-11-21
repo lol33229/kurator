@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import chevronIcon from '@/assets/icons/chevron-wide.svg'
 import { Logo } from '@/shared/ui/Logo/Logo'
 import styles from './UserHeader.module.css'
@@ -34,6 +34,8 @@ export function UserHeader({
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
+  // Искать менторов нужно только менти
+  const hidden = roleLabel === 'ментор' ? [...hiddenLinks, '/mentors'] : hiddenLinks
 
   useEffect(() => {
     if (!open) return
@@ -53,13 +55,17 @@ export function UserHeader({
     <header className={styles.header}>
       <Logo className={styles.logo} />
       <nav className={styles.nav} aria-label="Разделы">
-        {NAV_LINKS.filter((link) => !hiddenLinks.includes(link.to)).map((link) => {
+        {NAV_LINKS.filter((link) => !hidden.includes(link.to)).map((link) => {
           const hasUnread = unread.includes(link.to)
           return (
-            <Link key={link.to} to={link.to} className={hasUnread ? styles.unread : undefined}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) => [hasUnread && styles.unread, isActive && styles.active].filter(Boolean).join(' ') || undefined}
+            >
               {link.label}
               {hasUnread && <span className={styles.hidden}> (есть непрочитанные)</span>}
-            </Link>
+            </NavLink>
           )
         })}
       </nav>

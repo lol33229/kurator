@@ -17,19 +17,30 @@
   margin: auto;
   padding: var(--modal-padding-top, 50px) var(--modal-padding-right, 24px) var(--modal-padding-bottom, 56px)
     var(--modal-padding-left, 24px);
-  border: 3px solid var(--color-accent-light);
-  border-radius: 40px;
-  background: var(--color-surface);
+  border: var(--modal-border, 3px solid var(--color-accent-light));
+  border-radius: var(--modal-radius, 40px);
+  background: var(--modal-bg, var(--color-surface));
 }
 
 .close {
   position: absolute;
   top: var(--modal-close-top, 23px);
   right: var(--modal-close-right, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--modal-close-size, auto);
+  height: var(--modal-close-size, auto);
   padding: 0;
   border: none;
-  background: none;
+  border-radius: 50%;
+  background: var(--modal-close-bg, none);
   cursor: pointer;
+}
+
+.close img {
+  width: var(--modal-close-icon, 40px);
+  height: var(--modal-close-icon, 40px);
 }
 
 .close:hover {
@@ -43,12 +54,12 @@
 
 @media (max-width: 640px) {
   .dialog {
-    padding: 64px 16px 40px;
-    border-radius: 32px;
+    padding: var(--modal-mobile-padding, 64px 16px 40px);
+    border-radius: var(--modal-mobile-radius, 32px);
   }
 
   .close {
-    top: 16px;
-    right: 16px;
+    top: var(--modal-mobile-close, 16px);
+    right: var(--modal-mobile-close, 16px);
   }
 }
