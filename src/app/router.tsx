@@ -17,6 +17,7 @@ import { ResetRequestPage } from '@/pages/password-reset/ResetRequestPage'
 import { ResetSentPage } from '@/pages/password-reset/ResetSentPage'
 import { ConfirmEmailPage } from '@/pages/register/ConfirmEmailPage'
 import { RegisterPage } from '@/pages/register/RegisterPage'
+import { SettingsPage } from '@/pages/settings/SettingsPage'
 import { StudentProfilePage } from '@/pages/student/profile/StudentProfilePage'
 import { StudentHomePage } from '@/pages/student/StudentHomePage'
 import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
       { path: '/news/:id', element: <NewsArticlePage /> },
       { path: '/messages', element: <MessagesPage /> },
       { path: '/notifications', element: <NotificationsPage /> },
-      { path: '/settings', element: <PagePlaceholder title="Настройки" /> },
+      { path: '/settings', element: <SettingsPage /> },
       { path: '/student', element: <StudentHomePage /> },
       { path: '/student/requests', element: <PagePlaceholder title="Мои заявки" /> },
       { path: '/student/events', element: <PagePlaceholder title="События" /> },

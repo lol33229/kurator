@@ -1,0 +1,519 @@
+/* Настройки */
+
+.page {
+  --footer-offset: 29.5px;
+}
+
+.main {
+  width: min(958px, 100% - 2 * var(--page-gutter));
+  margin: 12px 0 0 max(var(--page-gutter), 50% - 611px);
+}
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.title {
+  color: #1d2236;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 49.3px;
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: #4a5065;
+  font-size: 16px;
+  line-height: 23.2px;
+}
+
+/* ---------- Карточки ---------- */
+
+.card {
+  margin-top: 16.5px;
+  padding: 31px 28px 28px;
+  border-radius: 24px;
+  background: var(--color-surface);
+  color: #1d2236;
+}
+
+.subtitle + .card {
+  margin-top: 20.5px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.cardText {
+  margin-top: 3px;
+  color: #4a5065;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+/* ---------- Уведомления ---------- */
+
+.master {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 67.15px;
+  margin-top: 23px;
+  padding: 0 18px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.rowTitle {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21.75px;
+}
+
+.masterText {
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.rows {
+  margin: 7.2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 70.85px;
+}
+
+.row + .row {
+  border-top: 0.8px solid #e6e7e0;
+}
+
+.rowText {
+  color: #8a8fa0;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  background: #d9dbd2;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.switch[aria-checked='true'] {
+  background: #9cd43a;
+}
+
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 15%);
+  transition: left 0.15s ease;
+}
+
+.switch[aria-checked='true'] .thumb {
+  left: 23px;
+}
+
+/* Каналы доставки */
+.channelsBlock {
+  margin-top: 6px;
+  padding-top: 17.8px;
+  border-top: 0.8px solid #e6e7e0;
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.channel {
+  height: 38.3px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 12px;
+  background: #f6f6f3;
+  color: #4a5065;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+  cursor: pointer;
+}
+
+.channel:hover {
+  background: #ecece6;
+}
+
+.channelOn,
+.channelOn:hover {
+  background: #e3f9b8;
+  color: #2f4a00;
+}
+
+/* ---------- Личные данные ---------- */
+
+.account {
+  padding-top: 28px;
+}
+
+.accountHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.accountHead .cardTitle {
+  margin-top: 4px;
+}
+
+.accountHead .cardText {
+  margin-top: 4px;
+}
+
+.edit {
+  flex-shrink: 0;
+  height: 44px;
+  padding: 0 24px;
+  min-width: 135px;
+  border: none;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.edit:hover {
+  background: #bdec58;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  margin: 21px 0 0;
+}
+
+.fields div {
+  min-height: 93.55px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.fields dt {
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 17.4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.fields dd {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 21.75px;
+  overflow-wrap: anywhere;
+}
+
+.fields .fieldNote {
+  margin-top: 2px;
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17.4px;
+}
+
+/* ---------- Изменение данных ---------- */
+
+.form {
+  margin-top: 21px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.85px;
+}
+
+.required {
+  color: #e5484d;
+}
+
+.input {
+  width: 100%;
+  height: 46.7px;
+  padding: 0 14.2px;
+  border: 1px solid #e6e7e0;
+  border-radius: 12px;
+  background: #f6f6f3;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: #757575;
+}
+
+.inputError {
+  border-color: #e5484d;
+}
+
+.error {
+  margin-top: 4px;
+  color: #e5484d;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.passwordField {
+  position: relative;
+}
+
+.passwordField .input {
+  padding-right: 44px;
+}
+
+/* Кнопка «показать пароль» внутри поля */
+.eye {
+  position: absolute;
+  top: 11.7px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: #8a8fa0;
+  font-family: 'Segoe UI Symbol', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.eye[aria-pressed='true'] {
+  color: #1d2236;
+}
+
+.formSection {
+  margin-top: 20px;
+  padding-top: 17.8px;
+  border-top: 0.8px solid #e6e7e0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21.75px;
+}
+
+.formSectionNote {
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.passwordRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 11px;
+}
+
+/* Полоски надёжности пароля */
+.strength {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.strength span {
+  height: 5px;
+  border-radius: 3px;
+  background: #e8eae1;
+}
+
+.strength[data-level='1'] span:first-child {
+  background: #e5484d;
+}
+
+.strength[data-level='2'] span:nth-child(-n + 2) {
+  background: #ffbe5c;
+}
+
+.strength[data-level='3'] span {
+  background: #9cd43a;
+}
+
+.confirmSection {
+  margin-top: 34px;
+}
+
+.currentField {
+  width: calc(50% - 2px);
+  margin-top: 12px;
+}
+
+.formFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 14px;
+}
+
+.formFooter .edit {
+  min-width: 126px;
+}
+
+.cancel {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  color: #1d2236;
+}
+
+.input:focus-visible,
+.eye:focus-visible,
+.cancel:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Выход ---------- */
+
+.logout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 100.95px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.logoutTitle {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24.65px;
+}
+
+.logoutText {
+  color: #4a5065;
+  font-size: 11.7px;
+  line-height: 16.92px;
+}
+
+.logoutButton {
+  flex-shrink: 0;
+  width: 101px;
+  height: 44px;
+  border: 1px solid #f5c2c3;
+  border-radius: 13px;
+  background: var(--color-surface);
+  color: #e5484d;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background: #fdecec;
+}
+
+.switch:focus-visible,
+.channel:focus-visible,
+.edit:focus-visible,
+.logoutButton:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 1240px) {
+  .main {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .master {
+    padding: 12px 14px;
+  }
+
+  .accountHead {
+    flex-direction: column;
+  }
+
+  .fields,
+  .passwordRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .currentField {
+    width: 100%;
+  }
+
+  .logout {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
