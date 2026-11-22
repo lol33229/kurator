@@ -67,15 +67,6 @@
   flex: 0 1 424px;
 }
 
-/* Окно редактирования целей в стиле анкеты */
-.goalsDialog {
-  --modal-padding-bottom: 48px;
-}
-
-.goalsFooter {
-  margin-top: 40px;
-}
-
 @media (max-width: 960px) {
   .goalList {
     grid-template-columns: minmax(0, 1fr);

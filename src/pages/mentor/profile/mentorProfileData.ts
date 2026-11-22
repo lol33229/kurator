@@ -2,6 +2,7 @@ import headerAvatar from '@/assets/mentor/user-avatar.png'
 import profilePhoto from '@/assets/mentor/profile-photo.png'
 import menteeEva from '@/assets/student/mentor-eva.png'
 import menteeIvan from '@/assets/student/mentor-ivan.png'
+import type { AvailabilityData, PersonalData } from '@/pages/profile/EditableSections'
 import type { HistoryItem, Review, SkillLevel } from '@/pages/profile/ProfileParts'
 
 // Моковые данные профиля ментора, пока нет API
@@ -9,14 +10,16 @@ export const PROFILE = {
   shortName: 'Алексей С.',
   headerAvatar,
   photo: profilePhoto,
-  fields: [
-    { label: 'Имя и фамилия', value: 'Алексей Смирнов' },
-    { label: 'Возраст', value: '30 лет' },
-    { label: 'Статус', value: 'Ментор' },
-    { label: 'Образование', value: 'УрФУ, Программная инженерия' },
-    { label: 'Город', value: 'Екатеринбург, Россия' },
-    { label: 'О себе', value: 'Интересуюсь аналитикой данных и машинным обучением.' },
-  ],
+  personal: {
+    firstName: 'Алексей',
+    lastName: 'Смирнов',
+    age: '30',
+    status: 'Ментор',
+    university: 'УрФУ',
+    specialty: 'Программная инженерия',
+    city: 'Екатеринбург, Россия',
+    about: 'Интересуюсь аналитикой данных и машинным обучением.',
+  } satisfies PersonalData,
 }
 
 export const SKILLS: SkillLevel[] = [
@@ -26,10 +29,12 @@ export const SKILLS: SkillLevel[] = [
   { skill: 'Data Analysis', level: 'Эксперт' },
 ]
 
-export const EXPERIENCE = [
-  { id: 'urfu', title: 'УрФУ - Исследователь (стажировка)', period: '2018 - 2019 год' },
-  { id: 'sber', title: 'Сбер - Data Science', period: '2019 - 2022 год' },
-  { id: 'yandex', title: 'Яндекс - Senior Data Science', period: '2022 - сейчас' },
+export type Job = { id: string; company: string; position: string; from: string; to: string; current: boolean }
+
+export const EXPERIENCE: Job[] = [
+  { id: 'urfu', company: 'УрФУ', position: 'Исследователь (стажировка)', from: '2018', to: '2019', current: false },
+  { id: 'sber', company: 'Сбер', position: 'Data Science', from: '2019', to: '2022', current: false },
+  { id: 'yandex', company: 'Яндекс', position: 'Senior Data Science', from: '2022', to: '', current: true },
 ]
 
 export const PROJECTS = [
@@ -41,11 +46,15 @@ export const PROJECTS = [
   },
 ]
 
-export const AVAILABILITY = {
-  days: 'Пн, Ср, Пт',
-  time: '18:00 - 21:00 (МСК +2)',
-  format: 'Онлайн, оффлайн (Екатеринбург)',
-  price: '1 час / 1000 рублей',
+export const AVAILABILITY: AvailabilityData = {
+  days: ['Пн', 'Ср', 'Пт'],
+  from: '18:00',
+  to: '21:00',
+  timezone: 'МСК +2',
+  formats: ['Онлайн', 'Офлайн'],
+  city: 'Екатеринбург',
+  priceModel: 'За час',
+  price: '1000',
 }
 
 export const MENTORSHIP = {

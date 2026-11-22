@@ -46,7 +46,6 @@ export const router = createBrowserRouter([
       { path: '/student/events', element: <PagePlaceholder title="События" /> },
       { path: '/student/goals', element: <PagePlaceholder title="Мои цели" /> },
       { path: '/student/profile', element: <StudentProfilePage /> },
-      { path: '/student/profile/edit', element: <PagePlaceholder title="Редактирование профиля" /> },
       { path: '/student/history', element: <PagePlaceholder title="История наставничества" /> },
       { path: '/student/reviews', element: <PagePlaceholder title="Отзывы" /> },
       { path: '/mentor', element: <MentorHomePage /> },
@@ -56,7 +55,6 @@ export const router = createBrowserRouter([
       { path: '/mentor/mentees', element: <PagePlaceholder title="Мои менти" /> },
       { path: '/mentor/mentees/:id', element: <MenteePage /> },
       { path: '/mentor/profile', element: <MentorProfilePage /> },
-      { path: '/mentor/profile/edit', element: <PagePlaceholder title="Редактирование профиля" /> },
       { path: '/mentor/history', element: <PagePlaceholder title="История наставничества" /> },
       { path: '/mentor/reviews', element: <PagePlaceholder title="Отзывы" /> },
       // Кабинеты куратора и администратора пока заглушки

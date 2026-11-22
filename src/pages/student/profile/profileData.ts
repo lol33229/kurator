@@ -2,23 +2,23 @@ import profilePhoto from '@/assets/student/mentor-maria.png'
 import mentorEva from '@/assets/student/mentor-eva.png'
 import mentorIvan from '@/assets/student/mentor-ivan.png'
 import headerAvatar from '@/assets/student/user-avatar.png'
+import type { AvailabilityData, PersonalData } from '@/pages/profile/EditableSections'
 
 // Моковые данные профиля, пока нет API
 export const PROFILE = {
   shortName: 'Анна С.',
   headerAvatar,
   photo: profilePhoto,
-  fields: [
-    { label: 'Имя и фамилия', value: 'Анна Смирнова' },
-    { label: 'Возраст', value: '20 лет' },
-    { label: 'Статус', value: 'Студентка, 3 курс' },
-    { label: 'Направление обучения', value: 'Прикладная информатика' },
-    { label: 'Город', value: 'Екатеринбург, Россия' },
-    {
-      label: 'О себе',
-      value: 'Интересуюсь аналитикой данных и машинным обучением. Хочу развиваться в Data Science и построить карьеру в ИТ.',
-    },
-  ],
+  personal: {
+    firstName: 'Анна',
+    lastName: 'Смирнова',
+    age: '20',
+    status: 'Студентка, 3 курс',
+    university: 'ВШЭ',
+    specialty: 'Прикладная информатика',
+    city: 'Екатеринбург, Россия',
+    about: 'Интересуюсь аналитикой данных и машинным обучением. Хочу развиваться в Data Science и построить карьеру в ИТ.',
+  } satisfies PersonalData,
 }
 
 export const SKILLS = [
@@ -28,26 +28,41 @@ export const SKILLS = [
   { skill: 'Data Analysis', level: 'Эксперт' },
 ]
 
-// Цели складываются из задач, выбранных в анкете («с чем нужна помощь»)
-export const GOALS = [
+export type Goal = {
+  id: string
+  title: string
+  term: string
+  directions: string[]
+  description?: string
+  progress: number
+}
+
+export const GOALS: Goal[] = [
   {
-    task: 'Освоить новую профессию',
+    id: 'internship',
     title: 'Стажировка в Data Science',
+    term: '6 месяцев',
+    directions: ['Карьерный рост', 'Смена профессии', 'Soft Skills'],
     description: 'Развить навыки и попасть на первую стажировку за 6 месяцев',
     progress: 78,
   },
   {
-    task: 'Подготовиться к собеседованию',
+    id: 'interview',
     title: 'Подготовиться к собеседованию в ИТ',
+    term: '3 месяца',
+    directions: ['Карьерный рост', 'Смена профессии', 'Soft Skills'],
     description: 'Составить резюме, портфолио и пройти пробные интервью',
     progress: 32,
   },
 ]
 
-export const AVAILABILITY = {
-  days: 'Пн, Ср, Пт',
-  time: '18:00 - 21:00 (МСК +2)',
-  format: 'Онлайн, оффлайн (Екатеринбург)',
+export const AVAILABILITY: AvailabilityData = {
+  days: ['Пн', 'Ср', 'Пт'],
+  from: '18:00',
+  to: '21:00',
+  timezone: 'МСК +2',
+  formats: ['Онлайн', 'Офлайн'],
+  city: 'Екатеринбург',
 }
 
 export const HISTORY = [

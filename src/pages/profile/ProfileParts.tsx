@@ -1,6 +1,5 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Link } from 'react-router'
-import avatarEditIcon from '@/assets/icons/avatar-edit.svg'
 import calendarIcon from '@/assets/icons/calendar-small.svg'
 import chevronRight from '@/assets/icons/chevron-right.svg'
 import pencilIcon from '@/assets/icons/pencil-edit.svg'
@@ -102,63 +101,6 @@ export function Section({ title, subtitle, action, aside, className, children }:
   )
 }
 
-// ---------- Личные данные ----------
-
-// Фото профиля с выбором нового файла; пока нет API, фото меняется только на экране
-function ProfilePhoto({ initial }: { initial: string }) {
-  const [photo, setPhoto] = useState(initial)
-  useEffect(() => () => URL.revokeObjectURL(photo), [photo])
-
-  return (
-    <div className={styles.photo}>
-      <img className={styles.photoImage} src={photo} alt="Фото профиля" width={100} height={100} />
-      <label className={styles.photoEdit}>
-        <input
-          type="file"
-          accept="image/*"
-          className={styles.hidden}
-          onChange={(event) => {
-            const file = event.target.files?.[0]
-            if (file) setPhoto(URL.createObjectURL(file))
-          }}
-        />
-        <img src={avatarEditIcon} alt="" width={30} height={30} />
-        <span className={styles.hidden}>Сменить фото</span>
-      </label>
-    </div>
-  )
-}
-
-type PersonalSectionProps = {
-  subtitle: string
-  photo: string
-  fields: { label: string; value: string }[]
-  editPath: string
-}
-
-export function PersonalSection({ subtitle, photo, fields, editPath }: PersonalSectionProps) {
-  return (
-    <Section
-      title="Личные данные"
-      subtitle={subtitle}
-      action={{ to: editPath, label: 'Редактировать', icon: 'edit' }}
-      className={styles.personal}
-    >
-      <div className={styles.personalBody}>
-        <ProfilePhoto initial={photo} />
-        <dl className={styles.fields}>
-          {fields.map((field) => (
-            <div key={field.label}>
-              <dt>{field.label}</dt>
-              <dd>{field.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </Section>
-  )
-}
-
 // ---------- Навыки ----------
 
 export type SkillLevel = { skill: string; level: string }
@@ -174,19 +116,6 @@ export function SkillPairs({ skills, className }: { skills: SkillLevel[]; classN
         </li>
       ))}
     </ul>
-  )
-}
-
-export function SkillsSection({ skills, editPath }: { skills: SkillLevel[]; editPath: string }) {
-  return (
-    <Section
-      title="Интересы и навыки"
-      subtitle="Области, которые вам интересны и ваши текущие навыки и уровень владения"
-      action={{ to: editPath, label: 'Редактировать', icon: 'edit' }}
-      className={styles.skills}
-    >
-      <SkillPairs skills={skills} />
-    </Section>
   )
 }
 
@@ -214,37 +143,6 @@ export function Progress({ value, label, className }: ProgressProps) {
       </span>
       <span className={styles.progressValue}>{value}%</span>
     </div>
-  )
-}
-
-// ---------- Доступность ----------
-
-type AvailabilitySectionProps = {
-  subtitle: string
-  rows: { icon: string; label: string; value: string }[]
-  editPath: string
-}
-
-export function AvailabilitySection({ subtitle, rows, editPath }: AvailabilitySectionProps) {
-  return (
-    <Section
-      title="Доступность"
-      subtitle={subtitle}
-      action={{ to: editPath, label: 'Редактировать', icon: 'edit' }}
-      className={styles.availability}
-    >
-      <dl className={styles.availabilityList}>
-        {rows.map((row) => (
-          <div key={row.label}>
-            <dt>
-              <img src={row.icon} alt="" width={20} height={20} />
-              {row.label}
-            </dt>
-            <dd>{row.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </Section>
   )
 }
 
