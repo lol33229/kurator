@@ -1,0 +1,122 @@
+/* Список жалоб */
+
+.filters {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: 22px;
+}
+
+.card {
+  margin-top: 14px;
+  padding: 4px 0;
+}
+
+.table th:nth-child(1) {
+  width: 18%;
+}
+
+.table th:nth-child(2) {
+  width: 8.5%;
+}
+
+.table th:nth-child(3) {
+  width: 27%;
+}
+
+.table th:nth-child(4) {
+  width: 13.5%;
+}
+
+.table th:nth-child(5) {
+  width: 13.5%;
+}
+
+.table th:nth-child(6) {
+  width: 9%;
+}
+
+.fromCell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 91.56px;
+  height: 34px;
+  border: 1px solid #e6e7e0;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d2236;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.view:hover {
+  background: #f6f6f3;
+}
+
+.view:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .card {
+    padding: 4px 16px;
+  }
+
+  .table tr {
+    grid-template-areas:
+      'person view'
+      'role status'
+      'reason reason'
+      'from date';
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .personCell {
+    grid-area: person;
+  }
+
+  .viewCell {
+    grid-area: view;
+    align-self: center;
+    justify-self: end;
+  }
+
+  .roleCell {
+    grid-area: role;
+  }
+
+  .statusCell {
+    grid-area: status;
+    justify-self: end;
+  }
+
+  .reasonCell {
+    grid-area: reason;
+    white-space: normal;
+  }
+
+  .fromCell {
+    grid-area: from;
+    color: #8a8fa0;
+    font-size: 12px;
+  }
+
+  .fromCell::before {
+    content: 'От: ';
+  }
+
+  .dateCell {
+    grid-area: date;
+    justify-self: end;
+    color: #8a8fa0;
+    font-size: 12px;
+  }
+}

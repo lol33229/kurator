@@ -1,0 +1,181 @@
+/* Список наставнических пар */
+
+.filters {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: 22px;
+}
+
+.card {
+  margin-top: 14px;
+  padding: 0 9px 16px;
+}
+
+.table th:nth-child(1) {
+  width: 38.5%;
+}
+
+.table th:nth-child(2) {
+  width: 14.9%;
+}
+
+.table th:nth-child(3) {
+  width: 12%;
+}
+
+.table th:nth-child(4) {
+  width: 9.6%;
+}
+
+.table th:nth-child(5) {
+  width: 15%;
+}
+
+.table td {
+  height: 62.8px;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:hover td {
+  background: #fafaf6;
+}
+
+.pair {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.avatars {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow {
+  color: #8a8fa0;
+  font-variant-emoji: text;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.pairText {
+  min-width: 0;
+}
+
+.pairName {
+  display: block;
+  overflow: hidden;
+  color: #1d2236;
+  font-weight: 700;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pairName:hover {
+  text-decoration: underline;
+}
+
+.pairName:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* Полоска совместимости */
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track {
+  overflow: hidden;
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  background: #eef0e8;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: #9cd43a;
+}
+
+.meterValue {
+  font-weight: 700;
+}
+
+.none {
+  color: #8a8fa0;
+  font-size: 12px;
+}
+
+.mobileLabel {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .card {
+    padding: 4px 16px;
+  }
+
+  .table tr {
+    grid-template-areas:
+      'pair pair'
+      'compat status'
+      'progress appeals'
+      'date date';
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .table td {
+    height: auto;
+  }
+
+  .pairCell {
+    grid-area: pair;
+  }
+
+  .compatCell {
+    grid-area: compat;
+  }
+
+  .statusCell {
+    grid-area: status;
+    justify-self: end;
+  }
+
+  .progressCell {
+    grid-area: progress;
+    color: #4a5065;
+    font-size: 13px;
+  }
+
+  .mobileLabel {
+    display: inline;
+  }
+
+  .appealsCell {
+    grid-area: appeals;
+    justify-self: end;
+  }
+
+  .dateCell {
+    grid-area: date;
+    color: #8a8fa0;
+    font-size: 12px;
+  }
+
+  .dateCell::before {
+    content: 'Старт: ';
+  }
+}

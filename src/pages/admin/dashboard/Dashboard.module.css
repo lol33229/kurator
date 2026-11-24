@@ -1,0 +1,313 @@
+/* Дашборд панели куратора */
+
+/* ---------- Цифры ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 23px;
+  margin: 21.75px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stat {
+  height: 133px;
+  padding: 20.8px 22px 0;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.statLabel {
+  color: #8a8fa0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18.85px;
+}
+
+.statValue {
+  margin-top: 4.7px;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 46.4px;
+}
+
+.statNote {
+  margin-top: 3.9px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17.4px;
+}
+
+.up {
+  color: #2e7d5b;
+}
+
+.alert {
+  color: #e5484d;
+}
+
+.muted {
+  color: #8a8fa0;
+}
+
+/* ---------- Блоки ---------- */
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 639fr) minmax(0, 487fr);
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 16px 27.5px 17px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.panelTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+}
+
+.more {
+  flex-shrink: 0;
+  color: #4a5065;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18.85px;
+  text-underline-offset: 2px;
+}
+
+.more:hover {
+  color: #1d2236;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  margin-top: 14px;
+  padding: 0 18px;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #bdec58;
+}
+
+/* ---------- Активные пары ---------- */
+
+.tableWrap {
+  align-self: stretch;
+  margin-top: 14px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table th {
+  height: 37.8px;
+  padding: 0 14px;
+  border-bottom: 0.8px solid #e6e7e0;
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17.4px;
+  letter-spacing: 0.5px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table th:nth-child(1) {
+  width: 51.5%;
+}
+
+.table th:nth-child(2) {
+  width: 23.9%;
+}
+
+.table td {
+  padding: 12px 14px;
+  border-bottom: 0.8px solid #e6e7e0;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Плашка «Требует внимания» может касаться края */
+.table td:last-child {
+  padding-right: 0;
+}
+
+.pair {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+}
+
+.avatars {
+  display: flex;
+  flex-shrink: 0;
+  gap: 23px;
+}
+
+.pairName {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.pairGoal {
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+/* ---------- Жалобы ---------- */
+
+.complaints {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: stretch;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.complaints + .button {
+  margin-top: 10px;
+}
+
+.complaint {
+  padding: 15.3px 14px 14px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.complaintHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.complaintAuthor {
+  flex: 1;
+  min-width: 0;
+  margin-top: -3px;
+}
+
+.complaintText {
+  margin-top: 7.3px;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.more:focus-visible,
+.button:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1100px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .stat {
+    height: auto;
+    padding: 16px 16px 18px;
+  }
+
+  .statValue {
+    font-size: 26px;
+    line-height: 36px;
+  }
+
+  .panel {
+    padding: 18px 16px 20px;
+  }
+
+  /* Пары карточками: имена сверху, совместимость и статус ниже */
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody {
+    display: block;
+  }
+
+  .table tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 12px 0;
+    border-bottom: 0.8px solid #e6e7e0;
+  }
+
+  .table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .table td,
+  .table td:last-child {
+    padding: 0;
+    border: none;
+  }
+
+  .table td:first-child {
+    flex-basis: 100%;
+  }
+
+  .table td:nth-child(2) {
+    color: #4a5065;
+    font-size: 13px;
+  }
+
+  .table td:nth-child(2)::before {
+    content: 'Совместимость ';
+  }
+
+  .avatars {
+    gap: 6px;
+  }
+
+  .pair {
+    gap: 10px;
+  }
+}

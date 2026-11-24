@@ -1,0 +1,380 @@
+/* Карточка наставнической пары */
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rematch {
+  flex-shrink: 0;
+  height: 42px;
+  padding: 0 34px;
+  border: none;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rematch:hover:not(:disabled) {
+  background: #bdec58;
+}
+
+.rematch:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 348px;
+  align-items: start;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.empty {
+  margin: 14px 0 10px;
+  color: #8a8fa0;
+  font-size: 14px;
+}
+
+/* ---------- Участники ---------- */
+
+.member {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 100px;
+  padding: 14px 24px 14px 14px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.bigAvatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 34.8px;
+}
+
+.memberInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.memberRole {
+  overflow: hidden;
+  color: #8a8fa0;
+  font-size: 11.7px;
+  line-height: 16.92px;
+  text-overflow: ellipsis;
+}
+
+.memberName {
+  margin: 1.5px 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24.65px;
+}
+
+.contact {
+  flex-shrink: 0;
+  height: 34px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 10px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.contact:hover {
+  background: #bdec58;
+}
+
+/* ---------- Статус ---------- */
+
+.data {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 0;
+}
+
+.item {
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f7f8f3;
+}
+
+.label {
+  color: #8a8fa0;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 15.95px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.value {
+  margin: 3px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+}
+
+/* ---------- Обращения ---------- */
+
+.appeals {
+  margin-bottom: 10px;
+}
+
+.appeal {
+  padding: 14px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.appealHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.appealName {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.appealMeta {
+  margin-top: 2px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.appealText {
+  margin-top: 7.3px;
+  color: #4a5065;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.appealActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+  margin-top: 10px;
+}
+
+.reply {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid #e6e7e0;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d2236;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reply:hover {
+  background: #f6f6f3;
+}
+
+.resolve {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.resolve:hover {
+  color: #1d2236;
+}
+
+/* ---------- Совместимость ---------- */
+
+.compat {
+  padding: 12px 13px 35px;
+}
+
+.compatTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+  text-align: center;
+}
+
+.ring {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  margin: 14px auto 0;
+  border-radius: 50%;
+  background: conic-gradient(#dbf3a9 0%, #c8f56a var(--value), #eef0e8 var(--value));
+}
+
+.ring::before {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  background: #fff;
+  content: '';
+}
+
+.ringValue {
+  position: relative;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 43.5px;
+}
+
+.factorsTitle {
+  margin-top: 10px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+  text-align: center;
+}
+
+.factors {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.factorHead {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.factorTrack {
+  display: block;
+  overflow: hidden;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  background: #eef0e8;
+}
+
+.factorFill {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: #9cd43a;
+}
+
+.low {
+  background: #f2c94c;
+}
+
+.rematch:focus-visible,
+.contact:focus-visible,
+.reply:focus-visible,
+.resolve:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Узкие экраны ---------- */
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .compat {
+    padding-bottom: 24px;
+  }
+
+  .member {
+    flex-wrap: wrap;
+    padding-right: 14px;
+  }
+
+  .bigAvatar {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+
+  .contact {
+    width: 100%;
+  }
+
+  .data {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

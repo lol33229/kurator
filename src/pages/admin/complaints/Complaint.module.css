@@ -1,0 +1,252 @@
+/* Карточка жалобы */
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.goTo {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 236px;
+  height: 42px;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.goTo:hover {
+  background: #bdec58;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 370px;
+  align-items: start;
+  gap: 7px;
+  margin-top: 22px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 5px;
+}
+
+.card {
+  border-radius: 22px;
+  background: #fff;
+}
+
+.cardTitle,
+.detailsTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+}
+
+/* ---------- Пользователь ---------- */
+
+.userCard {
+  padding: 5px 33px 15px 14px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 102px;
+  margin-top: 14px;
+  padding: 0 11px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 34.8px;
+}
+
+.userInfo {
+  min-width: 0;
+}
+
+.userName {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 24.65px;
+}
+
+.userEmail {
+  overflow: hidden;
+  margin-top: 3px;
+  color: #8a8fa0;
+  font-size: 11.7px;
+  line-height: 16.92px;
+  text-overflow: ellipsis;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 7px;
+}
+
+/* ---------- Комментарий ---------- */
+
+.commentCard {
+  padding: 6px 34px 16px 13px;
+}
+
+.commentCard .cardTitle {
+  padding-left: 2px;
+}
+
+.quote {
+  min-height: 60px;
+  margin: 8px 0 0;
+  padding: 8px 14px 8px 14.2px;
+  border-left: 2.8px solid #c8f56a;
+  border-radius: 0 12px 12px 0;
+  background: #fafaf6;
+  color: #4a5065;
+  font-size: 15px;
+  line-height: 21.75px;
+}
+
+.author {
+  margin-top: 15.6px;
+  padding-left: 2px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+/* ---------- Детали ---------- */
+
+.details {
+  padding: 24px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.item {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f7f8f3;
+}
+
+.label {
+  color: #8a8fa0;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 15.95px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.item dd {
+  margin-left: 0;
+}
+
+.value {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+}
+
+.selectWrap {
+  position: relative;
+  width: 175px;
+  margin-top: 3px;
+}
+
+.select {
+  width: 100%;
+  height: 32px;
+  padding: 0 30px 0 12.2px;
+  border: 1px solid #e6e7e0;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d2236;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+}
+
+.chevron {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  pointer-events: none;
+}
+
+.goTo:focus-visible,
+.select:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Узкие экраны ---------- */
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .main {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goTo {
+    width: 100%;
+  }
+
+  .userCard,
+  .commentCard {
+    padding: 12px 16px 16px;
+  }
+
+  .commentCard .cardTitle,
+  .author {
+    padding-left: 0;
+  }
+
+  .details {
+    padding: 16px;
+  }
+}

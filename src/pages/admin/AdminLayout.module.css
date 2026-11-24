@@ -1,0 +1,195 @@
+/* Панель куратора: боковое меню */
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #f7f7f2;
+  color: #1d2236;
+}
+
+.aside {
+  position: sticky;
+  top: 56px;
+  display: flex;
+  flex: 0 0 260px;
+  flex-direction: column;
+  height: 687.2px;
+  max-height: calc(100vh - 72px);
+  min-height: 560px;
+  margin-top: 56px;
+  padding: 61.4px 16px 24px;
+  border-radius: 0 24px 24px 0;
+  background: #1d2236;
+}
+
+/* Логотип чуть выходит за край меню, как в макете */
+.logo {
+  position: absolute;
+  top: -6px;
+  left: -3px;
+  color: #fff;
+}
+
+.caption {
+  padding-left: 10px;
+  color: #9ea3b5;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 25.6px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 42.3px;
+  padding: 0 12px 0 13px;
+  border-radius: 12px;
+  color: #c9ccd8;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+  text-decoration: none;
+}
+
+.link:hover {
+  background: rgb(255 255 255 / 6%);
+}
+
+.linkActive,
+.linkActive:hover {
+  background: #c8f56a;
+  color: #1d2236;
+}
+
+.badge {
+  min-width: 21px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #e5484d;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 17.95px;
+  text-align: center;
+}
+
+.badgeMuted {
+  background: rgb(255 255 255 / 12%);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 62px;
+  margin-top: auto;
+  padding: 0 10px 0 12px;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 6%);
+}
+
+.userText {
+  flex: 1;
+  min-width: 0;
+}
+
+.userName {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.userRole {
+  margin-top: -0.4px;
+  color: #9ea3b5;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.logout {
+  display: flex;
+  padding: 4px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background: rgb(255 255 255 / 8%);
+}
+
+.link:focus-visible,
+.logout:focus-visible {
+  outline: 2px solid #c8f56a;
+  outline-offset: 2px;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  max-width: 1196px;
+  padding: 52px 32px 48px 24px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .aside {
+    position: relative;
+    top: 0;
+    flex: none;
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    margin-top: 0;
+    padding: 76px 16px 16px;
+    border-radius: 0 0 24px 24px;
+  }
+
+  .logo {
+    top: 0;
+    left: 0;
+  }
+
+  .caption {
+    position: absolute;
+    top: 30px;
+    right: 16px;
+  }
+
+  .nav {
+    flex-direction: row;
+    margin: 0 -16px;
+    padding: 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .link {
+    flex-shrink: 0;
+    gap: 8px;
+    height: 38px;
+  }
+
+  .user {
+    height: 54px;
+    margin-top: 12px;
+  }
+
+  .main {
+    padding: 24px 16px 40px;
+  }
+}

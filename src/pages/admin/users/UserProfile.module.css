@@ -1,0 +1,265 @@
+/* Профиль пользователя в панели куратора */
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 34.8px;
+}
+
+.headInfo {
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 332px;
+  align-items: start;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  padding: 24px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.1px;
+}
+
+/* ---------- Данные профиля ---------- */
+
+.data {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 0;
+}
+
+.item {
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f7f8f3;
+}
+
+.label {
+  color: #8a8fa0;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 15.95px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.value {
+  overflow: hidden;
+  margin: 3px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20.3px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Жалобы и пары ---------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #f7f8f3;
+}
+
+.rowText {
+  min-width: 0;
+}
+
+.rowTitle {
+  margin-top: 1.5px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.rowMeta {
+  margin-top: 8.5px;
+  color: #4a5065;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+.pair {
+  align-items: center;
+  min-height: 72px;
+}
+
+.pairInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pairAvatars {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow {
+  color: #8a8fa0;
+  font-variant-emoji: text;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.pair .rowTitle {
+  margin-top: 0;
+}
+
+.pairGoal {
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.empty {
+  margin: 14px 0 10px;
+  color: #8a8fa0;
+  font-size: 14px;
+}
+
+/* ---------- Действия ---------- */
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.button {
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid #e6e7e0;
+  border-radius: 13px;
+  background: #fff;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #f6f6f3;
+}
+
+.danger {
+  border-color: #f5c2c3;
+  color: #e5484d;
+}
+
+.danger:hover {
+  background: #fff5f5;
+}
+
+.back {
+  border-color: transparent;
+  color: #4a5065;
+}
+
+.back:hover {
+  background: none;
+  color: #1d2236;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Узкие экраны ---------- */
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .actions {
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+
+  .headInfo {
+    padding-top: 0;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .data {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .pair {
+    align-items: flex-start;
+  }
+}

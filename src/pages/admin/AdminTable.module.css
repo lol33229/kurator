@@ -1,0 +1,162 @@
+/* Общие таблицы и фильтры панели куратора */
+
+.hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* ---------- Фильтр-переключатель ---------- */
+
+.filters {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+  height: 42.85px;
+  padding: 5px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.filter {
+  flex-shrink: 0;
+  padding: 0 14px;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter:hover {
+  background: #f3f4ef;
+}
+
+.filterActive,
+.filterActive:hover {
+  background: #c8f56a;
+  color: #1d2236;
+}
+
+/* ---------- Таблица ---------- */
+
+.card {
+  margin-top: 22px;
+  padding-bottom: 16px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table th {
+  height: 37.8px;
+  padding: 0 14px;
+  border-bottom: 0.8px solid #e6e7e0;
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17.4px;
+  letter-spacing: 0.5px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.table td {
+  height: 65.4px;
+  padding: 0 14px;
+  border-bottom: 0.8px solid #e6e7e0;
+  font-size: 14px;
+  line-height: 20.3px;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Аватар, имя и подпись под ним */
+.person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.person > div {
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub {
+  overflow: hidden;
+  margin-top: 0.6px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.empty {
+  padding: 24px 14px 8px;
+  color: #8a8fa0;
+  font-size: 14px;
+}
+
+.filter:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .filters {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .card {
+    padding: 4px 16px;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody {
+    display: block;
+  }
+
+  .table tr {
+    display: grid;
+    gap: 8px 12px;
+    padding: 16px 0;
+    border-bottom: 0.8px solid #e6e7e0;
+  }
+
+  .table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .table td {
+    height: auto;
+    padding: 0;
+    border: none;
+  }
+}

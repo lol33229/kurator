@@ -1,0 +1,34 @@
+/* Окна «Связаться» и повторного подбора */
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 7.3px;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20.3px;
+}
+
+.role {
+  margin-top: 2px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.label {
+  margin-top: 15.3px;
+}
+
+.textarea {
+  height: 105.6px;
+}
+
+.text {
+  max-width: none;
+  min-height: 0;
+}

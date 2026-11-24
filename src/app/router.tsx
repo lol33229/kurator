@@ -1,5 +1,15 @@
 import { createBrowserRouter } from 'react-router'
 import { RootLayout } from '@/app/RootLayout'
+import { AdminLayout } from '@/pages/admin/AdminLayout'
+import { ComplaintPage } from '@/pages/admin/complaints/ComplaintPage'
+import { ComplaintsPage } from '@/pages/admin/complaints/ComplaintsPage'
+import { DashboardPage } from '@/pages/admin/dashboard/DashboardPage'
+import { AdminNewsPage } from '@/pages/admin/news/AdminNewsPage'
+import { PairPage } from '@/pages/admin/pairs/PairPage'
+import { PairsPage } from '@/pages/admin/pairs/PairsPage'
+import { NewsEditorPage } from '@/pages/admin/news/NewsEditorPage'
+import { UserProfilePage } from '@/pages/admin/users/UserProfilePage'
+import { UsersPage } from '@/pages/admin/users/UsersPage'
 import { LandingPage } from '@/pages/landing/LandingPage'
 import { LoginPage } from '@/pages/login/LoginPage'
 import { MentorSearchPage } from '@/pages/mentors/MentorSearchPage'
@@ -20,7 +30,7 @@ import { RegisterPage } from '@/pages/register/RegisterPage'
 import { SettingsPage } from '@/pages/settings/SettingsPage'
 import { StudentProfilePage } from '@/pages/student/profile/StudentProfilePage'
 import { StudentHomePage } from '@/pages/student/StudentHomePage'
-import { ROLES, ROLE_LABELS } from '@/shared/config/roles'
+import { ROLE_LABELS } from '@/shared/config/roles'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
 
 export const router = createBrowserRouter([
@@ -57,11 +67,25 @@ export const router = createBrowserRouter([
       { path: '/mentor/profile', element: <MentorProfilePage /> },
       { path: '/mentor/history', element: <PagePlaceholder title="История наставничества" /> },
       { path: '/mentor/reviews', element: <PagePlaceholder title="Отзывы" /> },
-      // Кабинеты куратора и администратора пока заглушки
-      ...ROLES.filter((role) => role === 'curator' || role === 'admin').map((role) => ({
-        path: `/${role}`,
-        element: <PagePlaceholder title={`Кабинет: ${ROLE_LABELS[role]}`} />,
-      })),
+      { path: '/curator', element: <PagePlaceholder title={`Кабинет: ${ROLE_LABELS.curator}`} /> },
+      {
+        path: '/admin',
+        element: <AdminLayout />,
+        children: [
+          { index: true, element: <DashboardPage /> },
+          { path: 'users', element: <UsersPage /> },
+          { path: 'pairs', element: <PairsPage /> },
+          { path: 'pairs/:id', element: <PairPage /> },
+          { path: 'complaints', element: <ComplaintsPage /> },
+          { path: 'complaints/:id', element: <ComplaintPage /> },
+          { path: 'users/:id', element: <UserProfilePage /> },
+          { path: 'knowledge', element: <PagePlaceholder title="База знаний" /> },
+          { path: 'news', element: <AdminNewsPage /> },
+          { path: 'news/new', element: <NewsEditorPage /> },
+          { path: 'news/:id/edit', element: <NewsEditorPage /> },
+          { path: 'bot', element: <PagePlaceholder title="ИИ-бот" /> },
+        ],
+      },
       { path: '*', element: <PagePlaceholder title="Страница не найдена" /> },
     ],
   },
