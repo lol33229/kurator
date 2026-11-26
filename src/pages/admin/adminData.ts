@@ -36,7 +36,8 @@ export const STATS = [
   { label: 'Пользователи', value: '1240', note: '▲ 38 за неделю', tone: 'up' },
   { label: 'Активные пары', value: '186', note: '▲ 12 за неделю', tone: 'up' },
   { label: 'Новые жалобы', value: '2', note: '▲ 1 за сутки', tone: 'alert' },
-  { label: 'Ждут ответа куратора', value: '2', note: 'в ИИ-боте', tone: 'muted' },
+  // Пустое значение считается на главной по диалогам ИИ-бота
+  { label: 'Ждут ответа куратора', value: '', note: 'в ИИ-боте', tone: 'muted' },
 ] as const
 
 type Person = { initials: string; color: string; name: string; email: string }
@@ -190,7 +191,7 @@ export const NAV = [
   { to: '/admin/complaints', label: 'Жалобы', badge: 2 },
   { to: '/admin/knowledge', label: 'База знаний' },
   { to: '/admin/news', label: 'Новости' },
-  { to: '/admin/bot', label: 'ИИ-бот', badge: 2 },
+  { to: '/admin/bot', label: 'ИИ-бот' },
 ]
 
 // Причины предупреждения

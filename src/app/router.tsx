@@ -3,6 +3,7 @@ import { RootLayout } from '@/app/RootLayout'
 import { AdminLayout } from '@/pages/admin/AdminLayout'
 import { ComplaintPage } from '@/pages/admin/complaints/ComplaintPage'
 import { ComplaintsPage } from '@/pages/admin/complaints/ComplaintsPage'
+import { BotPage } from '@/pages/admin/bot/BotPage'
 import { DashboardPage } from '@/pages/admin/dashboard/DashboardPage'
 import { KnowledgeEditorPage } from '@/pages/admin/knowledge/KnowledgeEditorPage'
 import { KnowledgeItemPage } from '@/pages/admin/knowledge/KnowledgeItemPage'
@@ -89,7 +90,8 @@ export const router = createBrowserRouter([
           { path: 'news', element: <AdminNewsPage /> },
           { path: 'news/new', element: <NewsEditorPage /> },
           { path: 'news/:id/edit', element: <NewsEditorPage /> },
-          { path: 'bot', element: <PagePlaceholder title="ИИ-бот" /> },
+          { path: 'bot', element: <BotPage /> },
+          { path: 'bot/:id', element: <BotPage /> },
         ],
       },
       { path: '*', element: <PagePlaceholder title="Страница не найдена" /> },

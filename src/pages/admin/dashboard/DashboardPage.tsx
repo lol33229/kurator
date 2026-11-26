@@ -3,6 +3,7 @@ import { Avatar, PageTitle, Pill } from '../AdminParts'
 import { CURATOR, initials, STATS } from '../adminData'
 import { usePairs } from '../pairs/pairsStore'
 import { useUsers } from '../users/usersStore'
+import { useChats } from '../bot/botStore'
 import { useComplaints } from '../complaints/complaintsStore'
 import styles from './Dashboard.module.css'
 
@@ -15,6 +16,7 @@ const today = new Date().toLocaleDateString('ru-RU')
 export function DashboardPage() {
   const complaints = useComplaints()
   const users = useUsers()
+  const waiting = useChats().filter((chat) => chat.status === 'Ждёт оператора').length
   // На главной только текущие пары
   const pairs = usePairs().filter((pair) => pair.status === 'Активна' || pair.status === 'Требует внимания')
   return (
@@ -25,7 +27,7 @@ export function DashboardPage() {
         {STATS.map((stat) => (
           <li key={stat.label} className={styles.stat}>
             <p className={styles.statLabel}>{stat.label}</p>
-            <p className={styles.statValue}>{stat.value}</p>
+            <p className={styles.statValue}>{stat.value || waiting}</p>
             <p className={`${styles.statNote} ${TONES[stat.tone]}`}>{stat.note}</p>
           </li>
         ))}
