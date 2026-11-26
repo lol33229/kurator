@@ -4,6 +4,7 @@ import { AdminLayout } from '@/pages/admin/AdminLayout'
 import { ComplaintPage } from '@/pages/admin/complaints/ComplaintPage'
 import { ComplaintsPage } from '@/pages/admin/complaints/ComplaintsPage'
 import { DashboardPage } from '@/pages/admin/dashboard/DashboardPage'
+import { KnowledgeEditorPage } from '@/pages/admin/knowledge/KnowledgeEditorPage'
 import { KnowledgeItemPage } from '@/pages/admin/knowledge/KnowledgeItemPage'
 import { KnowledgePage } from '@/pages/admin/knowledge/KnowledgePage'
 import { AdminNewsPage } from '@/pages/admin/news/AdminNewsPage'
@@ -82,7 +83,9 @@ export const router = createBrowserRouter([
           { path: 'complaints/:id', element: <ComplaintPage /> },
           { path: 'users/:id', element: <UserProfilePage /> },
           { path: 'knowledge', element: <KnowledgePage /> },
+          { path: 'knowledge/new', element: <KnowledgeEditorPage /> },
           { path: 'knowledge/:id', element: <KnowledgeItemPage /> },
+          { path: 'knowledge/:id/edit', element: <KnowledgeEditorPage /> },
           { path: 'news', element: <AdminNewsPage /> },
           { path: 'news/new', element: <NewsEditorPage /> },
           { path: 'news/:id/edit', element: <NewsEditorPage /> },
