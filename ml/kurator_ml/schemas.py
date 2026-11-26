@@ -131,9 +131,23 @@ class ReviewModerationResponse(BaseModel):
 # ---------- Чат-бот ----------
 
 
+class KnowledgeDocument(BaseModel):
+    """Материал базы знаний: бот узнаёт вопрос по формулировкам и отвечает по тексту answer."""
+
+    id: str
+    title: str
+    questions: list[str] = Field(default_factory=list)
+    answer: str
+    audience: Literal["all", "mentor", "mentee"] = "all"
+
+
 class ChatbotRequest(BaseModel):
     user_id: str
     question: str = Field(min_length=1, max_length=2000)
+    role: Literal["mentor", "mentee"] | None = Field(None, description="Показываем материалы только для этой роли")
+    knowledge: list[KnowledgeDocument] | None = Field(
+        None, description="База знаний из бэкенда; если не передана — встроенная"
+    )
 
 
 class ChatbotSource(BaseModel):

@@ -45,3 +45,16 @@ def test_recommendations_rejects_unknown_skill():
 def test_moderation_rejects_bad_rating():
     body = {"review_id": "r1", "text": "Отличный наставник", "rating": 7}
     assert client.post("/moderation/review", json=body).status_code == 422
+
+
+def test_local_site_on_any_port_can_call_service():
+    for origin in ("http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173"):
+        headers = {"Origin": origin, "Access-Control-Request-Method": "POST", "Access-Control-Request-Headers": "content-type"}
+        response = client.options("/chatbot/ask", headers=headers)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == origin
+
+
+def test_foreign_site_is_rejected():
+    headers = {"Origin": "https://example.com", "Access-Control-Request-Method": "POST"}
+    assert client.options("/chatbot/ask", headers=headers).status_code == 400
