@@ -4,6 +4,8 @@ import { AdminLayout } from '@/pages/admin/AdminLayout'
 import { ComplaintPage } from '@/pages/admin/complaints/ComplaintPage'
 import { ComplaintsPage } from '@/pages/admin/complaints/ComplaintsPage'
 import { DashboardPage } from '@/pages/admin/dashboard/DashboardPage'
+import { KnowledgeItemPage } from '@/pages/admin/knowledge/KnowledgeItemPage'
+import { KnowledgePage } from '@/pages/admin/knowledge/KnowledgePage'
 import { AdminNewsPage } from '@/pages/admin/news/AdminNewsPage'
 import { PairPage } from '@/pages/admin/pairs/PairPage'
 import { PairsPage } from '@/pages/admin/pairs/PairsPage'
@@ -79,7 +81,8 @@ export const router = createBrowserRouter([
           { path: 'complaints', element: <ComplaintsPage /> },
           { path: 'complaints/:id', element: <ComplaintPage /> },
           { path: 'users/:id', element: <UserProfilePage /> },
-          { path: 'knowledge', element: <PagePlaceholder title="База знаний" /> },
+          { path: 'knowledge', element: <KnowledgePage /> },
+          { path: 'knowledge/:id', element: <KnowledgeItemPage /> },
           { path: 'news', element: <AdminNewsPage /> },
           { path: 'news/new', element: <NewsEditorPage /> },
           { path: 'news/:id/edit', element: <NewsEditorPage /> },

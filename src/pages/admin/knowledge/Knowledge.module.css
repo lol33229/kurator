@@ -1,0 +1,379 @@
+/* База знаний ИИ-бота: список, просмотр и форма */
+
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headActions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.primary,
+.danger {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 23px;
+  border: none;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary:hover {
+  background: #bdec58;
+}
+
+.danger {
+  padding: 0 25px;
+  border: 1px solid #f5c2c3;
+  background: #fff;
+  color: #e5484d;
+}
+
+.danger:hover {
+  background: #fff5f5;
+}
+
+/* ---------- Список ---------- */
+
+.search {
+  display: block;
+  margin-top: 22px;
+}
+
+.search input {
+  width: 100%;
+  height: 44px;
+  padding: 0 20.23px;
+  border: none;
+  border-radius: 14px;
+  background: #fff;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+}
+
+.search input::placeholder {
+  color: #757575;
+}
+
+.card {
+  margin-top: 14px;
+}
+
+.table th:nth-child(1) {
+  width: 42.1%;
+}
+
+.table th:nth-child(2) {
+  width: 26%;
+}
+
+.table th:nth-child(3) {
+  width: 14.2%;
+}
+
+.table td {
+  height: 62.5px;
+}
+
+.openCell {
+  text-align: right;
+}
+
+.open {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 17px;
+  border: 1px solid #e6e7e0;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d2236;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.open:hover {
+  background: #f6f6f3;
+}
+
+.mobileLabel {
+  display: none;
+}
+
+/* ---------- Просмотр и форма ---------- */
+
+.form {
+  max-width: 870px;
+  margin-top: 22px;
+  padding: 24px;
+  border-radius: 22px;
+  background: #fff;
+}
+
+.view {
+  padding-bottom: 45px;
+}
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.85px;
+}
+
+.star {
+  color: #e5484d;
+}
+
+.hint {
+  color: #8a8fa0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 17.4px;
+}
+
+/* Поле только для чтения на странице просмотра */
+.readonly {
+  min-height: 44.7px;
+  padding: 11.2px 14.2px;
+  border-radius: 12px;
+  background: #fafaf6;
+  font-size: 14px;
+  line-height: 20.3px;
+  overflow-wrap: anywhere;
+}
+
+.field {
+  display: block;
+  width: 100%;
+  height: 44.7px;
+  padding: 0 14.2px;
+  border: 1px solid #e6e7e0;
+  border-radius: 12px;
+  background: #f6f6f3;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+}
+
+.field::placeholder {
+  color: #757575;
+}
+
+.label + .field,
+.label + .readonly,
+.label + .questions {
+  margin-top: 6px;
+}
+
+.field + .label,
+.readonly + .label,
+.questions + .label {
+  margin-top: 16px;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.questionRow {
+  display: flex;
+  align-items: center;
+}
+
+.removeQuestion {
+  flex-shrink: 0;
+  width: 40.25px;
+  height: 44.7px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.removeQuestion:hover {
+  color: #e5484d;
+}
+
+.addQuestion {
+  display: block;
+  margin-top: 8px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #2f4a00;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18.85px;
+  cursor: pointer;
+}
+
+.addQuestion:hover {
+  text-decoration: underline;
+}
+
+.answerLabel {
+  margin-top: 16.65px;
+}
+
+.textarea {
+  height: 146.2px;
+  padding: 11px 14.2px;
+  line-height: 20.3px;
+  resize: vertical;
+}
+
+.answer {
+  min-height: 146.2px;
+  white-space: pre-wrap;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
+  margin-top: 21.1px;
+  padding-top: 18px;
+  border-top: 0.8px solid #e6e7e0;
+}
+
+.cancel {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #4a5065;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  color: #1d2236;
+}
+
+.save {
+  min-width: 111.82px;
+  height: 42px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 13px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.save:hover:not(:disabled) {
+  background: #bdec58;
+}
+
+.save:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.primary:focus-visible,
+.danger:focus-visible,
+.search input:focus-visible,
+.open:focus-visible,
+.field:focus-visible,
+.removeQuestion:focus-visible,
+.addQuestion:focus-visible,
+.cancel:focus-visible,
+.save:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Узкие экраны ---------- */
+
+@media (max-width: 900px) {
+  .table td {
+    height: auto;
+  }
+
+  .table tr {
+    grid-template-areas:
+      'title open'
+      'count date';
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .titleCell {
+    grid-area: title;
+    min-width: 0;
+  }
+
+  .openCell {
+    grid-area: open;
+  }
+
+  .countCell {
+    grid-area: count;
+    color: #4a5065;
+    font-size: 13px;
+  }
+
+  .mobileLabel {
+    display: inline;
+  }
+
+  .dateCell {
+    grid-area: date;
+    color: #8a8fa0;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headActions > * {
+    flex: 1;
+  }
+
+  .form {
+    padding: 16px;
+  }
+
+  .footer {
+    gap: 20px;
+  }
+
+  .save {
+    flex: 1;
+  }
+}

@@ -1,22 +1,15 @@
-import { useCallback, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import { Toast } from '@/shared/ui/Toast/Toast'
 import { PageTitle } from '../AdminParts'
+import { useRouteToast } from '../useRouteToast'
 import styles from './AdminNews.module.css'
 import { removeNews, useNews } from './newsStore'
 
 // Список публикаций с редактированием и удалением
 export function AdminNewsPage() {
   const news = useNews()
-  const navigate = useNavigate()
   // Сообщение после публикации приходит со страницы формы
-  const sent = (useLocation().state as { toast?: string } | null)?.toast
-  const [toast, setToast] = useState<string | null>(sent ?? null)
-
-  const hideToast = useCallback(() => {
-    setToast(null)
-    navigate('.', { replace: true, state: null })
-  }, [navigate])
+  const { toast, setToast, hideToast } = useRouteToast()
 
   return (
     <>
