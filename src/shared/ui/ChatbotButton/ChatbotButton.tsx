@@ -2,21 +2,25 @@ import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent 
 import botButton from '@/assets/chatbot/bot.svg'
 import botIcon from '@/assets/chatbot/bot-icon.svg'
 import sendIcon from '@/assets/chatbot/send.svg'
-import { findAnswer, topicsFor } from './knowledge'
+import { askChatbot, type KnowledgeDocument } from '@/shared/api/chatbot'
+import { findAnswer, isHandoff, topicsFor } from './knowledge'
 import styles from './ChatbotButton.module.css'
 
 type Message = { id: number; from: 'bot' | 'user'; text: string; feedback?: 'up' | 'down' }
 
+export type HandoffMessage = { from: 'user' | 'bot'; text: string }
+
 type ChatbotButtonProps = {
   userName: string
   role: 'mentor' | 'mentee'
+  // База знаний из админки; без неё сервис берёт встроенную
+  knowledge?: KnowledgeDocument[]
+  // Бот передал вопрос куратору: отдаём реплики, которых куратор ещё не видел
+  onHandoff?: (messages: HandoffMessage[]) => void
 }
 
-// Сколько «думает» бот перед ответом
-const REPLY_DELAY = 500
-
 // Плавающая кнопка ИИ-помощника и его окно
-export function ChatbotButton({ userName, role }: ChatbotButtonProps) {
+export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotButtonProps) {
   const titleId = useId()
   const topics = topicsFor(role)
   const greeting = `Здравствуйте, ${userName}! 👋 Я ИИ-помощник платформы. Подскажу, как работать с ${
@@ -30,6 +34,8 @@ export function ChatbotButton({ userName, role }: ChatbotButtonProps) {
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
+  // Сколько реплик (без приветствия) уже передано куратору
+  const handedOff = useRef(1)
 
   // Новое сообщение внизу: прокручиваем ленту до конца
   useEffect(() => {
@@ -50,27 +56,45 @@ export function ChatbotButton({ userName, role }: ChatbotButtonProps) {
     buttonRef.current?.focus()
   }
 
-  const ask = (text: string) => {
+  const ask = async (text: string) => {
     const question = text.trim()
     if (!question || typing) return
-    setMessages((list) => [...list, { id: Date.now(), from: 'user', text: question }])
+    const userMessage: Message = { id: Date.now(), from: 'user', text: question }
+    setMessages((list) => [...list, userMessage])
     setDraft('')
     setTyping(true)
-    window.setTimeout(() => {
-      setMessages((list) => [...list, { id: Date.now() + 1, from: 'bot', text: findAnswer(topics, question) }])
-      setTyping(false)
-    }, REPLY_DELAY)
+
+    let answer: string
+    let handoff: boolean
+    try {
+      const reply = await askChatbot({ userId: `demo-${role}`, question, role, knowledge })
+      answer = reply.answer
+      handoff = reply.handoff_to_curator
+    } catch {
+      // Сервис не запущен или не ответил — отвечаем по запасной базе
+      answer = findAnswer(topics, question)
+      handoff = isHandoff(answer)
+    }
+
+    const botMessage: Message = { id: Date.now() + 1, from: 'bot', text: answer }
+    const all = [...messages, userMessage, botMessage]
+    setMessages(all)
+    setTyping(false)
+    if (handoff) {
+      onHandoff?.(all.slice(handedOff.current).map(({ from, text }) => ({ from, text })))
+      handedOff.current = all.length
+    }
   }
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
-    ask(draft)
+    void ask(draft)
   }
 
   const onKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault()
-      ask(draft)
+      void ask(draft)
     }
   }
 
@@ -147,7 +171,7 @@ export function ChatbotButton({ userName, role }: ChatbotButtonProps) {
 
           <div className={styles.quick} aria-label="Частые вопросы">
             {topics.map((topic) => (
-              <button key={topic.question} type="button" className={styles.chip} onClick={() => ask(topic.question)} disabled={typing}>
+              <button key={topic.question} type="button" className={styles.chip} onClick={() => void ask(topic.question)} disabled={typing}>
                 {topic.question}
               </button>
             ))}

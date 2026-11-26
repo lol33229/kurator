@@ -1,4 +1,4 @@
-// База знаний бота, пока не подключён ИИ-сервис
+// Запасная база знаний: бот отвечает по ней, если ML-сервис недоступен
 
 export type Topic = {
   question: string
@@ -69,6 +69,9 @@ const MENTEE_TOPICS: Topic[] = [
 ]
 
 export const topicsFor = (role: 'mentor' | 'mentee') => (role === 'mentor' ? MENTOR_TOPICS : MENTEE_TOPICS)
+
+// Ответ без ИИ, после которого вопрос уходит куратору
+export const isHandoff = (answer: string) => answer === FALLBACK || answer === CURATOR.answer
 
 export const FALLBACK =
   'Пока не знаю ответа на этот вопрос. Передал его куратору — он ответит в разделе «Сообщения».'

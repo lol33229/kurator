@@ -14,7 +14,8 @@ export type ChatMessage = {
 
 export type BotChat = {
   id: string
-  userId: string
+  // Пользователь из админки; у гостей с сайта профиля нет
+  userId?: string
   name: string
   role: 'Ментор' | 'Менти'
   initials: string
@@ -107,6 +108,25 @@ export const sendReply = (id: string, text: string) =>
     status: 'В работе',
     messages: [...chat.messages, { id: crypto.randomUUID(), from: 'curator', text, time: now() }],
   }))
+
+type SiteUser = { id: string; name: string; role: BotChat['role']; initials: string; color: string }
+
+// Бот на сайте передал вопрос куратору: добавляем новые реплики и ставим диалог в очередь
+export function receiveHandoff(user: SiteUser, messages: { from: 'user' | 'bot'; text: string }[]) {
+  const time = now()
+  const added: ChatMessage[] = [
+    ...messages.map((message) => ({ id: crypto.randomUUID(), from: message.from, text: message.text, time })),
+    { id: crypto.randomUUID(), from: 'system', text: 'Бот передал диалог куратору', time },
+  ]
+  store.set((list) => {
+    const existing = list.find((chat) => chat.id === user.id)
+    const chat: BotChat = existing
+      ? { ...existing, status: 'Ждёт оператора', messages: [...existing.messages, ...added] }
+      : { ...user, status: 'Ждёт оператора', messages: added }
+    // Свежий диалог — наверх списка
+    return [chat, ...list.filter((item) => item.id !== user.id)]
+  })
+}
 
 // Куратор закрывает диалог, дальше снова отвечает бот
 export const closeChat = (id: string) =>

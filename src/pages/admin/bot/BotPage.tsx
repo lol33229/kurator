@@ -61,9 +61,11 @@ function Conversation({ chat, onClose }: { chat: BotChat; onClose: () => void })
           <Pill>{chat.status}</Pill>
         </div>
         <div className={styles.chatActions}>
-          <Link to={`/admin/users/${chat.userId}`} className={styles.ghost}>
-            Профиль
-          </Link>
+          {chat.userId && (
+            <Link to={`/admin/users/${chat.userId}`} className={styles.ghost}>
+              Профиль
+            </Link>
+          )}
           {!closed && (
             <button type="button" className={styles.ghost} onClick={onClose}>
               Завершить диалог
