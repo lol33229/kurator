@@ -5,12 +5,15 @@ import { Avatar } from './AdminParts'
 import { CURATOR, NAV } from './adminData'
 import styles from './AdminLayout.module.css'
 import { useChats } from './bot/botStore'
+import { useReviews } from './reviews/reviewsStore'
 
 // Панель куратора: меню слева и экран справа
 export function AdminLayout() {
   const navigate = useNavigate()
   // На «ИИ-бот» — сколько диалогов ждут оператора
   const waiting = useChats().filter((chat) => chat.status === 'Ждёт оператора').length
+  // На «Отзывы» — сколько ждут решения куратора
+  const toCheck = useReviews().filter((review) => review.status === 'На проверке').length
   return (
     <div className={styles.layout}>
       <aside className={styles.aside}>
@@ -18,7 +21,7 @@ export function AdminLayout() {
         <p className={styles.caption}>Панель куратора</p>
         <nav className={styles.nav} aria-label="Разделы панели">
           {NAV.map((item) => {
-            const badge = item.to === '/admin/bot' ? waiting : item.badge
+            const badge = item.to === '/admin/bot' ? waiting : item.to === '/admin/reviews' ? toCheck : item.badge
             return (
               <NavLink
                 key={item.to}

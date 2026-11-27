@@ -10,6 +10,7 @@ import { KnowledgeItemPage } from '@/pages/admin/knowledge/KnowledgeItemPage'
 import { KnowledgePage } from '@/pages/admin/knowledge/KnowledgePage'
 import { AdminNewsPage } from '@/pages/admin/news/AdminNewsPage'
 import { PairPage } from '@/pages/admin/pairs/PairPage'
+import { ReviewsPage } from '@/pages/admin/reviews/ReviewsPage'
 import { PairsPage } from '@/pages/admin/pairs/PairsPage'
 import { NewsEditorPage } from '@/pages/admin/news/NewsEditorPage'
 import { UserProfilePage } from '@/pages/admin/users/UserProfilePage'
@@ -82,6 +83,7 @@ export const router = createBrowserRouter([
           { path: 'pairs/:id', element: <PairPage /> },
           { path: 'complaints', element: <ComplaintsPage /> },
           { path: 'complaints/:id', element: <ComplaintPage /> },
+          { path: 'reviews', element: <ReviewsPage /> },
           { path: 'users/:id', element: <UserProfilePage /> },
           { path: 'knowledge', element: <KnowledgePage /> },
           { path: 'knowledge/new', element: <KnowledgeEditorPage /> },

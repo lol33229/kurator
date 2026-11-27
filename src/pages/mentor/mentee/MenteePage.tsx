@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router'
+import { MENTEE_CRITERIA } from '@/pages/reviews/criteria'
+import { ReviewModal } from '@/pages/reviews/ReviewModal'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
+import { Toast } from '@/shared/ui/Toast/Toast'
+import { MENTOR } from '../data'
 import { findMentee } from './menteeData'
 import { AboutCard, GoalCard, InteractionCard, MatchRing, MenteeLayout, SkillsCard } from './MenteeParts'
 import styles from './MenteeDetails.module.css'
@@ -9,6 +13,10 @@ import styles from './MenteeDetails.module.css'
 export function MenteePage() {
   const mentee = findMentee(useParams().id)
   const [done, setDone] = useState<string[]>([])
+  const [reviewOpen, setReviewOpen] = useState(false)
+  const [toast, setToast] = useState<string | null>(null)
+  const hideToast = useCallback(() => setToast(null), [setToast])
+  const closeReview = useCallback(() => setReviewOpen(false), [setReviewOpen])
   if (!mentee) return <PagePlaceholder title="Менти не найден" />
 
   const toggleTask = (task: string) =>
@@ -24,9 +32,9 @@ export function MenteePage() {
         <Link to="/mentor/events" className={`${styles.button} ${styles.primary}`}>
           Запланировать встречу
         </Link>
-        <Link to="/mentor/reviews" className={`${styles.button} ${styles.secondary}`}>
+        <button type="button" className={`${styles.button} ${styles.secondary}`} onClick={() => setReviewOpen(true)}>
           Оценить
-        </Link>
+        </button>
       </section>
 
       <section className={`${styles.sideCard} ${styles.matchSmall}`}>
@@ -56,11 +64,27 @@ export function MenteePage() {
   const badge = <p className={`${styles.badge} ${styles.badgePair}`}>Ваш менти · пара с {mentee.pairSince}</p>
 
   return (
-    <MenteeLayout crumb={{ to: '/mentor/mentees', label: 'Мои менти' }} mentee={mentee} badge={badge} aside={aside} lower>
-      <AboutCard mentee={mentee} />
-      <SkillsCard mentee={mentee} />
-      <InteractionCard mentee={mentee} tone="light" showLevel done={done} onToggleTask={toggleTask} />
-      <GoalCard mentee={mentee} />
-    </MenteeLayout>
+    <>
+      <MenteeLayout crumb={{ to: '/mentor/mentees', label: 'Мои менти' }} mentee={mentee} badge={badge} aside={aside} lower>
+        <AboutCard mentee={mentee} />
+        <SkillsCard mentee={mentee} />
+        <InteractionCard mentee={mentee} tone="light" showLevel done={done} onToggleTask={toggleTask} />
+        <GoalCard mentee={mentee} />
+      </MenteeLayout>
+      {reviewOpen && (
+        <ReviewModal
+          title="Оценить менти"
+          author={{ id: 'anton', name: MENTOR.shortName, role: 'Ментор' }}
+          target={{ id: mentee.id, name: mentee.name, role: 'Менти' }}
+          criteria={MENTEE_CRITERIA}
+          onDone={(message) => {
+            setReviewOpen(false)
+            setToast(message)
+          }}
+          onClose={closeReview}
+        />
+      )}
+      {toast && <Toast message={toast} onHide={hideToast} />}
+    </>
   )
 }

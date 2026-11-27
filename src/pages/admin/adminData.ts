@@ -189,6 +189,7 @@ export const NAV = [
   { to: '/admin/users', label: 'Пользователи' },
   { to: '/admin/pairs', label: 'Подбор пар', badge: 1, muted: true },
   { to: '/admin/complaints', label: 'Жалобы', badge: 2 },
+  { to: '/admin/reviews', label: 'Отзывы' },
   { to: '/admin/knowledge', label: 'База знаний' },
   { to: '/admin/news', label: 'Новости' },
   { to: '/admin/bot', label: 'ИИ-бот' },

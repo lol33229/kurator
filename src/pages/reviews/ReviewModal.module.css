@@ -1,0 +1,89 @@
+/* Окно отзыва; основа — стили окон чата */
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star,
+.starOn {
+  padding: 0 2px;
+  border: none;
+  background: none;
+  color: #e6e7e0;
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.starOn {
+  color: #f2c94c;
+}
+
+.star:hover {
+  color: #f6dd8a;
+}
+
+.large .star,
+.large .starOn {
+  font-size: 32px;
+}
+
+.star:focus-visible,
+.starOn:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--color-text);
+}
+
+.criteria {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f7f8f3;
+  list-style: none;
+}
+
+.criterion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.text {
+  height: 110px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  line-height: 20.3px;
+  resize: vertical;
+}
+
+.hint {
+  margin-top: 6px;
+  color: #8a8fa0;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.error {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fde7e7;
+  color: #b4232c;
+  font-size: 13px;
+  line-height: 18.85px;
+}
+
+@media (max-width: 480px) {
+  .criterion {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

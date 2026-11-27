@@ -1,0 +1,158 @@
+/* Отзывы на проверке */
+
+.filters {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: 22px;
+}
+
+.card {
+  margin-top: 14px;
+  padding: 4px 0 16px;
+}
+
+.table th:nth-child(1) {
+  width: 20%;
+}
+
+.table th:nth-child(2) {
+  width: 15%;
+}
+
+.table th:nth-child(4) {
+  width: 13%;
+}
+
+.table th:nth-child(5) {
+  width: 150px;
+}
+
+.table td {
+  height: auto;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  vertical-align: top;
+}
+
+.rating {
+  color: #f2c94c;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.ratingEmpty {
+  color: #e6e7e0;
+}
+
+.text {
+  margin-top: 2px;
+  font-size: 14px;
+  line-height: 20.3px;
+  overflow-wrap: anywhere;
+}
+
+.reasons {
+  margin-top: 6px;
+  color: #b4232c;
+  font-size: 12px;
+  line-height: 17.4px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.publish,
+.reject {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid #e6e7e0;
+  border-radius: 10px;
+  background: #c8f56a;
+  color: #1d2236;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.publish {
+  border-color: transparent;
+}
+
+.publish:hover {
+  background: #bdec58;
+}
+
+.reject {
+  border-color: #f5c2c3;
+  background: #fff;
+  color: #e5484d;
+}
+
+.reject:hover {
+  background: #fff5f5;
+}
+
+.publish:focus-visible,
+.reject:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .card {
+    padding: 4px 16px;
+  }
+
+  .table tr {
+    grid-template-areas:
+      'author status'
+      'target target'
+      'text text'
+      'actions actions';
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .authorCell {
+    grid-area: author;
+  }
+
+  .targetCell {
+    grid-area: target;
+  }
+
+  .targetCell p {
+    display: inline;
+  }
+
+  .targetCell p + p::before {
+    content: ' · ';
+  }
+
+  .textCell {
+    grid-area: text;
+  }
+
+  .statusCell {
+    grid-area: status;
+  }
+
+  .actionsCell {
+    grid-area: actions;
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+
+  .table td {
+    padding: 0;
+  }
+}
