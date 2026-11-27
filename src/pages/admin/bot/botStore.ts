@@ -92,7 +92,8 @@ const CHATS: BotChat[] = [
   },
 ]
 
-const store = createStore(CHATS)
+// Сохраняется в браузере: сайт и админка могут быть открыты в разных вкладках
+const store = createStore(CHATS, 'kurator.botChats.v1')
 
 export const useChats = store.use
 
@@ -127,6 +128,10 @@ export function receiveHandoff(user: SiteUser, messages: { from: 'user' | 'bot';
     return [chat, ...list.filter((item) => item.id !== user.id)]
   })
 }
+
+// Пока диалог у куратора, сообщения пользователя идут ему, а не боту
+export const receiveUserMessage = (id: string, text: string) =>
+  update(id, (chat) => ({ ...chat, messages: [...chat.messages, { id: crypto.randomUUID(), from: 'user', text, time: now() }] }))
 
 // Куратор закрывает диалог, дальше снова отвечает бот
 export const closeChat = (id: string) =>

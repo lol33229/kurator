@@ -95,7 +95,8 @@ const ITEMS: KnowledgeItem[] = [
   },
 ]
 
-const store = createStore(ITEMS)
+// Сохраняется в браузере, чтобы бот на сайте в другой вкладке видел правки
+const store = createStore(ITEMS, 'kurator.knowledge.v1')
 
 export const useKnowledge = store.use
 

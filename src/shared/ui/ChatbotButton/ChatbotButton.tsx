@@ -6,9 +6,25 @@ import { askChatbot, type KnowledgeDocument } from '@/shared/api/chatbot'
 import { findAnswer, isHandoff, topicsFor } from './knowledge'
 import styles from './ChatbotButton.module.css'
 
-type Message = { id: number; from: 'bot' | 'user'; text: string; feedback?: 'up' | 'down' }
+// synced — реплика уже передана куратору; quiet — служебная, без оценки «Ответ помог?»
+type Message = {
+  id: string
+  from: 'bot' | 'user' | 'curator'
+  text: string
+  feedback?: 'up' | 'down'
+  synced?: boolean
+  quiet?: boolean
+}
 
 export type HandoffMessage = { from: 'user' | 'bot'; text: string }
+
+// Диалог у куратора: active — куратор на связи, replies — его ответы
+export type CuratorState = { active: boolean; replies: { id: string; text: string }[] }
+
+const NO_CURATOR: CuratorState = { active: false, replies: [] }
+
+let lastId = 0
+const nextId = () => String(++lastId)
 
 type ChatbotButtonProps = {
   userName: string
@@ -17,10 +33,13 @@ type ChatbotButtonProps = {
   knowledge?: KnowledgeDocument[]
   // Бот передал вопрос куратору: отдаём реплики, которых куратор ещё не видел
   onHandoff?: (messages: HandoffMessage[]) => void
+  curator?: CuratorState
+  // Пока куратор на связи, сообщения пользователя идут ему
+  onUserMessage?: (text: string) => void
 }
 
 // Плавающая кнопка ИИ-помощника и его окно
-export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotButtonProps) {
+export function ChatbotButton({ userName, role, knowledge, onHandoff, curator = NO_CURATOR, onUserMessage }: ChatbotButtonProps) {
   const titleId = useId()
   const topics = topicsFor(role)
   const greeting = `Здравствуйте, ${userName}! 👋 Я ИИ-помощник платформы. Подскажу, как работать с ${
@@ -28,14 +47,37 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
   }. Выберите вопрос ниже или напишите свой.`
 
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<Message[]>([{ id: 0, from: 'bot', text: greeting }])
+  const [messages, setMessages] = useState<Message[]>([{ id: 'greeting', from: 'bot', text: greeting, synced: true, quiet: true }])
   const [draft, setDraft] = useState('')
   const [typing, setTyping] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  // Сколько реплик (без приветствия) уже передано куратору
-  const handedOff = useRef(1)
+  // Новый ответ куратора, пока окно закрыто
+  const [unread, setUnread] = useState(false)
+  // Ответы куратора, которые уже показаны; старые из прошлых сессий не дублируем
+  const shown = useRef(new Set(curator.replies.map((reply) => reply.id)))
+  const wasActive = useRef(curator.active)
+
+  // Пришёл ответ куратора — добавляем в ленту
+  useEffect(() => {
+    const fresh = curator.replies.filter((reply) => !shown.current.has(reply.id))
+    if (fresh.length === 0) return
+    fresh.forEach((reply) => shown.current.add(reply.id))
+    setMessages((list) => [...list, ...fresh.map((reply) => ({ id: nextId(), from: 'curator' as const, text: reply.text, synced: true, quiet: true }))])
+    if (!open) setUnread(true)
+  }, [curator.replies, open])
+
+  // Куратор завершил диалог — дальше снова отвечает бот
+  useEffect(() => {
+    if (wasActive.current && !curator.active) {
+      setMessages((list) => [
+        ...list,
+        { id: nextId(), from: 'bot', text: 'Куратор завершил диалог. Если появятся вопросы — пишите, я на связи.', synced: true, quiet: true },
+      ])
+    }
+    wasActive.current = curator.active
+  }, [curator.active])
 
   // Новое сообщение внизу: прокручиваем ленту до конца
   useEffect(() => {
@@ -59,9 +101,17 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
   const ask = async (text: string) => {
     const question = text.trim()
     if (!question || typing) return
-    const userMessage: Message = { id: Date.now(), from: 'user', text: question }
-    setMessages((list) => [...list, userMessage])
     setDraft('')
+
+    // Куратор на связи: бот молчит, сообщение уходит куратору
+    if (curator.active) {
+      setMessages((list) => [...list, { id: nextId(), from: 'user', text: question, synced: true }])
+      onUserMessage?.(question)
+      return
+    }
+
+    const userMessage: Message = { id: nextId(), from: 'user', text: question }
+    setMessages((list) => [...list, userMessage])
     setTyping(true)
 
     let answer: string
@@ -76,14 +126,16 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
       handoff = isHandoff(answer)
     }
 
-    const botMessage: Message = { id: Date.now() + 1, from: 'bot', text: answer }
-    const all = [...messages, userMessage, botMessage]
-    setMessages(all)
+    const botMessage: Message = { id: nextId(), from: 'bot', text: answer }
     setTyping(false)
-    if (handoff) {
-      onHandoff?.(all.slice(handedOff.current).map(({ from, text }) => ({ from, text })))
-      handedOff.current = all.length
+    if (!handoff) {
+      setMessages((list) => [...list, botMessage])
+      return
     }
+    // Куратору уходят реплики, которых он ещё не видел
+    const all = [...messages, userMessage, botMessage]
+    onHandoff?.(all.filter((message) => !message.synced && message.from !== 'curator').map(({ from, text }) => ({ from: from as HandoffMessage['from'], text })))
+    setMessages((list) => [...list, botMessage].map((message) => ({ ...message, synced: true })))
   }
 
   const submit = (event: FormEvent) => {
@@ -98,14 +150,24 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
     }
   }
 
-  const rate = (id: number, feedback: 'up' | 'down') =>
+  const rate = (id: string, feedback: 'up' | 'down') =>
     setMessages((list) => list.map((message) => (message.id === id ? { ...message, feedback } : message)))
 
   return (
     <>
       {!open && (
-        <button ref={buttonRef} type="button" className={styles.button} aria-label="Открыть ИИ-помощника" onClick={() => setOpen(true)}>
+        <button
+          ref={buttonRef}
+          type="button"
+          className={styles.button}
+          aria-label={unread ? 'Открыть ИИ-помощника: новый ответ куратора' : 'Открыть ИИ-помощника'}
+          onClick={() => {
+            setOpen(true)
+            setUnread(false)
+          }}
+        >
           <img src={botButton} alt="" width={80} height={83.5} />
+          {unread && <span className={styles.unread} aria-hidden="true" />}
         </button>
       )}
 
@@ -120,7 +182,8 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
                 ИИ-помощник Куратора
               </h2>
               <p className={styles.status}>
-                <span aria-hidden="true">● </span>в сети · отвечает сразу
+                <span aria-hidden="true">● </span>
+                {curator.active ? 'на связи куратор' : 'в сети · отвечает сразу'}
               </p>
             </div>
             <button type="button" className={styles.close} onClick={close} aria-label="Закрыть">
@@ -130,17 +193,19 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
 
           <div ref={listRef} className={styles.messages} role="log" aria-live="polite">
             <p className={styles.day}>Сегодня</p>
-            {messages.map((message, index) =>
+            {messages.map((message) =>
               message.from === 'user' ? (
                 <p key={message.id} className={`${styles.bubble} ${styles.user}`}>
                   {message.text}
                 </p>
               ) : (
                 <div key={message.id} className={`${styles.bubble} ${styles.bot}`}>
-                  <span className={styles.botName}>ИИ-бот</span>
+                  <span className={message.from === 'curator' ? `${styles.botName} ${styles.curatorName}` : styles.botName}>
+                    {message.from === 'curator' ? 'Куратор' : 'ИИ-бот'}
+                  </span>
                   <p>{message.text}</p>
-                  {/* Приветствие не оцениваем */}
-                  {index > 0 && (
+                  {/* Приветствие и ответы куратора не оцениваем */}
+                  {!message.quiet && (
                     <div className={styles.feedback}>
                       Ответ помог?
                       <button
@@ -169,21 +234,24 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
             {typing && <p className={`${styles.bubble} ${styles.bot} ${styles.typing}`}>ИИ-бот печатает…</p>}
           </div>
 
-          <div className={styles.quick} aria-label="Частые вопросы">
-            {topics.map((topic) => (
-              <button key={topic.question} type="button" className={styles.chip} onClick={() => void ask(topic.question)} disabled={typing}>
-                {topic.question}
-              </button>
-            ))}
-          </div>
+          {/* Пока на связи куратор, быстрые вопросы боту не показываем */}
+          {!curator.active && (
+            <div className={styles.quick} aria-label="Частые вопросы">
+              {topics.map((topic) => (
+                <button key={topic.question} type="button" className={styles.chip} onClick={() => void ask(topic.question)} disabled={typing}>
+                  {topic.question}
+                </button>
+              ))}
+            </div>
+          )}
 
           <form className={styles.composer} onSubmit={submit}>
             <textarea
               ref={inputRef}
               className={styles.input}
               rows={1}
-              placeholder="Задайте вопрос…"
-              aria-label="Вопрос"
+              placeholder={curator.active ? 'Сообщение куратору…' : 'Задайте вопрос…'}
+              aria-label={curator.active ? 'Сообщение куратору' : 'Вопрос'}
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
               onKeyDown={onKeyDown}
@@ -192,7 +260,11 @@ export function ChatbotButton({ userName, role, knowledge, onHandoff }: ChatbotB
               <img src={sendIcon} alt="" width={20} height={20} />
             </button>
           </form>
-          <p className={styles.note}>Бот отвечает по базе знаний. Если он не знает ответа — подключится куратор.</p>
+          <p className={styles.note}>
+            {curator.active
+              ? 'Сейчас вам отвечает куратор. Когда он завершит диалог, снова подключится бот.'
+              : 'Бот отвечает по базе знаний. Если он не знает ответа — подключится куратор.'}
+          </p>
         </section>
       )}
     </>

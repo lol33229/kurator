@@ -1,10 +1,10 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Outlet, useLocation } from 'react-router'
-import { receiveHandoff } from '@/pages/admin/bot/botStore'
+import { receiveHandoff, receiveUserMessage, useChats } from '@/pages/admin/bot/botStore'
 import { useKnowledge } from '@/pages/admin/knowledge/knowledgeStore'
 import { MENTOR } from '@/pages/mentor/data'
 import { STUDENT } from '@/pages/student/data'
-import { ChatbotButton, type HandoffMessage } from '@/shared/ui/ChatbotButton/ChatbotButton'
+import { ChatbotButton, type CuratorState, type HandoffMessage } from '@/shared/ui/ChatbotButton/ChatbotButton'
 
 // Пока нет авторизации: кто пишет боту с сайта
 const SITE_USERS = {
@@ -24,6 +24,17 @@ export function RootLayout() {
   const knowledge = useKnowledge()
   // Вопрос, на который бот не ответил, попадает во вкладку «ИИ-бот»
   const handoff = useCallback((messages: HandoffMessage[]) => receiveHandoff(SITE_USERS[role], messages), [role])
+
+  // Диалог этого пользователя во вкладке «ИИ-бот»: на связи ли куратор и что он ответил
+  const chat = useChats().find((item) => item.id === SITE_USERS[role].id)
+  const curator = useMemo<CuratorState>(
+    () => ({
+      active: chat !== undefined && chat.status !== 'Завершён',
+      replies: (chat?.messages ?? []).filter((message) => message.from === 'curator').map(({ id, text }) => ({ id, text })),
+    }),
+    [chat],
+  )
+  const toCurator = useCallback((text: string) => receiveUserMessage(SITE_USERS[role].id, text), [role])
   return (
     <>
       <Outlet />
@@ -34,6 +45,8 @@ export function RootLayout() {
           userName={isMentor ? MENTOR.firstName : STUDENT.firstName}
           knowledge={knowledge}
           onHandoff={handoff}
+          curator={curator}
+          onUserMessage={toCurator}
         />
       )}
     </>
