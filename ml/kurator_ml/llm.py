@@ -19,8 +19,8 @@ log = logging.getLogger(__name__)
 
 
 class LanguageModel(Protocol):
-    def complete(self, system: str, user: str) -> str | None:
-        """Ответ модели или None, если ответить не получилось."""
+    def complete(self, system: str, user: str, json_mode: bool = False) -> str | None:
+        """Ответ модели или None, если ответить не получилось. json_mode — ответ строго JSON-объектом."""
         ...
 
 
@@ -35,7 +35,7 @@ class MistralClient:
         self.api_key = api_key if api_key is not None else read_key()
         self.model = model or os.getenv("MISTRAL_MODEL", DEFAULT_MODEL)
 
-    def complete(self, system: str, user: str) -> str | None:
+    def complete(self, system: str, user: str, json_mode: bool = False) -> str | None:
         if not self.api_key:
             return None
         body = {
@@ -44,6 +44,8 @@ class MistralClient:
             "max_tokens": 400,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
         }
+        if json_mode:
+            body["response_format"] = {"type": "json_object"}
         request = urllib.request.Request(
             API_URL,
             data=json.dumps(body).encode(),

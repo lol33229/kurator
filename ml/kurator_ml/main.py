@@ -4,11 +4,12 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from kurator_ml import __version__
 from kurator_ml.chatbot import Chatbot
+from kurator_ml.moderation import Moderator
 from kurator_ml.recommender import Recommender
 from kurator_ml.schemas import (
     ChatbotRequest,
@@ -39,10 +40,9 @@ app.add_middleware(
     allow_headers=["Content-Type"],
 )
 
-NOT_READY = "Будет реализовано на следующих этапах"
-
 recommender = Recommender()
 chatbot = Chatbot()
+moderator = Moderator()
 
 
 @app.get("/health", tags=["Служебное"])
@@ -56,10 +56,10 @@ def recommend(request: RecommendationRequest) -> RecommendationResponse:
     return recommender.recommend(request)
 
 
-@app.post("/moderation/review", tags=["Модерация"], responses={501: {"description": NOT_READY}})
+@app.post("/moderation/review", tags=["Модерация"])
 def moderate_review(request: ReviewModerationRequest) -> ReviewModerationResponse:
     """Решение по отзыву: опубликовать, отправить на ручную проверку или отклонить."""
-    raise HTTPException(status_code=501, detail=NOT_READY)
+    return moderator.review(request)
 
 
 @app.post("/chatbot/ask", tags=["Чат-бот"])

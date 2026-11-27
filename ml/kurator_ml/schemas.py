@@ -118,7 +118,8 @@ class ReviewModerationRequest(BaseModel):
 
 
 ModerationVerdict = Literal["publish", "manual_review", "reject"]
-ModerationReason = Literal["toxicity", "spam", "personal_data"]
+# rating_mismatch — оценка противоречит тексту
+ModerationReason = Literal["toxicity", "spam", "personal_data", "rating_mismatch"]
 
 
 class ReviewModerationResponse(BaseModel):

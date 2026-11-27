@@ -13,7 +13,7 @@ class FakeModel:
         self.reply = reply
         self.prompts: list[str] = []
 
-    def complete(self, system: str, user: str) -> str | None:
+    def complete(self, system: str, user: str, json_mode: bool = False) -> str | None:
         self.prompts.append(user)
         return self.reply
 
