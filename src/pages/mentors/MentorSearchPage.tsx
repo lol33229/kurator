@@ -13,6 +13,7 @@ import { MAX_COMPARE, SEARCH_MENTORS, plural, type SearchMentor } from './data'
 import { DEFAULT_FILTERS, type Filters } from './filters'
 import { SearchFilters } from './SearchFilters'
 import styles from './MentorSearch.module.css'
+import { useAiMatches } from './useAiMatches'
 
 type Sort = 'compatibility' | 'rating' | 'price'
 
@@ -63,13 +64,27 @@ export function MentorSearchPage() {
   const [compareOpen, setCompareOpen] = useState(false)
   const [profileId, setProfileId] = useState<string | null>(null)
 
+  // Совместимость и «Почему подходит?» от ИИ; пока сервис молчит — примерные из данных
+  const ai = useAiMatches()
+  const mentors = useMemo(
+    () =>
+      SEARCH_MENTORS.map((mentor) => {
+        if (ai.status !== 'ready') return mentor
+        const match = ai.byId.get(mentor.id)
+        // Сервис отсеял по бюджету или языку — не подходит совсем
+        if (!match) return { ...mentor, compatibility: 0, reasons: [] }
+        return { ...mentor, compatibility: match.score, reasons: match.reasons.length ? match.reasons : mentor.reasons }
+      }),
+    [ai],
+  )
+
   const results = useMemo(
-    () => SEARCH_MENTORS.filter((mentor) => matches(mentor, filters, query)).sort(SORTERS[sort]),
-    [filters, query, sort],
+    () => mentors.filter((mentor) => matches(mentor, filters, query)).sort(SORTERS[sort]),
+    [mentors, filters, query, sort],
   )
   const visible = expanded ? results : results.slice(0, PAGE_SIZE)
-  const comparedMentors = compared.map((id) => SEARCH_MENTORS.find((mentor) => mentor.id === id)).filter((mentor) => mentor !== undefined)
-  const profileMentor = SEARCH_MENTORS.find((mentor) => mentor.id === profileId)
+  const comparedMentors = compared.map((id) => mentors.find((mentor) => mentor.id === id)).filter((mentor) => mentor !== undefined)
+  const profileMentor = mentors.find((mentor) => mentor.id === profileId)
 
   const send = (id: string) => setSent((list) => (list.includes(id) ? list : [...list, id]))
   const removeFromCompare = (id: string) => setCompared((list) => list.filter((item) => item !== id))
@@ -138,9 +153,12 @@ export function MentorSearchPage() {
               <span className={styles.aiIcon}>
                 <img src={botIcon} alt="" width={15} height={15} />
               </span>
-              {count > 0
-                ? `ИИ подобрал ${count} ${plural(count, 'наставника', 'наставников', 'наставников')} под вашу анкету`
-                : 'По этим фильтрам наставников нет'}
+              {ai.status === 'loading'
+                ? 'ИИ подбирает наставников под вашу анкету…'
+                : count > 0
+                  ? `ИИ подобрал ${count} ${plural(count, 'наставника', 'наставников', 'наставников')} под вашу анкету`
+                  : 'По этим фильтрам наставников нет'}
+              {ai.status === 'offline' && count > 0 && ' · ИИ-сервис недоступен, совместимость примерная'}
             </p>
 
             {count > 0 ? (

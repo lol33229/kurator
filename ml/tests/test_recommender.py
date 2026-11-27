@@ -117,3 +117,11 @@ def test_response_time_for_1000_mentors():
         started = time.perf_counter()
         recommender.recommend(RecommendationRequest(student=student, mentors=mentors))
         assert time.perf_counter() - started < 2
+
+
+def test_free_mentor_is_accepted():
+    mentors, students, _ = generate(mentors=3, students=1)
+    free = mentors[0].model_copy(update={"price": 0})
+    request = RecommendationRequest(student=students[0], mentors=[free, *mentors[1:]], min_score=0)
+    ids = [item.mentor_id for item in Recommender().recommend(request).recommendations]
+    assert free.id in ids

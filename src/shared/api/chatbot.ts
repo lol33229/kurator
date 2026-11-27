@@ -1,7 +1,6 @@
 // Запросы к чат-боту ML-сервиса
 
-// Адрес сервиса можно поменять в .env.local: VITE_ML_URL=http://...
-const ML_URL = import.meta.env.VITE_ML_URL ?? 'http://localhost:8001'
+import { ML_URL } from './ml'
 
 // Сколько ждём ответа модели, потом отвечаем без сервиса
 const TIMEOUT_MS = 25_000

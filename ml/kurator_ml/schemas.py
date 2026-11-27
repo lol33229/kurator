@@ -55,7 +55,7 @@ class MentorProfile(BaseModel):
     format: Format
     availability: Availability
     price_model: PriceModel
-    price: int = Field(gt=0, description="Рубли")
+    price: int = Field(ge=0, description="Рубли; 0 — бесплатно")
     free_trial: bool = False
     duration: Duration | None = Field(None, description="Поля пока нет в анкете")
     about: str = Field("", max_length=2000, description="Поля пока нет в анкете")
