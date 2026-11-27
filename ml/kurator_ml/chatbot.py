@@ -1,7 +1,8 @@
 """Чат-бот по базе знаний.
 
 1. Если пользователь просит живого человека — сразу передаём куратору.
-2. Ищем похожие материалы. Ничего похожего нет — передаём куратору.
+2. Ищем похожие материалы: по буквам и, если есть эмбеддинги Mistral, по смыслу.
+   Ничего похожего нет — передаём куратору.
 3. Mistral формулирует ответ только по найденным материалам.
    Если модель не нашла ответа в них — передаём куратору.
 4. Модель недоступна — отвечаем текстом материала, если он точно подходит.
@@ -10,7 +11,7 @@
 import re
 
 from kurator_ml.knowledge import DEFAULT_KNOWLEDGE, Found, KnowledgeSearch
-from kurator_ml.llm import LanguageModel, MistralClient
+from kurator_ml.llm import Embeddings, LanguageModel, MistralClient, MistralEmbeddings
 from kurator_ml.schemas import ChatbotRequest, ChatbotResponse, ChatbotSource
 
 # Ниже — в базе нет ничего похожего, модель не спрашиваем
@@ -36,6 +37,10 @@ SYSTEM_PROMPT = f"""Ты ИИ-помощник платформы наставн
 Если в материалах совсем нет ответа на вопрос, ответь ровно словом {NO_ANSWER} и ничего больше."""
 
 
+def _strength(item: Found) -> float:
+    return max(item.score, item.semantic or 0.0)
+
+
 def _context(found: list[Found]) -> str:
     return "\n\n".join(
         f"[{item.document.title}]\nПохожие вопросы: {'; '.join(item.document.questions)}\nОтвет: {item.document.answer}"
@@ -44,9 +49,12 @@ def _context(found: list[Found]) -> str:
 
 
 class Chatbot:
-    def __init__(self, model: LanguageModel | None = None) -> None:
+    def __init__(self, model: LanguageModel | None = None, embeddings: Embeddings | None = None) -> None:
         self.model = model or MistralClient()
-        self.search = KnowledgeSearch()
+        # Свою модель подставляют в тестах — там без эмбеддингов, если их не передали явно
+        if embeddings is None and model is None:
+            embeddings = MistralEmbeddings()
+        self.search = KnowledgeSearch(embeddings)
 
     def ask(self, request: ChatbotRequest) -> ChatbotResponse:
         question = request.question.strip()
@@ -54,12 +62,13 @@ class Chatbot:
             return ChatbotResponse(answer=HANDOFF_ANSWER, sources=[], confidence=1.0, handoff_to_curator=True)
 
         documents = request.knowledge if request.knowledge is not None else DEFAULT_KNOWLEDGE
-        found = [item for item in self.search.search(question, documents, request.role) if item.score >= RELEVANT]
+        found = self.search.candidates(question, documents, request.role, RELEVANT)
         if not found:
             return self._unknown(0.0)
 
-        best = found[0]
-        confidence = round(min(best.score, 1.0), 2)
+        # Без модели отвечаем только по совпадению текста: смысловая похожесть слишком шумная
+        best = max(found, key=lambda item: item.score)
+        confidence = round(min(_strength(found[0]), 1.0), 2)
         reply = self.model.complete(SYSTEM_PROMPT, f"Материалы:\n{_context(found)}\n\nВопрос пользователя: {question}")
 
         if reply is None:
@@ -75,7 +84,7 @@ class Chatbot:
     @staticmethod
     def _answer(text: str, found: list[Found], confidence: float) -> ChatbotResponse:
         # Модель видит до трёх материалов, а в источники идут только близкие к лучшему
-        close = [item for item in found if item.score >= found[0].score - SOURCE_GAP]
+        close = [item for item in found if _strength(item) >= _strength(found[0]) - SOURCE_GAP]
         sources = [
             ChatbotSource(document_id=item.document.id, title=item.document.title, fragment=item.document.answer[:200])
             for item in close

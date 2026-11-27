@@ -61,3 +61,44 @@ class MistralClient:
         except (urllib.error.URLError, TimeoutError, KeyError, IndexError, ValueError) as error:
             log.warning("Mistral недоступен: %s", error)
         return None
+
+
+EMBEDDINGS_URL = "https://api.mistral.ai/v1/embeddings"
+EMBEDDING_MODEL = "mistral-embed"
+
+
+class Embeddings(Protocol):
+    def embed(self, texts: list[str]) -> list[list[float]] | None:
+        """Векторы текстов в том же порядке или None, если посчитать не получилось."""
+        ...
+
+
+class MistralEmbeddings:
+    """Векторы смысла фраз. Фразы базы знаний повторяются в каждом запросе — кэшируем их в памяти."""
+
+    def __init__(self, api_key: str | None = None) -> None:
+        self.api_key = api_key if api_key is not None else read_key()
+        self._cache: dict[str, list[float]] = {}
+
+    def embed(self, texts: list[str]) -> list[list[float]] | None:
+        if not self.api_key:
+            return None
+        missing = list(dict.fromkeys(text for text in texts if text not in self._cache))
+        if missing:
+            request = urllib.request.Request(
+                EMBEDDINGS_URL,
+                data=json.dumps({"model": EMBEDDING_MODEL, "input": missing}).encode(),
+                headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"},
+            )
+            try:
+                with urllib.request.urlopen(request, timeout=TIMEOUT_SECONDS) as response:
+                    data = json.load(response)
+                for text, item in zip(missing, data["data"], strict=True):
+                    self._cache[text] = item["embedding"]
+            except urllib.error.HTTPError as error:
+                log.warning("Mistral embeddings ответил %s: %s", error.code, error.read()[:300])
+                return None
+            except (urllib.error.URLError, TimeoutError, KeyError, ValueError) as error:
+                log.warning("Mistral embeddings недоступен: %s", error)
+                return None
+        return [self._cache[text] for text in texts]

@@ -10,6 +10,7 @@ import { MentorTermsStep, type MentorTerms } from './MentorTermsStep'
 import { PreferencesStep, type Preferences } from './PreferencesStep'
 import { ProgressSteps } from './ProgressSteps'
 import { RoleStep } from './RoleStep'
+import { saveStudentProfile } from './savedProfile'
 import styles from './Onboarding.module.css'
 
 const TOTAL_STEPS = 4
@@ -106,7 +107,18 @@ export function OnboardingPage() {
         {step === 4 && isMentor && (
           <MentorTermsStep values={mentorTerms} onChange={setMentorTerms} onBack={() => setStep(3)} onNext={close} />
         )}
-        {step === 4 && !isMentor && <GoalStep values={goal} onChange={setGoal} onBack={() => setStep(3)} onNext={close} />}
+        {step === 4 && !isMentor && (
+          <GoalStep
+            values={goal}
+            onChange={setGoal}
+            onBack={() => setStep(3)}
+            onNext={() => {
+              // Анкета нужна ИИ-подбору наставников
+              saveStudentProfile(basicInfo, preferences, goal)
+              close()
+            }}
+          />
+        )}
       </Modal>
     </>
   )

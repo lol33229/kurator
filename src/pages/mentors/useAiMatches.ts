@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { loadStudentProfile } from '@/pages/onboarding/savedProfile'
 import { getRecommendations, type Recommendation } from '@/shared/api/matching'
 import { DEMO_STUDENT, MENTOR_PROFILES } from './matchProfiles'
 
@@ -13,7 +14,8 @@ export function useAiMatches() {
 
   useEffect(() => {
     let alive = true
-    getRecommendations(DEMO_STUDENT, MENTOR_PROFILES)
+    // Анкета из онбординга, а если её ещё не заполняли — демо-анкета
+    getRecommendations(loadStudentProfile() ?? DEMO_STUDENT, MENTOR_PROFILES)
       .then((list) => alive && setState({ status: 'ready', byId: new Map(list.map((item) => [item.mentor_id, item])) }))
       .catch(() => alive && setState({ status: 'offline', byId: new Map() }))
     return () => {

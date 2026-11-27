@@ -4,8 +4,11 @@
 встроенная — те же материалы, что в админке и в боте на фронте.
 """
 
+import math
+import statistics
 from dataclasses import dataclass
 
+from kurator_ml.llm import Embeddings
 from kurator_ml.schemas import KnowledgeDocument
 from kurator_ml.text_similarity import TrigramSimilarity
 
@@ -88,14 +91,31 @@ DEFAULT_KNOWLEDGE = [
 @dataclass
 class Found:
     document: KnowledgeDocument
+    # Похожесть по буквам (триграммы), 0–1
     score: float
+    # Похожесть по смыслу (косинус эмбеддингов); None — эмбеддинги не считались
+    semantic: float | None = None
+
+
+# Смысловая похожесть у mistral-embed на русском «шумная»: несвязанные фразы дают 0,68–0,76.
+# Поэтому по смыслу только добираем кандидатов для модели, если материал заметно выше остальных
+SEMANTIC_MIN = 0.75
+SEMANTIC_MARGIN = 0.04
+SEMANTIC_LIMIT = 2
+
+
+def _cosine(left: list[float], right: list[float]) -> float:
+    dot = sum(a * b for a, b in zip(left, right, strict=True))
+    norm = math.sqrt(sum(a * a for a in left) * sum(b * b for b in right))
+    return dot / norm if norm else 0.0
 
 
 class KnowledgeSearch:
-    """Ищет материалы, похожие на вопрос: по заголовку, формулировкам и тексту ответа."""
+    """Ищет материалы, похожие на вопрос: по буквам, а с эмбеддингами — ещё и по смыслу."""
 
-    def __init__(self) -> None:
+    def __init__(self, embeddings: Embeddings | None = None) -> None:
         self.similarity = TrigramSimilarity()
+        self.embeddings = embeddings
 
     def score(self, question: str, document: KnowledgeDocument) -> float:
         # Формулировки важнее всего; ответ учитываем слабее, он длинный и общий
@@ -109,3 +129,33 @@ class KnowledgeSearch:
         found = [Found(doc, self.score(question, doc)) for doc in visible]
         found.sort(key=lambda item: item.score, reverse=True)
         return found[:limit]
+
+    def candidates(self, question: str, documents: list[KnowledgeDocument], role: str | None, relevant: float) -> list[Found]:
+        """Материалы для модели: похожие по буквам плюс заметно близкие по смыслу."""
+        lexical = [item for item in self.search(question, documents, role) if item.score >= relevant]
+        semantic = self._semantic(question, documents, role)
+        chosen = {item.document.id: item for item in lexical}
+        for item in semantic:
+            if item.document.id in chosen:
+                chosen[item.document.id].semantic = item.semantic
+            else:
+                chosen[item.document.id] = item
+        return sorted(chosen.values(), key=lambda item: max(item.score, item.semantic or 0), reverse=True)
+
+    def _semantic(self, question: str, documents: list[KnowledgeDocument], role: str | None) -> list[Found]:
+        visible = [doc for doc in documents if role is None or doc.audience in ("all", role)]
+        if self.embeddings is None or len(visible) < 2:
+            return []
+        phrases = [[doc.title, *doc.questions] for doc in visible]
+        vectors = self.embeddings.embed([question, *(phrase for group in phrases for phrase in group)])
+        if vectors is None:
+            return []
+        query, rest = vectors[0], iter(vectors[1:])
+        scored = []
+        for doc, group in zip(visible, phrases, strict=True):
+            best = max(_cosine(query, next(rest)) for _ in group)
+            scored.append(Found(doc, self.score(question, doc), best))
+        median = statistics.median(item.semantic for item in scored)
+        picked = [item for item in scored if item.semantic >= SEMANTIC_MIN and item.semantic - median >= SEMANTIC_MARGIN]
+        picked.sort(key=lambda item: item.semantic, reverse=True)
+        return picked[:SEMANTIC_LIMIT]

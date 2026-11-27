@@ -5,6 +5,7 @@ import { ReviewModal } from '@/pages/reviews/ReviewModal'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
 import { Toast } from '@/shared/ui/Toast/Toast'
 import { MENTOR } from '../data'
+import { useMenteeMatches } from '../matchProfiles'
 import { findMentee } from './menteeData'
 import { AboutCard, GoalCard, InteractionCard, MatchRing, MenteeLayout, SkillsCard } from './MenteeParts'
 import styles from './MenteeDetails.module.css'
@@ -17,6 +18,7 @@ export function MenteePage() {
   const [toast, setToast] = useState<string | null>(null)
   const hideToast = useCallback(() => setToast(null), [setToast])
   const closeReview = useCallback(() => setReviewOpen(false), [setReviewOpen])
+  const scores = useMenteeMatches()
   if (!mentee) return <PagePlaceholder title="Менти не найден" />
 
   const toggleTask = (task: string) =>
@@ -38,7 +40,7 @@ export function MenteePage() {
       </section>
 
       <section className={`${styles.sideCard} ${styles.matchSmall}`}>
-        <MatchRing value={mentee.compatibility} size="sm" />
+        <MatchRing value={scores.get(mentee.id) ?? mentee.compatibility} size="sm" />
         <div>
           <h2 className={styles.sideTitle}>Процент совместимости</h2>
           <p className={styles.matchText}>Совпадают цель, навыки, формат и часовой пояс</p>

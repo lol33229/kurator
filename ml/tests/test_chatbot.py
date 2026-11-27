@@ -84,3 +84,28 @@ def test_endpoint_works_without_key(monkeypatch):
     response = TestClient(app).post("/chatbot/ask", json={"user_id": "u1", "question": "Как оценить менти?"})
     assert response.status_code == 200
     assert response.json()["sources"][0]["document_id"] == "rate-mentee"
+
+
+class FakeEmbeddings:
+    """Подменяет эмбеддинги: всё про перенос встреч — один вектор, остальное — другой."""
+
+    def embed(self, texts: list[str]) -> list[list[float]]:
+        about_move = ("перенес", "сдвинуть", "поменять время")
+        return [[1.0, 0.0] if any(word in text.lower() for word in about_move) else [0.0, 1.0] for text in texts]
+
+
+PARAPHRASE = "Не успеваю на занятие, можно его сдвинуть?"
+
+
+def test_semantic_search_finds_paraphrase():
+    model = FakeModel("Откройте встречу в разделе «События» и нажмите «Перенести».")
+    response = Chatbot(model, FakeEmbeddings()).ask(ChatbotRequest(user_id="u1", question=PARAPHRASE))
+    assert not response.handoff_to_curator
+    assert response.sources[0].document_id == "reschedule"
+
+
+def test_without_embeddings_paraphrase_goes_to_curator():
+    model = FakeModel("ответ")
+    response = Chatbot(model).ask(ChatbotRequest(user_id="u1", question=PARAPHRASE))
+    assert response.handoff_to_curator
+    assert model.prompts == []

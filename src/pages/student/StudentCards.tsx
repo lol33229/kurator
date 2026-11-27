@@ -4,6 +4,7 @@ import chartIcon from '@/assets/icons/chart-mixed.svg'
 import smallChevron from '@/assets/icons/chevron-small.svg'
 import chevronIcon from '@/assets/icons/chevron-wide.svg'
 import pencilIcon from '@/assets/icons/pencil.svg'
+import { useAiMatches } from '@/pages/mentors/useAiMatches'
 import { CardHead } from '@/shared/ui/DashboardCard/DashboardCard'
 import cardStyles from '@/shared/ui/DashboardCard/DashboardCard.module.css'
 import { EVENTS, GOAL, REQUESTS, SUGGESTIONS, type Mentor, type RequestStatus } from './data'
@@ -91,6 +92,8 @@ export function RequestsCard() {
 }
 
 export function FindMentorCard() {
+  // Совместимость от ИИ; пока сервис не ответил — примерная из данных
+  const ai = useAiMatches()
   return (
     <section className={`${cardStyles.card} ${styles.findCard}`}>
       <CardHead more={{ to: '/mentors', label: 'Все рекомендации' }}>
@@ -107,7 +110,7 @@ export function FindMentorCard() {
             <Link to="/mentors" className={styles.suggestion}>
               <Person {...mentor} />
               <span className={styles.suggestionFooter}>
-                <span className={`${cardStyles.pill} ${cardStyles.pillGreen} ${styles.compat}`}>{mentor.compatibility}% совместимости</span>
+                <span className={`${cardStyles.pill} ${cardStyles.pillGreen} ${styles.compat}`}>{ai.byId.get(mentor.id)?.score ?? mentor.compatibility}% совместимости</span>
                 <img className={styles.suggestionChevron} src={chevronIcon} alt="" width={23} height={24} />
               </span>
             </Link>

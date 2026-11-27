@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { PagePlaceholder } from '@/shared/ui/PagePlaceholder'
+import { useMenteeMatches } from '../matchProfiles'
 import { findMentee, type MatchFactor } from './menteeData'
 import { AboutCard, GoalCard, InteractionCard, MatchRing, MenteeLayout, SkillsCard } from './MenteeParts'
 import styles from './MenteeDetails.module.css'
@@ -27,13 +28,14 @@ function Factor({ factor }: { factor: MatchFactor }) {
 export function MenteeRequestPage() {
   const mentee = findMentee(useParams().id)
   const [status, setStatus] = useState<Status>('new')
+  const scores = useMenteeMatches()
   if (!mentee) return <PagePlaceholder title="Заявка не найдена" />
 
   const aside = (
     <>
       <section className={`${styles.sideCard} ${styles.match}`}>
         <h2 className={styles.matchTitle}>Процент совместимости</h2>
-        <MatchRing value={mentee.compatibility} size="lg" />
+        <MatchRing value={scores.get(mentee.id) ?? mentee.compatibility} size="lg" />
         <p className={styles.matchCaption}>Рассчитан ИИ по анкетам — вашей и менти</p>
         <ul className={styles.factors}>
           {mentee.factors.map((factor) => (
